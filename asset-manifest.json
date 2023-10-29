@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/telexx12.github.io/static/css/main.073c9b0a.css",
-    "main.js": "/telexx12.github.io/static/js/main.6d766a64.js",
+    "main.css": "/telexx12.github.io/static/css/main.5335e9af.css",
+    "main.js": "/telexx12.github.io/static/js/main.7c79538c.js",
     "static/js/787.1ed0c42c.chunk.js": "/telexx12.github.io/static/js/787.1ed0c42c.chunk.js",
-    "static/media/logo.svg": "/telexx12.github.io/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/telexx12.github.io/index.html",
-    "main.073c9b0a.css.map": "/telexx12.github.io/static/css/main.073c9b0a.css.map",
-    "main.6d766a64.js.map": "/telexx12.github.io/static/js/main.6d766a64.js.map",
+    "main.5335e9af.css.map": "/telexx12.github.io/static/css/main.5335e9af.css.map",
+    "main.7c79538c.js.map": "/telexx12.github.io/static/js/main.7c79538c.js.map",
     "787.1ed0c42c.chunk.js.map": "/telexx12.github.io/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.6d766a64.js"
+    "static/css/main.5335e9af.css",
+    "static/js/main.7c79538c.js"
   ]
 }
