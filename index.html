@@ -16,8 +16,8 @@
         </button>
     </div>
 
-    <div id="navContainer" class="hidden">
-        <div class="w-screen h-[70vh] relative overflow-hidden z-10">
+    <div id="navContainer" class="hidden w-screen h-[70vh] relative rounded-rb-full overflow-hidden">
+        <div class="w-full h-full absolute z-10" id="innerCircle">
             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; bottom: 0; left: 0; max-height: 100%; min-height:100%">
             <!-- Use 'preserveAspectRatio' to control how the SVG scales -->
             <path d="M 100 0 H 0 V 100 C 0 100 80 85 90 0 Z" fill="yellow"
@@ -25,7 +25,7 @@
             </svg>
         </div>
 
-        <div class="w-screen h-[70vh] absolute top-0 h-0 overflow-hidden">
+        <div class="w-full h-full absolute top-0 h-0" id="outerCircle">
             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; bottom: 0; left: 0; max-height: 100%; min-height:100%">
             <!-- Use 'preserveAspectRatio' to control how the SVG scales -->
             <path d="M 100 0 H 0 V 100 C 0 100 90 100 100 0 Z" fill="rgb(209 180 27)"
