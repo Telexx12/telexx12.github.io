@@ -8,32 +8,42 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 </head>
 <body class="bg-slate-950">
-    <div class="absolute top-10 bg-yellow-300 p-4 inline-block rounded-r-lg cursor-pointer">
-        <button class="w-6" id="navButton">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
-            </svg>
-        </button>
-    </div>
-
-    <div id="navContainer" class="hidden w-screen h-[70vh] relative rounded-rb-full overflow-hidden">
-        <div class="w-full h-full absolute z-10" id="innerCircle">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; bottom: 0; left: 0; max-height: 100%; min-height:100%">
-            <!-- Use 'preserveAspectRatio' to control how the SVG scales -->
-            <path d="M 100 0 H 0 V 100 C 0 100 80 85 90 0 Z" fill="yellow"
-                    preserveAspectRatio="xMinYMid slice"/>
-            </svg>
+    <nav>
+        <div class="absolute top-10 bg-yellow-300 p-4 inline-block rounded-r-lg cursor-pointer">
+            <button class="w-6" id="navButton">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+                </svg>
+            </button>
         </div>
 
-        <div class="w-full h-full absolute top-0 h-0" id="outerCircle">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; bottom: 0; left: 0; max-height: 100%; min-height:100%">
-            <!-- Use 'preserveAspectRatio' to control how the SVG scales -->
-            <path d="M 100 0 H 0 V 100 C 0 100 90 100 100 0 Z" fill="rgb(209 180 27)"
-                    preserveAspectRatio="xMinYMid slice"/>
-            </svg>
-        </div>
-    </div>
+        <div id="navContainer" class="hidden w-screen h-[70vh] relative rounded-rb-full overflow-hidden">
+            <div class="w-full h-full absolute z-10" id="innerCircle">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; bottom: 0; left: 0; max-height: 100%; min-height:100%">
+                <!-- Use 'preserveAspectRatio' to control how the SVG scales -->
+                <path d="M 100 0 H 0 V 100 C 0 100 80 85 90 0 Z" fill="yellow"
+                        preserveAspectRatio="xMinYMid slice"/>
+                </svg>
+            </div>
 
+            <div class="w-full h-full absolute top-0 h-0" id="outerCircle">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; bottom: 0; left: 0; max-height: 100%; min-height:100%">
+                <!-- Use 'preserveAspectRatio' to control how the SVG scales -->
+                <path d="M 100 0 H 0 V 100 C 0 100 90 100 100 0 Z" fill="rgb(209 180 27)"
+                        preserveAspectRatio="xMinYMid slice"/>
+                </svg>
+            </div>
+        </div>
+
+
+        <div class="absolute bottom-0 hidden w-full flex justify-center" id="navCloseButtonContainer">
+            <div class="p-3 bg-yellow-300 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8" id="navCloseButton">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>                  
+            </div>
+        </div>
+    </nav>
     <footer>
         <script src="/assets/js/index.js"></script>
     </footer>
