@@ -6,6 +6,118 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        .poppins-thin {
+            font-family: "Poppins", sans-serif;
+            font-weight: 100;
+            font-style: normal;
+        }
+
+        .poppins-extralight {
+        font-family: "Poppins", sans-serif;
+        font-weight: 200;
+        font-style: normal;
+        }
+
+        .poppins-light {
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        }
+
+        .poppins-regular {
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        }
+
+        .poppins-medium {
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        }
+
+        .poppins-semibold {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        }
+
+        .poppins-bold {
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        }
+
+        .poppins-extrabold {
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-style: normal;
+        }
+
+        .poppins-black {
+        font-family: "Poppins", sans-serif;
+        font-weight: 900;
+        font-style: normal;
+        }
+
+        .poppins-thin-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        font-style: italic;
+        }
+
+        .poppins-extralight-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 200;
+        font-style: italic;
+        }
+
+        .poppins-light-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+        font-style: italic;
+        }
+
+        .poppins-regular-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        font-style: italic;
+        }
+
+        .poppins-medium-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-style: italic;
+        }
+
+        .poppins-semibold-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-style: italic;
+        }
+
+        .poppins-bold-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: italic;
+        }
+
+        .poppins-extrabold-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-style: italic;
+        }
+
+        .poppins-black-italic {
+        font-family: "Poppins", sans-serif;
+        font-weight: 900;
+        font-style: italic;
+        }
+    </style>
 </head>
 <body class="bg-slate-950">
     <nav>
@@ -20,18 +132,21 @@
         <div id="navContainer" class="hidden w-screen h-[70vh] relative rounded-rb-full overflow-hidden">
             <div class="w-full h-full absolute z-10" id="innerCircle">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; bottom: 0; left: 0; max-height: 100%; min-height:100%">
-                <!-- Use 'preserveAspectRatio' to control how the SVG scales -->
-                <path d="M 100 0 H 0 V 100 C 0 100 80 85 90 0 Z" fill="yellow"
-                        preserveAspectRatio="xMinYMid slice"/>
+                    <!-- Use 'preserveAspectRatio' to control how the SVG scales -->
+                    <path d="M 100 0 H 0 V 100 C 0 100 80 85 90 0 Z" fill="yellow"
+                            preserveAspectRatio="xMinYMid slice"/>
                 </svg>
             </div>
-
             <div class="w-full h-full absolute top-0 h-0" id="outerCircle">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; bottom: 0; left: 0; max-height: 100%; min-height:100%">
                 <!-- Use 'preserveAspectRatio' to control how the SVG scales -->
                 <path d="M 100 0 H 0 V 100 C 0 100 90 100 100 0 Z" fill="rgb(209 180 27)"
                         preserveAspectRatio="xMinYMid slice"/>
                 </svg>
+            </div>
+            <div class="relative z-20 pt-10 pl-12">
+                <p class="menu_item poppins-bold-italic text-xl mb-6">About me</p>
+                <p class="menu_item poppins-bold-italic text-xl">My Works</p>
             </div>
         </div>
 

@@ -19,6 +19,7 @@ navButton.addEventListener("click", function(){
 
     gsap.fromTo(navCloseButtonContainer,{bottom:"-3.5rem"},{bottom:"3.5rem", display:"flex", duration:0.5 * durationMultiplier});
     gsap.to(navCloseButton,{rotation:450, duration:0.6 * durationMultiplier});
+    gsap.from(".menu_item", {duration: 1,scale: 0.5,y: 50,opacity: 0,ease: "power2.out"});
 }); 
 
 navCloseButton.addEventListener("click", function(){
