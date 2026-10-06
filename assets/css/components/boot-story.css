@@ -1,0 +1,160 @@
+html {
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+.boot-story {
+    position: relative;
+    background: var(--panel);
+    transition: background .3s;
+}
+
+.boot-sections {
+    position: relative;
+}
+
+.boot-rail {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 40px;
+    box-sizing: border-box;
+    background: var(--rail);
+    border-left: 1px solid var(--line);
+    transform: translateX(100%);
+    transition: transform .35s ease, background .3s;
+}
+
+.boot-rail.is-visible {
+    transform: none;
+}
+
+.rail-theme,
+.rail-node {
+    position: absolute;
+    left: 0;
+    width: 40px;
+    height: 44px;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rail-theme {
+    top: 40px;
+}
+
+.rail-theme span {
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--fg);
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--fg) 50%, transparent 50%);
+    transform: rotate(-45deg);
+}
+
+.rail-icon {
+    -webkit-mask: var(--icon) center / contain no-repeat;
+    mask: var(--icon) center / contain no-repeat;
+}
+
+.rail-track {
+    position: absolute;
+    top: 120px;
+    bottom: 48px;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.rail-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 19px;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--track);
+}
+
+.rail-fill {
+    width: 100%;
+    height: var(--progress, 0%);
+    border-radius: 2px;
+    background: var(--accent);
+}
+
+.rail-node {
+    margin-top: -22px;
+}
+
+.rail-node > span {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--item-bg);
+    box-shadow: 0 0 0 3px var(--rail);
+    transition: background .2s, transform .2s;
+}
+
+.rail-node .rail-icon {
+    width: 11px;
+    height: 11px;
+    background: var(--item-fg);
+}
+
+.rail-node.is-passed > span {
+    background: var(--accent);
+}
+
+.rail-node.is-passed .rail-icon {
+    background: #FFFFFF;
+}
+
+.rail-node.is-current > span {
+    transform: scale(1.15);
+}
+
+@media (min-width: 1200px) {
+    .boot-rail,
+    .rail-theme,
+    .rail-node {
+        width: 48px;
+    }
+
+    .rail-theme {
+        top: 28px;
+    }
+
+    .rail-theme span {
+        width: 14px;
+        height: 14px;
+    }
+
+    .rail-line {
+        left: 23px;
+    }
+
+    .rail-node > span {
+        width: 24px;
+        height: 24px;
+    }
+
+    .rail-node .rail-icon {
+        width: 12px;
+        height: 12px;
+    }
+}
