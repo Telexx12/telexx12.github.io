@@ -1,20 +1,15 @@
 (() => {
-    const DURATION = 40;
-    const INTERRUPTS = ["wheel", "touchstart", "keydown", "pointerdown"];
     const root = document.documentElement;
     const page = document.scrollingElement;
     const actions = {
-        play,
         end: () => scrollPage(page.scrollHeight),
-        start: () => scrollPage(0),
         theme: () => { root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark"; },
-        lang: (el) => window.I18n.set(el.dataset.lang),
+        lang: () => window.I18n.set(root.lang === "en" ? "hu" : "en").then(() => ScrollTrigger.refresh()),
     };
 
     let story, rail, track, nodes;
     let starts = [];
     let frame = 0;
-    let autoplay = 0;
 
     function init() {
         story = document.querySelector(".boot-story");
@@ -31,11 +26,9 @@
 
     function layout() {
         starts = [];
-        let top = 0;
         story.querySelectorAll(".boot-sections > section").forEach((section) => {
             const offsets = (section.dataset.railStops ?? "0").split(" ").map(Number);
-            offsets.forEach((offset) => starts.push(top + (offset / 100) * page.clientHeight));
-            top += section.offsetHeight;
+            offsets.forEach((offset) => starts.push(section.offsetTop + (offset / 100) * page.clientHeight));
         });
 
         const max = maxScroll();
@@ -75,39 +68,7 @@
     }
 
     function scrollPage(top, behavior = "instant") {
-        stop();
         window.scrollTo({ top, behavior });
-    }
-
-    function play() {
-        stop();
-        const max = maxScroll();
-        if (matchMedia("(prefers-reduced-motion: reduce)").matches) return scrollPage(max);
-        if (page.scrollTop >= max - 2) scrollPage(0);
-
-        const speed = max / DURATION;
-        let position = page.scrollTop;
-        let last = performance.now();
-
-        const step = (now) => {
-            position += (speed * (now - last)) / 1000;
-            last = now;
-            page.scrollTop = Math.min(position, max);
-            if (position >= max) return stop();
-            autoplay = requestAnimationFrame(step);
-        };
-
-        autoplay = requestAnimationFrame(step);
-        setTimeout(() => {
-            if (autoplay) INTERRUPTS.forEach((type) => story.addEventListener(type, stop, { passive: true }));
-        });
-    }
-
-    function stop() {
-        if (!autoplay) return;
-        cancelAnimationFrame(autoplay);
-        autoplay = 0;
-        INTERRUPTS.forEach((type) => story.removeEventListener(type, stop));
     }
 
     function runAction(e) {
@@ -120,7 +81,6 @@
     function drag(e) {
         if (e.target.closest(".rail-node")) return;
         e.preventDefault();
-        stop();
         seek(e);
         window.addEventListener("pointermove", seek);
         window.addEventListener("pointerup", release);

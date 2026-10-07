@@ -1,15 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Open+Sans:wght@400;600;700&family=Spinnaker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Open+Sans:wght@400;600;700&display=swap");
 
 :root {
     --accent: #E31E26;
 
     --font-body: "Open Sans", sans-serif;
     --font-head: sans-serif;
-    --font-text: Spinnaker, sans-serif;
     --font-mono: "JetBrains Mono", monospace;
 
     --view: 100vh;
-    --column: 440px;
 
     --fg: #252932;
     --panel: #FFFFFF;
@@ -20,9 +18,6 @@
     --item-fg: #71717A;
     --muted: #71717A;
     --body: #52525B;
-    --btn2-bg: #252932;
-    --btn2-fg: #FFFFFF;
-    --icon-filter: none;
 }
 
 @supports (height: 100svh) {
@@ -41,9 +36,6 @@
     --item-fg: #9A9AA3;
     --muted: #9A9AA3;
     --body: #D1D5DB;
-    --btn2-bg: #F4F4F5;
-    --btn2-fg: #0B0B0D;
-    --icon-filter: invert(1);
 }
 
 html,
@@ -74,36 +66,6 @@ a:focus-visible {
     outline-offset: 2px;
 }
 
-.btn {
-    height: 48px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3px;
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 15px;
-}
-
-.btn-primary,
-.btn-primary:hover {
-    background: var(--accent);
-    color: #FFFFFF;
-}
-
-.btn-secondary,
-.btn-secondary:hover {
-    background: var(--btn2-bg);
-    color: var(--btn2-fg);
-}
-
-.btn-outline {
-    height: 44px;
-    border: 1px solid var(--line);
-    font-size: 14px;
-}
-
 .placeholder {
     height: var(--view);
     display: flex;
@@ -118,30 +80,4 @@ a:focus-visible {
     font-size: 14px;
     font-weight: 400;
     color: var(--muted);
-}
-
-@media (max-width: 1199.98px) {
-    .desktop-only {
-        display: none !important;
-    }
-}
-
-@media (min-width: 1200px) {
-    :root {
-        --column: 1440px;
-    }
-
-    .mobile-only {
-        display: none !important;
-    }
-
-    .btn {
-        height: auto;
-        padding: 12px 28px;
-    }
-
-    .btn-primary:hover,
-    .btn-secondary:hover {
-        opacity: 0.85;
-    }
 }

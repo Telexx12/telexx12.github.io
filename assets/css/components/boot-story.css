@@ -35,6 +35,7 @@ html::-webkit-scrollbar {
 }
 
 .rail-theme,
+.rail-lang,
 .rail-node {
     position: absolute;
     left: 0;
@@ -53,6 +54,23 @@ html::-webkit-scrollbar {
     top: 40px;
 }
 
+.rail-lang {
+    top: 84px;
+    height: 32px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--fg);
+}
+
+.rail-lang::after {
+    content: "EN";
+}
+
+:root[lang="en"] .rail-lang::after {
+    content: "HU";
+}
+
 .rail-theme span {
     width: 12px;
     height: 12px;
@@ -69,7 +87,7 @@ html::-webkit-scrollbar {
 
 .rail-track {
     position: absolute;
-    top: 120px;
+    top: 138px;
     bottom: 48px;
     left: 0;
     right: 0;
@@ -131,12 +149,21 @@ html::-webkit-scrollbar {
 @media (min-width: 1200px) {
     .boot-rail,
     .rail-theme,
+    .rail-lang,
     .rail-node {
         width: 48px;
     }
 
     .rail-theme {
         top: 28px;
+    }
+
+    .rail-lang {
+        top: 72px;
+    }
+
+    .rail-track {
+        top: 126px;
     }
 
     .rail-theme span {

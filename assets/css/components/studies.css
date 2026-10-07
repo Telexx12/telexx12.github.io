@@ -1,0 +1,473 @@
+.studies {
+    --pending: #A1A1AA;
+    --browser-dot: #D4D4D8;
+    --browser-bar: #F4F4F5;
+    --browser-shadow: 0 16px 32px -16px rgba(24, 24, 27, 0.22);
+    height: calc(var(--view) + 1300px);
+    pointer-events: none;
+}
+
+:root[data-theme="dark"] .studies {
+    --pending: #5B5B64;
+    --browser-dot: #4B5060;
+    --browser-bar: #18181C;
+    --browser-shadow: none;
+}
+
+.studies-stage {
+    position: relative;
+    height: var(--view);
+    overflow-anchor: none;
+}
+
+.browser {
+    position: absolute;
+    inset: 0;
+    pointer-events: auto;
+    box-sizing: border-box;
+    overflow: clip;
+    --edge: 1;
+    border: 1px solid color-mix(in srgb, var(--line) calc(var(--edge) * 100%), transparent);
+    border-radius: 10px;
+    background: var(--panel);
+    box-shadow: var(--browser-shadow);
+}
+
+.browser-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 70px 10px 10px;
+    border-bottom: 1px solid var(--line);
+    background: var(--browser-bar);
+}
+
+.browser-bar i {
+    flex: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--browser-dot);
+}
+
+.browser-bar i:first-child {
+    background: var(--accent);
+}
+
+.browser-address {
+    flex: 0 1 520px;
+    min-width: 0;
+    margin: 0 auto;
+    padding: 2px 12px;
+    border-radius: 6px;
+    background: var(--panel);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--muted);
+}
+
+.browser-loading {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+.browser-page {
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 24px 56px 24px 16px;
+}
+
+.studies-title {
+    margin: 0;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.studies-loader {
+    position: relative;
+    flex: none;
+    width: 168px;
+    height: 168px;
+}
+
+.studies-ring {
+    --gap: 12;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: studies-spin 1.6s linear infinite;
+}
+
+.studies-stage[data-state="done"] .studies-ring {
+    animation-play-state: paused;
+}
+
+@keyframes studies-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.studies-ring g {
+    transform: rotate(calc(var(--i) * 120deg + var(--gap) * 0.5deg - 90deg));
+    transform-origin: 60px 60px;
+}
+
+.studies-ring circle {
+    fill: none;
+    stroke-width: 3.5;
+    stroke-dasharray: calc((120 - var(--gap)) * var(--fill) * 1px) 360px;
+}
+
+.ring-slot {
+    --fill: 1;
+    stroke: var(--track);
+    transition: stroke .3s;
+}
+
+.studies-ring g:not([data-state="idle"]) .ring-slot {
+    stroke: var(--pending);
+}
+
+.ring-fill {
+    --fill: 0;
+    stroke: var(--accent);
+}
+
+.studies-ring g:first-child .ring-fill {
+    --fill: 0.15;
+}
+
+.studies-ring g[data-state="booted"] circle {
+    stroke-linecap: round;
+}
+
+.studies-face {
+    position: absolute;
+    inset: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--item-bg);
+}
+
+.studies-face img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+    filter: grayscale(1) blur(6px);
+}
+
+.studies-status {
+    display: grid;
+    place-items: center;
+    min-height: 36px;
+    text-align: center;
+}
+
+.studies-status > * {
+    grid-area: 1 / 1;
+    margin: 0;
+}
+
+.studies-loading {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.studies-loading b {
+    font-weight: 600;
+    color: var(--fg);
+}
+
+.studies-done {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: -0.04em;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.studies-dot {
+    color: var(--accent);
+}
+
+.services {
+    width: 100%;
+    max-width: 360px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+}
+
+.service-card {
+    display: grid;
+    justify-items: start;
+    margin-top: 8px;
+    padding: 10px 14px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    transition: border-color .3s;
+}
+
+.service[data-state="registered"] .service-card,
+.service[data-state="booting"] .service-card {
+    border-color: var(--accent);
+}
+
+.service-head {
+    justify-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.service-name {
+    position: relative;
+    font-weight: 600;
+}
+
+.service[data-state="idle"] .service-name {
+    color: transparent;
+}
+
+.service-state {
+    flex: none;
+    color: var(--muted);
+}
+
+.service-state > span {
+    display: none;
+}
+
+.service[data-state="registered"] [data-when="registered"],
+.service[data-state="booting"] [data-when="booting"],
+.service[data-state="booted"] [data-when="booted"] {
+    display: inline;
+}
+
+.service[data-state="booting"] .service-state {
+    color: var(--fg);
+}
+
+.service[data-state="booted"] .service-state {
+    color: var(--accent);
+}
+
+.service[data-state="booted"] .service-state::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 8px;
+    margin: 0 9px 1px 0;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.service-line {
+    position: relative;
+    max-width: 100%;
+    transition: color .3s;
+}
+
+.service-line::before {
+    content: "";
+    position: absolute;
+    inset: 5px 0;
+    border-radius: 4px;
+    background: var(--item-bg);
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.service:not([data-state="booted"]) .service-line {
+    color: transparent;
+}
+
+.service:not([data-state="booted"]) .service-line::before {
+    opacity: 1;
+}
+
+.service[data-state="idle"] .service-name::before {
+    content: "";
+    position: absolute;
+    inset: 5px 0;
+    border-radius: 4px;
+    background: var(--item-bg);
+}
+
+.service:not([data-state="booted"]) .service-line::before,
+.service[data-state="idle"] .service-name::before {
+    animation: studies-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes studies-pulse {
+    50% {
+        opacity: 0.45;
+    }
+}
+
+.service-stage {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.service-meta {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--muted);
+}
+
+.service-bind {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 20px;
+    color: var(--body);
+}
+
+.service[data-state="booted"] .service-key {
+    color: var(--muted);
+}
+
+@media (max-height: 700px) {
+    .browser-page {
+        gap: 12px;
+        padding-top: 56px;
+        padding-bottom: 16px;
+    }
+
+    .studies-loader {
+        width: 136px;
+        height: 136px;
+    }
+
+    .studies-face {
+        inset: 12px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .browser-bar {
+        padding: 12px 80px 12px 20px;
+    }
+
+    .browser-address {
+        font-size: 12px;
+    }
+
+    .browser-page {
+        gap: 24px;
+        padding: 32px 72px 32px 24px;
+    }
+
+    .studies-title {
+        font-size: 14px;
+    }
+
+    .studies-loader {
+        width: 264px;
+        height: 264px;
+    }
+
+    .studies-ring circle {
+        stroke-width: 3;
+    }
+
+    .studies-face {
+        inset: 20px;
+    }
+
+    .studies-loading {
+        font-size: 13px;
+    }
+
+    .studies-done {
+        font-size: 40px;
+        line-height: 48px;
+    }
+
+    .studies-status {
+        min-height: 48px;
+    }
+
+    .services {
+        max-width: 960px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .service-card {
+        margin-top: 16px;
+        padding: 14px 18px 16px;
+    }
+
+    .service-head {
+        font-size: 13px;
+    }
+
+    .service-stage {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .service-meta {
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .studies-ring,
+    .service:not([data-state="booted"]) .service-line::before,
+    .service[data-state="idle"] .service-name::before {
+        animation: none;
+    }
+
+    .ring-slot,
+    .service-card,
+    .service-line,
+    .service-line::before {
+        transition: none;
+    }
+}
