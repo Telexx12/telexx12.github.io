@@ -3,15 +3,13 @@
     --term-bg: #FAFAFA;
     --term-bar: #F4F4F5;
     --term-shadow: 0 16px 32px -16px rgba(24, 24, 27, 0.22);
-    --home-dot: rgba(37, 41, 50, 0.07);
     position: fixed;
-    inset: 0;
+    inset: var(--bar) 0 0;
     overflow-y: auto;
     outline: none;
     scrollbar-width: none;
     display: flex;
     flex-direction: column-reverse;
-    background: radial-gradient(var(--home-dot) 1px, transparent 1.3px) left bottom / 22px 22px local, var(--panel);
 }
 
 .home::-webkit-scrollbar {
@@ -23,7 +21,6 @@
     --term-bg: #121215;
     --term-bar: #18181C;
     --term-shadow: none;
-    --home-dot: rgba(255, 255, 255, 0.05);
 }
 
 :root:has(.home) {
@@ -250,10 +247,9 @@
 
 .home-button {
     flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    justify-items: center;
+    align-content: center;
     height: 64px;
     padding: 0 32px;
     border: 0;
@@ -275,6 +271,7 @@
 }
 
 .home-label {
+    grid-area: 1 / 1;
     font-family: var(--font-head);
     font-weight: 700;
     font-size: 17px;
@@ -283,11 +280,11 @@
 
 .home-label[data-when="sent"],
 .home[data-state="sent"] .home-label[data-when="ready"] {
-    display: none;
+    visibility: hidden;
 }
 
 .home[data-state="sent"] .home-label[data-when="sent"] {
-    display: inline;
+    visibility: visible;
 }
 
 .home-code {

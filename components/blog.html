@@ -1,3 +1,33 @@
-<section class="placeholder" id="blog">
-    <h2 data-i18n="rail.blog"></h2>
+<section class="station blog" id="blog" data-i18n-label="rail.blog">
+    <h2 class="station-title" data-i18n="rail.blog"></h2>
+
+    <div class="station-code blog-view" aria-hidden="true">
+        <span class="blog-line"><b>@foreach</b> ($posts as $post)</span>
+        <span class="blog-line">    &lt;x-post :$post /&gt;</span>
+        <span class="blog-line"><b>@endforeach</b></span>
+    </div>
+
+    <ol class="station-list">
+        <li class="station-item blog-post" data-state="idle">
+            <article class="station-card">
+                <div class="station-head"><span class="station-name" data-i18n="blog.date"></span><span class="station-state"><span data-when="working">render()</span><span data-when="done" data-i18n="blog.done"></span></span></div>
+                <span class="station-line station-label" data-i18n="blog.one.title"></span>
+                <span class="station-line station-value" data-i18n="blog.one.excerpt"></span>
+            </article>
+        </li>
+        <li class="station-item blog-post" data-state="idle">
+            <article class="station-card">
+                <div class="station-head"><span class="station-name" data-i18n="blog.date"></span><span class="station-state"><span data-when="working">render()</span><span data-when="done" data-i18n="blog.done"></span></span></div>
+                <span class="station-line station-label" data-i18n="blog.two.title"></span>
+                <span class="station-line station-value" data-i18n="blog.two.excerpt"></span>
+            </article>
+        </li>
+        <li class="station-item blog-post" data-state="idle">
+            <article class="station-card">
+                <div class="station-head"><span class="station-name" data-i18n="blog.date"></span><span class="station-state"><span data-when="working">render()</span><span data-when="done" data-i18n="blog.done"></span></span></div>
+                <span class="station-line station-label" data-i18n="blog.three.title"></span>
+                <span class="station-line station-value" data-i18n="blog.three.excerpt"></span>
+            </article>
+        </li>
+    </ol>
 </section>

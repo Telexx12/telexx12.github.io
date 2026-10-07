@@ -11,7 +11,6 @@
     let section, tl, arcs, cards, browser, button;
 
     function init() {
-        gsap.registerPlugin(ScrollTrigger);
         section = document.querySelector(".studies");
         arcs = [...section.querySelectorAll(".studies-ring g")];
         cards = [...section.querySelectorAll(".service")];
@@ -26,7 +25,6 @@
                 scrub: true,
                 pin: find(".studies-stage"),
                 pinSpacing: false,
-                invalidateOnRefresh: true,
             },
         });
 
@@ -43,25 +41,24 @@
     }
 
     function open(e) {
-        const opening = gsap.timeline({ defaults: { ease: "power2.inOut" }, onComplete: opened })
+        const opening = gsap.timeline({ defaults: { ease: "power2.inOut" }, onComplete: opened, onCompleteParams: [e.detail] })
           .set(browser, { autoAlpha: 1 })
           .fromTo(browser, { scale: 0.03, xPercent: buttonX, yPercent: buttonY }, { scale: 1, xPercent: 0, yPercent: 0, duration: 1 }, 0)
           .fromTo(find(".browser-loading"), { scaleX: 0 }, { scaleX: 1, duration: 0.75, ease: "none" }, 0.15)
           .to(browser, { borderRadius: 0, "--edge": 0, duration: 0.15, ease: "none" }, 0.85)
           .to(find(".browser-bar"), { yPercent: -110, duration: 0.3 }, 1.05);
 
-        if (e.detail === "instant") opening.progress(1);
+        if (e.detail === "instant" || matchMedia("(prefers-reduced-motion: reduce)").matches) opening.progress(1);
     }
 
-    function opened() {
-        document.dispatchEvent(new Event("story:opened"));
+    function opened(detail) {
+        document.dispatchEvent(new CustomEvent("story:opened", { detail }));
+        gsap.to(browser, { "--fill": 0, duration: 0.5, ease: "none" });
     }
 
     function addService(card, i) {
-        const at = START + i * STEP;
-
-        register(card, i, at);
-        boot(card, i, at + 0.6);
+        register(card, i, START + i * 0.1);
+        boot(card, i, START + 0.6 + i * STEP);
     }
 
     function register(card, i, at) {
@@ -73,7 +70,12 @@
           .to(arcs[i].querySelector(".ring-fill"), { "--fill": 1, duration: 2.2 }, at)
           .to(find(".studies-face img"), { ...FOCUS[i], duration: 2.2 }, at)
           .set([arcs[i], card], { attr: { "data-state": "booted" } }, at + 2.2)
-          .set(find(".studies-count"), { textContent: i + 1 }, at + 2.2);
+          .set(find(".studies-count"), { textContent: i + 1 }, at + 2.2)
+          .call(announceBoot, null, at + 2.2);
+    }
+
+    function announceBoot() {
+        document.dispatchEvent(new Event("story:booted"));
     }
 
     function addBooted() {
@@ -91,12 +93,12 @@
 
     function buttonX() {
         const b = button.getBoundingClientRect();
-        return ((b.left + b.width / 2) / browser.offsetWidth - 0.5) * 100;
+        return ((b.left + b.width / 2 - browser.offsetLeft) / browser.offsetWidth - 0.5) * 100;
     }
 
     function buttonY() {
         const b = button.getBoundingClientRect();
-        return ((b.top + b.height / 2) / browser.offsetHeight - 0.5) * 100;
+        return ((b.top + b.height / 2 - browser.offsetTop) / browser.offsetHeight - 0.5) * 100;
     }
 
     function find(selector) {

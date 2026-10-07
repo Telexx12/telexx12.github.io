@@ -6,20 +6,119 @@ html::-webkit-scrollbar {
     display: none;
 }
 
+:root.is-traveling {
+    overflow: hidden;
+}
+
+:root.is-traveling .boot-rail {
+    pointer-events: none;
+}
+
 .boot-story {
     position: relative;
-    background: var(--panel);
-    transition: background .3s;
 }
 
 .boot-sections {
     position: relative;
 }
 
+.boot-bar {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: var(--bar);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--line);
+    background: color-mix(in srgb, var(--rail) 85%, transparent);
+    backdrop-filter: blur(8px);
+    transition: background .3s;
+}
+
+.bar-trace {
+    min-width: 0;
+    margin: 0 auto 0 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--muted);
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.bar-trace.is-visible {
+    opacity: 1;
+}
+
+.bar-arrow {
+    color: var(--accent);
+}
+
+.bar-step {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--fg);
+}
+
+.bar-theme,
+.bar-lang {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fg);
+    transition: background .2s;
+}
+
+.bar-theme:hover,
+.bar-lang:hover {
+    background: var(--item-bg);
+}
+
+.bar-theme span {
+    width: 14px;
+    height: 14px;
+    box-sizing: border-box;
+    border: 2px solid var(--fg);
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--fg) 50%, transparent 50%);
+    transform: rotate(-45deg);
+}
+
+.bar-lang {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.bar-lang::after {
+    content: "EN";
+}
+
+:root[lang="en"] .bar-lang::after {
+    content: "HU";
+}
+
 .boot-rail {
     position: fixed;
     z-index: 1;
-    top: 0;
+    top: var(--bar);
     right: 0;
     bottom: 0;
     width: 40px;
@@ -30,17 +129,26 @@ html::-webkit-scrollbar {
     transition: transform .35s ease, background .3s;
 }
 
+.boot-rail:not(.is-visible) {
+    visibility: hidden;
+}
+
 .boot-rail.is-visible {
     transform: none;
 }
 
-.rail-theme,
-.rail-lang,
+.boot-rail.is-away {
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform .35s ease, visibility 0s .35s, background .3s;
+}
+
 .rail-node {
     position: absolute;
     left: 0;
     width: 40px;
     height: 44px;
+    margin-top: -22px;
     border: 0;
     padding: 0;
     cursor: pointer;
@@ -50,36 +158,6 @@ html::-webkit-scrollbar {
     justify-content: center;
 }
 
-.rail-theme {
-    top: 40px;
-}
-
-.rail-lang {
-    top: 84px;
-    height: 32px;
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 11px;
-    color: var(--fg);
-}
-
-.rail-lang::after {
-    content: "EN";
-}
-
-:root[lang="en"] .rail-lang::after {
-    content: "HU";
-}
-
-.rail-theme span {
-    width: 12px;
-    height: 12px;
-    border: 2px solid var(--fg);
-    border-radius: 50%;
-    background: linear-gradient(90deg, var(--fg) 50%, transparent 50%);
-    transform: rotate(-45deg);
-}
-
 .rail-icon {
     -webkit-mask: var(--icon) center / contain no-repeat;
     mask: var(--icon) center / contain no-repeat;
@@ -87,8 +165,8 @@ html::-webkit-scrollbar {
 
 .rail-track {
     position: absolute;
-    top: 138px;
-    bottom: 48px;
+    top: 32px;
+    bottom: 32px;
     left: 0;
     right: 0;
     cursor: pointer;
@@ -110,10 +188,6 @@ html::-webkit-scrollbar {
     height: var(--progress, 0%);
     border-radius: 2px;
     background: var(--accent);
-}
-
-.rail-node {
-    margin-top: -22px;
 }
 
 .rail-node > span {
@@ -147,28 +221,18 @@ html::-webkit-scrollbar {
 }
 
 @media (min-width: 1200px) {
+    .boot-bar {
+        padding: 0 12px;
+    }
+
+    .bar-trace {
+        margin-left: 8px;
+        font-size: 12px;
+    }
+
     .boot-rail,
-    .rail-theme,
-    .rail-lang,
     .rail-node {
         width: 48px;
-    }
-
-    .rail-theme {
-        top: 28px;
-    }
-
-    .rail-lang {
-        top: 72px;
-    }
-
-    .rail-track {
-        top: 126px;
-    }
-
-    .rail-theme span {
-        width: 14px;
-        height: 14px;
     }
 
     .rail-line {

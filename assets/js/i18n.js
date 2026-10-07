@@ -25,7 +25,7 @@ window.I18n = (() => {
     }
 
     function currentLang() {
-        return document.documentElement.lang || "hu";
+        return document.documentElement.lang;
     }
 
     load(currentLang());

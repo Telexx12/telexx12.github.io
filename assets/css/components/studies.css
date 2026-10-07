@@ -2,16 +2,15 @@
     --pending: #A1A1AA;
     --browser-dot: #D4D4D8;
     --browser-bar: #F4F4F5;
-    --browser-shadow: 0 16px 32px -16px rgba(24, 24, 27, 0.22);
+    --browser-shade: rgba(24, 24, 27, 0.22);
     height: calc(var(--view) + 1300px);
-    pointer-events: none;
 }
 
 :root[data-theme="dark"] .studies {
     --pending: #5B5B64;
     --browser-dot: #4B5060;
     --browser-bar: #18181C;
-    --browser-shadow: none;
+    --browser-shade: transparent;
 }
 
 .studies-stage {
@@ -21,24 +20,24 @@
 }
 
 .browser {
+    --edge: 1;
+    --fill: 1;
     position: absolute;
-    inset: 0;
-    pointer-events: auto;
+    inset: var(--bar) 0 0;
     box-sizing: border-box;
     overflow: clip;
-    --edge: 1;
     border: 1px solid color-mix(in srgb, var(--line) calc(var(--edge) * 100%), transparent);
     border-radius: 10px;
-    background: var(--panel);
-    box-shadow: var(--browser-shadow);
+    background: color-mix(in srgb, var(--panel) calc(var(--fill) * 100%), transparent);
+    box-shadow: 0 16px 32px -16px color-mix(in srgb, var(--browser-shade) calc(var(--edge) * 100%), transparent);
 }
 
 .browser-bar {
     position: absolute;
+    z-index: 1;
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -94,19 +93,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    justify-content: safe center;
     gap: 20px;
     padding: 24px 56px 24px 16px;
-}
-
-.studies-title {
-    margin: 0;
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 20px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
 }
 
 .studies-loader {
@@ -240,10 +229,10 @@
     padding: 10px 14px 12px;
     border: 1px solid var(--line);
     border-radius: 10px;
+    background: var(--panel);
     transition: border-color .3s;
 }
 
-.service[data-state="registered"] .service-card,
 .service[data-state="booting"] .service-card {
     border-color: var(--accent);
 }
@@ -399,10 +388,6 @@
     .browser-page {
         gap: 24px;
         padding: 32px 72px 32px 24px;
-    }
-
-    .studies-title {
-        font-size: 14px;
     }
 
     .studies-loader {

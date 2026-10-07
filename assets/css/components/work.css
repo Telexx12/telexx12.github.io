@@ -1,0 +1,9 @@
+.work-route {
+    max-width: 100%;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.work-route:not([data-state="idle"]) b {
+    color: var(--accent);
+}

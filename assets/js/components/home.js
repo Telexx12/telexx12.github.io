@@ -120,11 +120,12 @@
         state = "sent";
         section.dataset.state = state;
         find(".home-tldr").disabled = true;
+        document.dispatchEvent(new Event("story:request"));
         gsap.timeline()
           .call(showLatest)
           .set(cursorLine, { attr: { "data-cursor": "off" } })
           .set(steps("get"), { display: "block" })
-          .set(steps("ok"), { display: "block" }, 0.35)
+          .set(steps("handle"), { display: "block" }, 0.35)
           .call(openStory, null, 0.9);
     }
 

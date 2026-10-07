@@ -1,3 +1,32 @@
-<section class="placeholder" id="work">
-    <h2 data-i18n="rail.work"></h2>
+<section class="station work" id="work" data-i18n-label="rail.work">
+    <h2 class="station-title" data-i18n="rail.work"></h2>
+
+    <p class="station-code work-route" data-state="idle" aria-hidden="true">Route::get('/', <b>WorkController</b>::class);</p>
+
+    <ol class="station-list">
+        <li class="station-item work-project" data-state="idle">
+            <div class="station-card">
+                <div class="station-head"><span class="station-name">$projects[0]</span><span class="station-state"><span data-when="working">__invoke()</span><span data-when="done" data-i18n="work.done"></span></span></div>
+                <span class="station-line station-label" data-i18n="work.one.name"></span>
+                <span class="station-line station-value" data-i18n="work.one.about"></span>
+                <span class="station-line station-chips"><span class="station-chip">Laravel</span><span class="station-chip" data-i18n="work.tech"></span></span>
+            </div>
+        </li>
+        <li class="station-item work-project" data-state="idle">
+            <div class="station-card">
+                <div class="station-head"><span class="station-name">$projects[1]</span><span class="station-state"><span data-when="working">__invoke()</span><span data-when="done" data-i18n="work.done"></span></span></div>
+                <span class="station-line station-label" data-i18n="work.two.name"></span>
+                <span class="station-line station-value" data-i18n="work.two.about"></span>
+                <span class="station-line station-chips"><span class="station-chip">Laravel</span><span class="station-chip" data-i18n="work.tech"></span></span>
+            </div>
+        </li>
+        <li class="station-item work-project" data-state="idle">
+            <div class="station-card">
+                <div class="station-head"><span class="station-name">$projects[2]</span><span class="station-state"><span data-when="working">__invoke()</span><span data-when="done" data-i18n="work.done"></span></span></div>
+                <span class="station-line station-label" data-i18n="work.three.name"></span>
+                <span class="station-line station-value" data-i18n="work.three.about"></span>
+                <span class="station-line station-chips"><span class="station-chip">Laravel</span><span class="station-chip" data-i18n="work.tech"></span></span>
+            </div>
+        </li>
+    </ol>
 </section>
