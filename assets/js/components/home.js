@@ -1,81 +1,72 @@
 (() => {
     const BAR = 20;
-    const STEP = 0.045;
+    const ROW = 0.04;
+    const BEAT = 0.08;
+    const PAUSE = 0.15;
+    const OPEN = 0.2;
 
     let section, tl, installs, cursorLine;
     let state = "booting";
+    let held = false;
 
     function init() {
         section = document.querySelector(".home");
         installs = steps("install");
-        cursorLine = steps("new")[0];
+        cursorLine = step("new");
         tl = gsap.timeline({ defaults: { ease: "none" }, onComplete: ready });
 
-        resetTerminal();
-        addCommands();
+        addIntro();
         addInstall();
         addQuestions();
         addServe();
         addActions();
 
-        find(".terminal").addEventListener("click", skip);
+        section.addEventListener("pointerdown", press);
         find(".home-fetch").addEventListener("click", sendRequest);
         find(".home-tldr").addEventListener("click", jumpToStory);
-        document.addEventListener("keydown", onKey);
+        document.addEventListener("keydown", press);
         document.addEventListener("story:opened", leave, { once: true });
         section.focus({ preventScroll: true });
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) skip();
     }
 
-    function resetTerminal() {
-        section.querySelectorAll(".term-total").forEach((el) => { el.textContent = installs.length; });
-        gsap.set(section.querySelectorAll(".term-line"), { display: "none", attr: { "data-cursor": "off" } });
-        gsap.set([find(".term-count"), find(".term-percent")], { textContent: 0 });
-        gsap.set(steps("progress"), { "--done": 0 });
-    }
-
-    function addCommands() {
+    function addIntro() {
         tl.fromTo(find(".terminal"), { autoAlpha: 0, y: 14, scale: 0.97 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.35, ease: "expo.out" }, 0);
-        print(steps("new")[0], 0.05);
-        type(steps("new")[0], 0.15, 0.8);
-        steps("banner").forEach((line, i) => print(line, 1.05 + i * 0.03, { cursor: false }));
-        print(steps("blank")[0], 1.22, { cursor: false });
-        print(steps("install-command")[0], 1.25);
-        type(steps("install-command")[0], 1.28, 0.25);
+        command(step("new"), 0.05, 0.8);
+        const banner = after(BEAT);
+        [...steps("banner"), step("blank")].forEach((line, i) => print(line, banner + i * ROW, { cursor: false }));
     }
 
     function addInstall() {
-        const [loading, resolving, operations] = steps("resolve");
-        const start = 1.85;
-        const autoload = start + installs.length * STEP + 0.04;
-
-        print(loading, 1.6);
-        print(resolving, 1.72);
-        print(operations, 1.78);
-        print(steps("progress")[0], start);
+        const start = after(PAUSE);
+        print(step("progress"), start);
         installs.forEach((line, i) => {
-            print(line, start + i * STEP, { cursor: false });
-            showInstalled(i + 1, start + (i + 0.6) * STEP);
+            const at = start + i * ROW;
+            print(line, at, { cursor: false });
+            showInstalled(i + 1, at);
         });
-        print(steps("autoload")[0], autoload);
-        print(steps("autoload")[1], autoload + 0.07);
     }
 
     function addQuestions() {
-        ask(steps("where"), 2.7, { typed: true });
-        ask(steps("edition"), 2.95);
-        ask(steps("when"), 3.17, { typed: true });
+        ask(steps("where"), after(PAUSE));
+        ask(steps("when"), after(BEAT));
     }
 
     function addServe() {
-        print(steps("done")[0], 3.45);
-        print(steps("serve")[0], 3.53);
-        type(steps("serve")[0], 3.55, 0.18);
-        print(steps("started")[0], 3.8);
+        print(step("done"), after(BEAT));
+        command(step("serve"), after(BEAT), 0.18);
+        const live = after(BEAT);
+        print(step("started"), live, { cursor: false });
+        hideCursor(live);
     }
 
     function addActions() {
-        tl.fromTo(find(".home-actions"), { autoAlpha: 0, scale: 0.7 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: "back.out(1.7)" }, 3.95);
+        tl.fromTo(find(".home-actions"), { autoAlpha: 0, scale: 0.7 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: "back.out(1.7)" }, after(PAUSE));
+    }
+
+    function command(line, at, duration) {
+        print(line, at);
+        type(line, at + BEAT, duration);
     }
 
     function print(line, at, { cursor = true } = {}) {
@@ -86,6 +77,10 @@
         cursorLine = line;
     }
 
+    function hideCursor(at) {
+        tl.set(cursorLine, { attr: { "data-cursor": "off" } }, at);
+    }
+
     function type(line, at, duration) {
         const text = line.querySelector(".term-type");
         const length = text.textContent.length;
@@ -93,21 +88,30 @@
           .set(text, { "--chars": 999 }, at + duration);
     }
 
-    function ask([question, answer, end], at, { typed = false } = {}) {
+    function ask([question, answer, end], at) {
         print(question, at);
-        print(answer, at + 0.06);
-        if (typed) type(answer, at + 0.06, 0.15);
-        print(end, at + 0.06);
+        print(answer, at + BEAT);
+        type(answer, at + BEAT, 0.15);
+        print(end, at + BEAT);
     }
 
     function showInstalled(count, at) {
         tl.set(find(".term-count"), { textContent: count }, at)
           .set(find(".term-percent"), { textContent: Math.round((count / installs.length) * 100) }, at)
-          .set(steps("progress"), { "--done": Math.round((count / installs.length) * BAR) }, at);
+          .set(step("progress"), { "--done": Math.round((count / installs.length) * BAR) }, at);
+    }
+
+    function after(gap) {
+        return tl.duration() + gap;
     }
 
     function skip() {
         if (state === "booting") tl.progress(1);
+    }
+
+    function press(event) {
+        held = event.type === "pointerdown" && state === "booting";
+        skip();
     }
 
     function ready() {
@@ -116,45 +120,33 @@
     }
 
     function sendRequest() {
-        if (state !== "ready") return;
+        if (state !== "ready" || held) return;
         state = "sent";
         section.dataset.state = state;
-        find(".home-tldr").disabled = true;
         document.dispatchEvent(new Event("story:request"));
-        gsap.timeline()
-          .call(showLatest)
-          .set(cursorLine, { attr: { "data-cursor": "off" } })
-          .set(steps("get"), { display: "block" })
-          .set(steps("handle"), { display: "block" }, 0.35)
-          .call(openStory, null, 0.9);
-    }
-
-    function showLatest() {
-        section.scrollTo({ top: 0, behavior: "smooth" });
+        gsap.delayedCall(OPEN, openStory);
     }
 
     function openStory() {
-        document.dispatchEvent(new CustomEvent("story:open"));
+        document.dispatchEvent(new Event("story:open"));
     }
 
     function jumpToStory() {
+        if (state !== "ready" || held) return;
         document.dispatchEvent(new CustomEvent("story:open", { detail: "instant" }));
     }
 
     function leave() {
-        document.removeEventListener("keydown", onKey);
+        document.removeEventListener("keydown", press);
         section.remove();
-    }
-
-    function onKey(e) {
-        if (e.target.closest("button")) return;
-        if (e.key === "Escape") skip();
-        else if (e.key === "Enter") state === "booting" ? skip() : sendRequest();
-        else if ((e.key === "t" || e.key === "T") && state !== "booting") find(".home-tldr").click();
     }
 
     function find(selector) {
         return section.querySelector(selector);
+    }
+
+    function step(name) {
+        return section.querySelector(`[data-step="${name}"]`);
     }
 
     function steps(name) {

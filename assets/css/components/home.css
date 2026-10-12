@@ -214,8 +214,7 @@
 .home-actions {
     flex: none;
     display: flex;
-    align-items: flex-start;
-    gap: 14px;
+    justify-content: center;
     padding: 32px 0 56px;
 }
 
@@ -226,38 +225,30 @@
     gap: 12px;
 }
 
-.home-mark {
-    flex: none;
-    width: 10px;
-    height: 10px;
-    margin-top: 27px;
-    background: var(--accent);
-    animation: home-mark .84s step-end infinite;
-}
-
-.home[data-state="sent"] .home-mark {
-    visibility: hidden;
-}
-
-@keyframes home-mark {
-    50% {
-        opacity: 0.15;
-    }
-}
-
 .home-button {
     flex: 1 0 auto;
-    display: grid;
-    justify-items: center;
-    align-content: center;
-    height: 64px;
-    padding: 0 32px;
+    min-width: 180px;
+    height: 56px;
+    padding: 0 28px;
     border: 0;
-    border-radius: 3px;
+    border-radius: 8px;
     background: var(--accent);
     color: #FFFFFF;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 24px;
     white-space: nowrap;
     cursor: pointer;
+    transition: filter .15s, transform .15s, opacity .3s;
+}
+
+.home-button:hover {
+    filter: brightness(1.08);
+}
+
+.home-button:active {
+    transform: translateY(1px);
 }
 
 .home-tldr {
@@ -268,45 +259,6 @@
 .home[data-state="sent"] .home-button {
     opacity: 0.6;
     cursor: default;
-}
-
-.home-label {
-    grid-area: 1 / 1;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 24px;
-}
-
-.home-label[data-when="sent"],
-.home[data-state="sent"] .home-label[data-when="ready"] {
-    visibility: hidden;
-}
-
-.home[data-state="sent"] .home-label[data-when="sent"] {
-    visibility: visible;
-}
-
-.home-code {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    line-height: 18px;
-    opacity: 0.85;
-}
-
-.home-skip {
-    position: fixed;
-    right: 16px;
-    bottom: 12px;
-    white-space: nowrap;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    line-height: 18px;
-    color: var(--muted);
-}
-
-.home:not([data-state="booting"]) .home-skip {
-    display: none;
 }
 
 @media (min-width: 1200px) {
@@ -363,8 +315,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .term-line[data-cursor="on"]::after,
-    .home-mark {
+    .term-line[data-cursor="on"]::after {
         animation: none;
+    }
+
+    .home-button {
+        transition: none;
     }
 }

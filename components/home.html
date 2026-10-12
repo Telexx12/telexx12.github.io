@@ -17,10 +17,6 @@
                 <div class="term-line term-banner" data-step="banner"> ███████╗ ██║  ██║ ██║  ██║ ██║  ██║  ╚████╔╝  ███████╗ ███████╗</div>
                 <div class="term-line term-banner" data-step="banner"> ╚══════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝   ╚═══╝   ╚══════╝ ╚══════╝</div>
                 <div class="term-line term-blank" data-step="blank"></div>
-                <div class="term-line" data-step="install-command"><span class="term-red term-strong">$ </span><span class="term-type">composer install david</span></div>
-                <div class="term-line term-dim" data-step="resolve" data-i18n="home.loading"></div>
-                <div class="term-line term-dim" data-step="resolve" data-i18n="home.resolving"></div>
-                <div class="term-line" data-step="resolve" style="--gap: 6px"><span class="term-soft" data-i18n="home.operations"></span><b><span class="term-total">15</span> <span data-i18n="home.installs"></span></b><span class="term-soft" data-i18n="home.operationsRest"></span></div>
                 <div class="term-line" data-step="install"><span class="term-dim">  - </span><span data-i18n="home.installing"></span><b data-i18n="home.trait1"></b> (9.0)</div>
                 <div class="term-line" data-step="install"><span class="term-dim">  - </span><span data-i18n="home.installing"></span><b data-i18n="home.trait2"></b> (5.0)</div>
                 <div class="term-line" data-step="install"><span class="term-dim">  - </span><span data-i18n="home.installing"></span><b data-i18n="home.trait3"></b> (10.0)</div>
@@ -37,41 +33,22 @@
                 <div class="term-line" data-step="install"><span class="term-dim">  - </span><span data-i18n="home.installing"></span><b data-i18n="home.trait14"></b> (9.0)</div>
                 <div class="term-line" data-step="install"><span class="term-dim">  - </span><span data-i18n="home.installing"></span><b data-i18n="home.trait15"></b> (1.0)</div>
                 <div class="term-line term-soft" data-step="progress" style="--gap: 4px"> <span class="term-count">15</span>/<span class="term-total">15</span> [<span class="term-red term-bar-done">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</span><span class="term-bar-left">░░░░░░░░░░░░░░░░░░░░</span>] <span class="term-percent">100</span>%</div>
-                <div class="term-line term-dim" data-step="autoload" style="--gap: 6px" data-i18n="home.autoload"></div>
-                <div class="term-line term-soft" data-step="autoload"><span class="term-total">15</span> <span data-i18n="home.packagesInstalled"></span></div>
                 <div class="term-line" data-step="where" style="--gap: 10px"><span class="term-dim">┌ </span><b data-i18n="home.where"></b></div>
                 <div class="term-line" data-step="where"><span class="term-dim">│ </span><span class="term-type"><span class="term-red">› </span><span data-i18n="home.place"></span></span></div>
                 <div class="term-line term-dim" data-step="where">└</div>
-                <div class="term-line" data-step="edition" style="--gap: 4px"><span class="term-dim">┌ </span><b data-i18n="home.edition"></b></div>
-                <div class="term-line" data-step="edition"><span class="term-dim">│ </span><span class="term-red">● </span><span data-i18n="home.boy"></span>    <span class="term-dim">○ <span data-i18n="home.girl"></span></span></div>
-                <div class="term-line term-dim" data-step="edition">└</div>
                 <div class="term-line" data-step="when" style="--gap: 4px"><span class="term-dim">┌ </span><b data-i18n="home.when"></b></div>
                 <div class="term-line" data-step="when"><span class="term-dim">│ </span><span class="term-type" data-i18n="home.date"></span></div>
                 <div class="term-line term-dim" data-step="when">└</div>
                 <div class="term-line" data-step="done" style="--gap: 10px"><span class="term-badge term-badge-done" data-i18n="home.done"></span> <span data-i18n="home.installed"></span></div>
                 <div class="term-line" data-step="serve" style="--gap: 12px"><span class="term-red term-strong">$ </span><span class="term-type">php artisan serve</span></div>
-                <div class="term-line" data-step="started" style="--gap: 6px"><span class="term-badge term-badge-info">INFO</span> <span data-i18n="home.started"></span> <span class="term-dim">http://</span><b class="term-red" data-i18n="home.host"></b></div>
-                <div class="term-line" data-step="get" style="--gap: 12px"><span class="term-red term-strong">→ </span>GET <b>http://<span data-i18n="home.host"></span>/</b></div>
-                <div class="term-line" data-step="handle"><span class="term-dim">  └ </span>public/index.php <span class="term-soft" data-i18n="home.handling"></span></div>
-            </div>
+                <div class="term-line" data-step="started" style="--gap: 6px"><span class="term-badge term-badge-info">INFO</span> <span data-i18n="home.started"></span> <span class="term-dim">http://</span><b class="term-red" data-i18n="home.host"></b></div>            </div>
         </div>
 
         <div class="home-actions">
-            <span class="home-mark"></span>
             <div class="home-buttons">
-                <button type="button" class="home-button home-fetch">
-                    <span class="home-label" data-when="ready" data-i18n="home.fetch"></span>
-                    <span class="home-label" data-when="sent" data-i18n="home.sent"></span>
-                    <span class="home-code">fetch('http://<span data-i18n="home.host"></span>')</span>
-                </button>
-                <button type="button" class="home-button home-tldr">
-                    <span class="home-label">TLDR</span>
-                    <span class="home-code">[T] · <span data-i18n="home.tldr"></span></span>
-                </button>
+                <button type="button" class="home-button home-fetch" data-i18n="home.fetch"></button>
+                <button type="button" class="home-button home-tldr" data-i18n="home.tldr"></button>
             </div>
-            <span class="home-mark"></span>
         </div>
-
-        <div class="home-skip" data-i18n="home.skip"></div>
     </div>
 </section>
