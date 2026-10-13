@@ -1,43 +1,14 @@
 (() => {
-    const LENGTH = 13;
-    const START = 0.6;
-    const STEP = 3.2;
-    const FOCUS = [
-        { opacity: 0.45, filter: "grayscale(0.67) blur(4px)" },
-        { opacity: 0.75, filter: "grayscale(0.33) blur(2px)" },
-        { opacity: 1, filter: "grayscale(0) blur(0px)" },
-    ];
+    const REDUCED = "(prefers-reduced-motion: reduce)";
 
-    let section, tl, arcs, cards, browser, button;
+    let section, browser, button;
 
     function init() {
         section = document.querySelector(".studies");
-        arcs = [...section.querySelectorAll(".studies-ring g")];
-        cards = [...section.querySelectorAll(".service")];
         browser = find(".browser");
         button = document.querySelector(".home-fetch");
-        tl = gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: {
-                trigger: section,
-                start: "top top",
-                end: "bottom bottom",
-                scrub: true,
-                pin: find(".studies-stage"),
-                pinSpacing: false,
-            },
-        });
-
-        hideBrowser();
-        cards.forEach(addService);
-        addBooted();
-        addRest();
 
         document.addEventListener("story:open", open, { once: true });
-    }
-
-    function hideBrowser() {
-        gsap.set(browser, { autoAlpha: 0 });
     }
 
     function open(e) {
@@ -48,47 +19,12 @@
           .to(browser, { borderRadius: 0, "--edge": 0, duration: 0.15, ease: "none" }, 0.85)
           .to(find(".browser-bar"), { yPercent: -110, duration: 0.3 }, 1.05);
 
-        if (e.detail === "instant" || matchMedia("(prefers-reduced-motion: reduce)").matches) opening.progress(1);
+        if (e.detail === "instant" || matchMedia(REDUCED).matches) opening.progress(1);
     }
 
     function opened(detail) {
         document.dispatchEvent(new CustomEvent("story:opened", { detail }));
         gsap.to(browser, { "--fill": 0, duration: 0.5, ease: "none" });
-    }
-
-    function addService(card, i) {
-        register(card, i, START + i * 0.1);
-        boot(card, i, START + 0.6 + i * STEP);
-    }
-
-    function register(card, i, at) {
-        tl.set([arcs[i], card], { attr: { "data-state": "registered" } }, at);
-    }
-
-    function boot(card, i, at) {
-        tl.set([arcs[i], card], { attr: { "data-state": "booting" } }, at)
-          .to(arcs[i].querySelector(".ring-fill"), { "--fill": 1, duration: 2.2 }, at)
-          .to(find(".studies-face img"), { ...FOCUS[i], duration: 2.2 }, at)
-          .set([arcs[i], card], { attr: { "data-state": "booted" } }, at + 2.2)
-          .set(find(".studies-count"), { textContent: i + 1 }, at + 2.2)
-          .call(announceBoot, null, at + 2.2);
-    }
-
-    function announceBoot() {
-        document.dispatchEvent(new Event("story:booted"));
-    }
-
-    function addBooted() {
-        const at = START + cards.length * STEP;
-
-        tl.set(find(".studies-stage"), { attr: { "data-state": "done" } }, at)
-          .to(find(".studies-ring"), { "--gap": 0, duration: 0.8 }, at + 0.2)
-          .to(find(".studies-loading"), { autoAlpha: 0, duration: 0.4 }, at + 0.6)
-          .to(find(".studies-done"), { autoAlpha: 1, y: 0, duration: 0.6 }, at + 1);
-    }
-
-    function addRest() {
-        tl.to({}, { duration: LENGTH - tl.duration() });
     }
 
     function buttonX() {

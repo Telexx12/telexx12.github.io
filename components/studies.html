@@ -1,5 +1,5 @@
-<section class="studies" id="studies" data-i18n-label="rail.studies">
-    <div class="studies-stage" data-state="loading">
+<section class="studies" id="studies" data-i18n-label="rail.studies" data-thread="intro">
+    <div class="studies-stage">
         <div class="browser">
             <div class="browser-bar" aria-hidden="true">
                 <i></i>
@@ -9,60 +9,76 @@
                 <span class="browser-loading"></span>
             </div>
 
-            <div class="browser-page">
-                <h2 class="station-title" data-i18n="rail.studies"></h2>
+            <div class="browser-page" data-thread-layer>
+                <h2 class="station-title" data-i18n="rail.studies" data-thread-start data-thread-axis></h2>
 
-                <div class="studies-loader">
-                    <svg class="studies-ring" viewBox="0 0 120 120" aria-hidden="true">
-                        <g data-state="idle" style="--i: 0"><circle class="ring-slot" cx="60" cy="60" r="56" pathLength="360"></circle><circle class="ring-fill" cx="60" cy="60" r="56" pathLength="360"></circle></g>
-                        <g data-state="idle" style="--i: 1"><circle class="ring-slot" cx="60" cy="60" r="56" pathLength="360"></circle><circle class="ring-fill" cx="60" cy="60" r="56" pathLength="360"></circle></g>
-                        <g data-state="idle" style="--i: 2"><circle class="ring-slot" cx="60" cy="60" r="56" pathLength="360"></circle><circle class="ring-fill" cx="60" cy="60" r="56" pathLength="360"></circle></g>
-                    </svg>
-                    <div class="studies-face">
-                        <img src="assets/img/portrait-placeholder.svg" alt="">
-                    </div>
-                </div>
-
-                <div class="studies-status">
-                    <p class="studies-loading"><span data-i18n="studies.loading"></span> <b class="studies-count">0</b>/3</p>
-                    <p class="studies-done"><span data-i18n="studies.done"></span><span class="studies-dot">.</span></p>
-                </div>
-
-                <ol class="services">
-                    <li class="service" data-state="idle">
-                        <div class="service-card">
-                            <div class="service-head">
-                                <span class="service-name">CoreService</span>
-                                <span class="service-state"><span data-when="registered">register()</span><span data-when="booting">boot()</span><span data-when="booted" data-i18n="studies.booted"></span></span>
-                            </div>
-                            <span class="service-line service-stage" data-i18n="studies.core.stage"></span>
-                            <span class="service-line service-meta"><span data-i18n="studies.core.school"></span> · <span data-i18n="studies.core.years"></span></span>
-                            <span class="service-line service-bind"><span class="service-key">bind</span> <span data-i18n="studies.core.learned"></span></span>
+                <ol class="pages" data-thread-shelf>
+                    <li class="page">
+                        <div class="page-sheet" data-thread-stop>
+                            <span class="page-line page-head"><span class="page-stage" data-i18n="studies.real.stage"></span><span class="page-date" data-i18n="studies.real.years"></span></span>
+                            <span class="page-line page-school" data-i18n="studies.real.school"></span>
+                            <ul class="page-notes">
+                                <li class="page-line page-note" data-i18n="studies.real.learned1"></li>
+                                <li class="page-line page-note" data-i18n="studies.real.learned2"></li>
+                                <li class="page-line page-note" data-i18n="studies.real.learned3"></li>
+                            </ul>
                         </div>
                     </li>
-                    <li class="service" data-state="idle">
-                        <div class="service-card">
-                            <div class="service-head">
-                                <span class="service-name">RealPerspectiveService</span>
-                                <span class="service-state"><span data-when="registered">register()</span><span data-when="booting">boot()</span><span data-when="booted" data-i18n="studies.booted"></span></span>
-                            </div>
-                            <span class="service-line service-stage" data-i18n="studies.real.stage"></span>
-                            <span class="service-line service-meta"><span data-i18n="studies.real.school"></span> · <span data-i18n="studies.real.years"></span></span>
-                            <span class="service-line service-bind"><span class="service-key">bind</span> <span data-i18n="studies.real.learned"></span></span>
+                    <li class="page">
+                        <div class="page-sheet" data-thread-stop>
+                            <span class="page-line page-head"><span class="page-stage" data-i18n="studies.higher.stage"></span><span class="page-date" data-i18n="studies.higher.years"></span></span>
+                            <span class="page-line page-school" data-i18n="studies.higher.school"></span>
+                            <ul class="page-notes">
+                                <li class="page-line page-note" data-i18n="studies.higher.learned1"></li>
+                                <li class="page-line page-note" data-i18n="studies.higher.learned2"></li>
+                                <li class="page-line page-note" data-i18n="studies.higher.learned3"></li>
+                                <li class="page-line page-note" data-i18n="studies.higher.learned4"></li>
+                            </ul>
                         </div>
                     </li>
-                    <li class="service" data-state="idle">
-                        <div class="service-card">
-                            <div class="service-head">
-                                <span class="service-name">FelsőoktatásService</span>
-                                <span class="service-state"><span data-when="registered">register()</span><span data-when="booting">boot()</span><span data-when="booted" data-i18n="studies.booted"></span></span>
-                            </div>
-                            <span class="service-line service-stage" data-i18n="studies.higher.stage"></span>
-                            <span class="service-line service-meta"><span data-i18n="studies.higher.school"></span> · <span data-i18n="studies.higher.years"></span></span>
-                            <span class="service-line service-bind"><span class="service-key">bind</span> <span data-i18n="studies.higher.learned"></span></span>
+                    <li class="page">
+                        <div class="page-sheet" data-thread-stop>
+                            <span class="page-line page-head"><span class="page-stage" data-i18n="studies.laracasts.stage"></span><span class="page-date" data-i18n="studies.laracasts.years"></span></span>
+                            <span class="page-line page-school" data-i18n="studies.laracasts.school"></span>
+                            <ul class="page-notes">
+                                <li class="page-line page-note" data-i18n="studies.laracasts.learned1"></li>
+                                <li class="page-line page-note" data-i18n="studies.laracasts.learned2"></li>
+                                <li class="page-line page-note" data-i18n="studies.laracasts.learned3"></li>
+                            </ul>
                         </div>
                     </li>
                 </ol>
+
+                <div class="board studies-board" data-thread-board="1">
+                    <svg class="board-art" viewBox="0 0 120 120" aria-hidden="true">
+                        <defs>
+                            <clipPath id="studies-placed"><path class="board-cut"></path></clipPath>
+                            <clipPath id="studies-cut"><path class="board-cut"></path></clipPath>
+                            <clipPath id="studies-bands">
+                                <rect class="board-band"></rect>
+                                <rect class="board-band"></rect>
+                                <rect class="board-band"></rect>
+                            </clipPath>
+                        </defs>
+                        <path class="board-ghost"></path>
+                        <g class="board-placed">
+                            <g clip-path="url(#studies-placed)">
+                                <rect class="board-base" width="120" height="120"></rect>
+                                <image href="assets/img/portrait-placeholder.svg" x="10" y="10" width="100" height="100"></image>
+                            </g>
+                            <path class="board-line"></path>
+                        </g>
+                        <g class="board-piece">
+                            <g clip-path="url(#studies-cut)">
+                                <rect class="board-base" width="120" height="120"></rect>
+                                <image href="assets/img/portrait-placeholder.svg" x="10" y="10" width="100" height="100" clip-path="url(#studies-bands)"></image>
+                            </g>
+                            <path class="board-line"></path>
+                        </g>
+                    </svg>
+                    <span class="board-label" data-i18n="rail.work"></span>
+                    <span class="board-label" data-i18n="rail.filters"></span>
+                </div>
             </div>
         </div>
     </div>
