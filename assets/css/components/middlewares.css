@@ -195,23 +195,6 @@
     --lift-rotate: -6;
 }
 
-.filters-placed {
-    min-width: 0;
-    margin: 0;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(8px);
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 28px;
-    letter-spacing: -0.04em;
-}
-
-.filters-dot {
-    color: var(--accent);
-}
-
 @media (max-height: 700px) {
     .filters {
         --overlap: 40px;
@@ -358,14 +341,6 @@
     .filters-board {
         grid-column: 2;
         grid-row: 1;
-    }
-
-    .filters-placed {
-        grid-column: 1;
-        grid-row: 1;
-        text-align: right;
-        font-size: 32px;
-        line-height: 40px;
     }
 }
 

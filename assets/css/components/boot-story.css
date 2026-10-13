@@ -38,37 +38,24 @@ html::-webkit-scrollbar {
     transition: background .3s;
 }
 
-.bar-trace {
-    min-width: 0;
-    margin: 0 auto 0 4px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    line-height: 16px;
-    color: var(--muted);
-    opacity: 0;
-    transition: opacity .3s;
+.bar-logo {
+    flex: none;
+    width: 25px;
+    height: 22px;
+    margin: 0 auto 0 6px;
+    color: var(--fg);
 }
 
-.bar-trace.is-visible,
+.bar-cursor {
+    fill: var(--accent-ink);
+}
+
 .bar-thread.is-visible {
     opacity: 1;
 }
 
 .bar-thread.is-away {
     opacity: 0;
-}
-
-.bar-arrow {
-    color: var(--accent-ink);
-}
-
-.bar-step {
-    display: inline-block;
-    font-weight: 600;
-    color: var(--fg);
 }
 
 .bar-thread {
@@ -154,8 +141,9 @@ html::-webkit-scrollbar {
         padding: 0 12px;
     }
 
-    .bar-trace {
+    .bar-logo {
+        width: 27px;
+        height: 24px;
         margin-left: 8px;
-        font-size: 12px;
     }
 }

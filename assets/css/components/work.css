@@ -111,17 +111,6 @@
     text-overflow: ellipsis;
 }
 
-.sign-badge {
-    flex: none;
-    scale: clamp(0, (var(--passing) * 6 - 0.5) * 2, 1);
-    padding: 0 6px;
-    border-radius: 4px;
-    background: #FFFFFF;
-    font-size: 11px;
-    line-height: 18px;
-    color: var(--accent);
-}
-
 .sign-meta {
     display: flex;
     justify-content: space-between;
@@ -166,23 +155,6 @@
     --lift-x: 6;
     --lift-y: -7;
     --lift-rotate: 6;
-}
-
-.work-placed {
-    min-width: 0;
-    margin: 0;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(8px);
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 28px;
-    letter-spacing: -0.04em;
-}
-
-.work-dot {
-    color: var(--accent);
 }
 
 @media (max-height: 700px) {
@@ -261,11 +233,6 @@
 
     .work-board {
         grid-column: 2;
-    }
-
-    .work-placed {
-        font-size: 32px;
-        line-height: 40px;
     }
 }
 

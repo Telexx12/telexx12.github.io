@@ -93,6 +93,7 @@ a:focus-visible {
 
 .station {
     position: relative;
+    isolation: isolate;
     min-height: var(--view);
     box-sizing: border-box;
     display: flex;

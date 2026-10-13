@@ -1,6 +1,5 @@
 (() => {
     const LEG = 1.8;
-    const STEPS = ["ServiceProvider::boot()", "Router::dispatch()", "Middleware::handle()", "Response::send()"];
     const HURRY_KEYS = ["Escape", "Enter", " ", "ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End"];
     const root = document.documentElement;
     const page = document.scrollingElement;
@@ -9,18 +8,14 @@
         lang: () => window.I18n.set(root.lang === "en" ? "hu" : "en").then(() => ScrollTrigger.refresh()),
     };
 
-    let story, sections, trace, step, thread, journey;
+    let story, sections, thread, journey;
 
     function init() {
         story = document.querySelector(".boot-story");
         sections = [...story.querySelectorAll(".boot-sections > section")];
-        trace = story.querySelector(".bar-trace");
-        step = trace.querySelector(".bar-step");
         thread = story.querySelector(".bar-thread");
 
-        step.textContent = STEPS[0];
         addProgress();
-        sections.forEach(watchStep);
         watchLanding();
         story.addEventListener("click", runAction);
         document.addEventListener("story:opened", start, { once: true });
@@ -38,18 +33,7 @@
         ScrollTrigger.create({ trigger: sections.at(-1), start: "top center", toggleClass: { targets: thread, className: "is-away" } });
     }
 
-    function watchStep(section, i) {
-        ScrollTrigger.create({ trigger: section, start: "top center", end: "bottom center", onToggle: (self) => self.isActive && showStep(i) });
-    }
-
-    function showStep(i) {
-        if (step.textContent === STEPS[i]) return;
-        step.textContent = STEPS[i];
-        gsap.fromTo(step, { y: 6, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out" });
-    }
-
     function start(e) {
-        trace.classList.add("is-visible");
         thread.classList.add("is-visible");
         if (e.detail === "instant" || matchMedia("(prefers-reduced-motion: reduce)").matches) land();
         else travel();

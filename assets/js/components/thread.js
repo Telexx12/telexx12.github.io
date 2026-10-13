@@ -41,7 +41,6 @@ window.Thread = (() => {
             stops: [...section.querySelectorAll("[data-thread-stop]")],
             followers: [...section.querySelectorAll("[data-thread-follow]")],
             end: section.querySelector("[data-thread-end]"),
-            placed: section.querySelector("[data-thread-placed]"),
             board: goal,
             piece: goal && goal.querySelector(".board-piece"),
             bands: goal ? [...goal.querySelectorAll(".board-band")] : [],
@@ -419,7 +418,6 @@ window.Thread = (() => {
 
         line.flow.fromTo(line.piece, lifted(line), { x: 0, y: 0, rotation: 0, scale: 1, duration: snap, ease: "back.out(3)", immediateRender: false }, settle)
           .fromTo(line.board, { "--lifted": 1 }, { "--lifted": 0, duration: snap, immediateRender: false }, settle);
-        if (line.placed) line.flow.fromTo(line.placed, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: snap / 2, immediateRender: false }, settle + snap / 2);
         stretch(line, line.flow, tail, settle + snap, Math.max(settle + snap + 1, end));
     }
 
