@@ -1,32 +1,61 @@
-<section class="station work" id="work" data-i18n-label="rail.work">
-    <h2 class="station-title" data-i18n="rail.work"></h2>
+<section class="work" id="work" data-i18n-label="rail.work" data-thread="scroll">
+    <div class="station work-stage" data-thread-layer>
+        <h2 class="station-title" data-i18n="rail.work" data-thread-axis></h2>
 
-    <p class="station-code work-route" data-state="idle" aria-hidden="true">Route::get('/', <b>WorkController</b>::class);</p>
+        <ol class="work-signs" data-thread-shelf>
+            <li class="work-sign" data-thread-stop>
+                <div class="sign-plate">
+                    <p class="sign-route"><span><b>GET</b> /<span data-i18n="work.one.slug"></span></span></p>
+                    <p class="sign-meta"><span data-i18n="work.one.role"></span><span class="sign-years" data-i18n="work.one.years"></span></p>
+                    <p class="sign-did" data-i18n="work.one.did"></p>
+                </div>
+            </li>
+            <li class="work-sign" data-thread-stop>
+                <div class="sign-plate">
+                    <p class="sign-route"><span><b>GET</b> /<span data-i18n="work.two.slug"></span></span></p>
+                    <p class="sign-meta"><span data-i18n="work.two.role"></span><span class="sign-years" data-i18n="work.two.years"></span></p>
+                    <p class="sign-did" data-i18n="work.two.did"></p>
+                </div>
+            </li>
+            <li class="work-sign" data-thread-stop>
+                <div class="sign-plate">
+                    <p class="sign-route"><span><b>GET</b> /<span data-i18n="work.three.slug"></span></span></p>
+                    <p class="sign-meta"><span data-i18n="work.three.role"></span><span class="sign-years" data-i18n="work.three.years"></span></p>
+                    <p class="sign-did" data-i18n="work.three.did"></p>
+                </div>
+            </li>
+        </ol>
 
-    <ol class="station-list">
-        <li class="station-item work-project" data-state="idle">
-            <div class="station-card">
-                <div class="station-head"><span class="station-name">$projects[0]</span><span class="station-state"><span data-when="working">__invoke()</span><span data-when="done" data-i18n="work.done"></span></span></div>
-                <span class="station-line station-label" data-i18n="work.one.name"></span>
-                <span class="station-line station-value" data-i18n="work.one.about"></span>
-                <span class="station-line station-chips"><span class="station-chip">Laravel</span><span class="station-chip" data-i18n="work.tech"></span></span>
+        <div class="work-finish">
+            <div class="board work-board" data-thread-board="2">
+                <svg class="board-art" viewBox="0 0 120 120" aria-hidden="true">
+                    <defs>
+                        <clipPath id="work-placed"><path class="board-cut"></path></clipPath>
+                        <clipPath id="work-cut"><path class="board-cut"></path></clipPath>
+                        <clipPath id="work-bands">
+                            <rect class="board-band"></rect>
+                            <rect class="board-band"></rect>
+                            <rect class="board-band"></rect>
+                        </clipPath>
+                    </defs>
+                    <path class="board-ghost"></path>
+                    <g class="board-placed">
+                        <g clip-path="url(#work-placed)">
+                            <rect class="board-base" width="120" height="120"></rect>
+                            <image href="assets/img/portrait-placeholder.svg" x="10" y="10" width="100" height="100"></image>
+                        </g>
+                        <path class="board-line"></path>
+                    </g>
+                    <g class="board-piece">
+                        <g clip-path="url(#work-cut)">
+                            <rect class="board-base" width="120" height="120"></rect>
+                            <image href="assets/img/portrait-placeholder.svg" x="10" y="10" width="100" height="100" clip-path="url(#work-bands)"></image>
+                        </g>
+                        <path class="board-line"></path>
+                    </g>
+                </svg>
+                <span class="board-label" data-i18n="rail.filters"></span>
             </div>
-        </li>
-        <li class="station-item work-project" data-state="idle">
-            <div class="station-card">
-                <div class="station-head"><span class="station-name">$projects[1]</span><span class="station-state"><span data-when="working">__invoke()</span><span data-when="done" data-i18n="work.done"></span></span></div>
-                <span class="station-line station-label" data-i18n="work.two.name"></span>
-                <span class="station-line station-value" data-i18n="work.two.about"></span>
-                <span class="station-line station-chips"><span class="station-chip">Laravel</span><span class="station-chip" data-i18n="work.tech"></span></span>
-            </div>
-        </li>
-        <li class="station-item work-project" data-state="idle">
-            <div class="station-card">
-                <div class="station-head"><span class="station-name">$projects[2]</span><span class="station-state"><span data-when="working">__invoke()</span><span data-when="done" data-i18n="work.done"></span></span></div>
-                <span class="station-line station-label" data-i18n="work.three.name"></span>
-                <span class="station-line station-value" data-i18n="work.three.about"></span>
-                <span class="station-line station-chips"><span class="station-chip">Laravel</span><span class="station-chip" data-i18n="work.tech"></span></span>
-            </div>
-        </li>
-    </ol>
+        </div>
+    </div>
 </section>

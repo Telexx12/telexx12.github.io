@@ -1,9 +1,303 @@
-.work-route {
-    max-width: 100%;
-    text-align: center;
-    overflow-wrap: anywhere;
+.work {
+    --sign: var(--fg);
+    --sign-ink: var(--panel);
+    --hang: 14px;
+    --thread-radius: 16px;
+    position: relative;
 }
 
-.work-route:not([data-state="idle"]) b {
+.work .station-title {
+    --thread-inset: 20px;
+}
+
+.work-stage {
+    justify-content: flex-start;
+    padding-top: calc(var(--bar) + 12px);
+    overflow-anchor: none;
+}
+
+.work-signs {
+    --thread-left: 10px;
+    --thread-right: 10px;
+    --rung: 10px;
+    width: 100%;
+    max-width: var(--column);
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0 0 0 24px;
+    list-style: none;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--rung);
+}
+
+.work-signs::before {
+    content: "";
+    margin-bottom: calc(var(--rung) * -1);
+}
+
+.work-sign {
+    --thread-pass: across;
+    --thread-inset: calc(var(--hang) * -1);
+    --thread-trim: 17px;
+    --on: min(1, var(--passing) * 1000);
+    position: relative;
+    width: calc(100% - 56px);
+    margin-top: var(--hang);
+    perspective: 600px;
+}
+
+.work-sign:nth-child(even) {
+    --thread-dir: rtl;
+    align-self: flex-end;
+}
+
+.work-sign::before,
+.work-sign::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--hang) * -1);
+    left: 16px;
+    width: 2px;
+    height: var(--hang);
+    background: color-mix(in srgb, var(--fg) 35%, transparent);
+}
+
+.work-sign::after {
+    right: 16px;
+    left: auto;
+}
+
+.sign-plate {
+    --flip: min(1, var(--passing) * 6);
+    --glow: clamp(0, min(var(--passing) * 10, (0.5 - var(--passing)) * 4), 1);
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    border: 2px solid var(--sign);
+    border-radius: 6px;
+    background: var(--panel);
+    box-shadow: 0 0 0 calc(var(--glow) * 4px) color-mix(in srgb, var(--accent) 20%, transparent);
+    opacity: var(--flip);
+    transform: rotateX(calc((1 - var(--flip)) * -90deg));
+    transform-origin: 50% 0;
+}
+
+.sign-plate p {
+    margin: 0;
+}
+
+.sign-route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 3px 10px;
+    background: color-mix(in srgb, var(--accent) calc(var(--on) * 100%), var(--sign));
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 22px;
+    color: color-mix(in srgb, #FFFFFF calc(var(--on) * 100%), var(--sign-ink));
+    transition: background-color .3s, color .3s;
+}
+
+.sign-route > span:first-child {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sign-badge {
+    flex: none;
+    scale: clamp(0, (var(--passing) * 6 - 0.5) * 2, 1);
+    padding: 0 6px;
+    border-radius: 4px;
+    background: #FFFFFF;
+    font-size: 11px;
+    line-height: 18px;
     color: var(--accent);
+}
+
+.sign-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 10px 0;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.sign-years {
+    flex: none;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.sign-did {
+    padding: 0 10px 7px;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--body);
+}
+
+.work-finish {
+    width: 100%;
+    max-width: var(--column);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 8px 0 28px 24px;
+}
+
+.work-board {
+    --thread-corner: 1;
+    --thread-approach: above;
+    --thread-exit: down;
+    --thread-tie: 8px;
+    --lift-x: 6;
+    --lift-y: -7;
+    --lift-rotate: 6;
+}
+
+.work-placed {
+    min-width: 0;
+    margin: 0;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    letter-spacing: -0.04em;
+}
+
+.work-dot {
+    color: var(--accent);
+}
+
+@media (max-height: 700px) {
+    .work-stage {
+        gap: 12px;
+        padding-top: calc(var(--bar) + 8px);
+        padding-bottom: 12px;
+    }
+
+    .work-signs {
+        --rung: 6px;
+    }
+
+    .sign-meta {
+        padding-top: 4px;
+    }
+
+    .sign-did {
+        padding-bottom: 5px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .work-stage {
+        padding-top: calc(var(--bar) + 24px);
+        padding-bottom: 24px;
+    }
+
+    .work-signs {
+        max-width: 960px;
+        --rung: 18px;
+        padding: 0 48px;
+    }
+
+    .work {
+        --thread-axis: center;
+    }
+
+    .work-sign {
+        --thread-dir: rtl;
+        width: 400px;
+    }
+
+    .work-sign:nth-child(even) {
+        --thread-dir: ltr;
+    }
+
+    .sign-route {
+        padding: 5px 14px;
+        font-size: 15px;
+    }
+
+    .sign-meta {
+        padding: 10px 14px 0;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .sign-years {
+        font-size: 12px;
+    }
+
+    .sign-did {
+        padding: 2px 14px 12px;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .work-finish {
+        max-width: 960px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 32px;
+        padding: 20px 0 8px;
+    }
+
+    .work-board {
+        grid-column: 2;
+    }
+
+    .work-placed {
+        font-size: 32px;
+        line-height: 40px;
+    }
+}
+
+@media (min-width: 1200px) and (max-height: 820px) {
+    .work-stage {
+        gap: 16px;
+        padding-top: calc(var(--bar) + 16px);
+    }
+
+    .work-signs {
+        --rung: 4px;
+    }
+
+    .work-sign {
+        --hang: 10px;
+    }
+
+    .sign-meta {
+        padding-top: 6px;
+    }
+
+    .sign-did {
+        padding-bottom: 8px;
+    }
+
+    .work-finish {
+        padding: 12px 0 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sign-route {
+        transition: none;
+    }
 }
