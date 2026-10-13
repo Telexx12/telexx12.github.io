@@ -1,0 +1,53 @@
+<section class="filters" id="filters" data-i18n-label="rail.filters" data-thread="scroll">
+    <div class="station filters-stage" data-thread-layer>
+        <h2 class="station-title" data-i18n="rail.filters" data-thread-axis></h2>
+
+        <div class="filters-body">
+            <ol class="filters-stack" data-thread-shelf>
+                <li class="filters-item" data-thread-stop>HandleExamSession</li>
+                <li class="filters-item" data-thread-stop>SurviveCovid</li>
+                <li class="filters-item" data-thread-stop>AdoptToAIEra</li>
+            </ol>
+
+            <div class="filters-log">
+                <p class="log-head"><span data-i18n="filters.title"></span></p>
+                <p class="log-line" data-thread-follow="0"><span class="log-type">→ HandleExamSession</span><span class="log-type log-result" style="--lead: 5">.... <b data-i18n="filters.exam"></b></span></p>
+                <p class="log-line" data-thread-follow="1"><span class="log-type">→ SurviveCovid</span><span class="log-type log-result">......... <b data-i18n="filters.covid"></b></span></p>
+                <p class="log-line" data-thread-follow="2"><span class="log-type">→ AdoptToAIEra</span><span class="log-type log-result">......... <b data-i18n="filters.ai"></b></span></p>
+            </div>
+        </div>
+
+        <div class="filters-finish">
+            <div class="board filters-board" data-thread-board="3">
+                <svg class="board-art" viewBox="0 0 120 120" aria-hidden="true">
+                    <defs>
+                        <clipPath id="filters-placed"><path class="board-cut"></path></clipPath>
+                        <clipPath id="filters-cut"><path class="board-cut"></path></clipPath>
+                        <clipPath id="filters-bands">
+                            <rect class="board-band"></rect>
+                            <rect class="board-band"></rect>
+                            <rect class="board-band"></rect>
+                        </clipPath>
+                    </defs>
+                    <path class="board-ghost"></path>
+                    <g class="board-placed">
+                        <g clip-path="url(#filters-placed)">
+                            <rect class="board-base" width="120" height="120"></rect>
+                            <image href="assets/img/portrait-placeholder.svg" x="10" y="10" width="100" height="100"></image>
+                        </g>
+                        <path class="board-line"></path>
+                    </g>
+                    <g class="board-piece">
+                        <g clip-path="url(#filters-cut)">
+                            <rect class="board-base" width="120" height="120"></rect>
+                            <image href="assets/img/portrait-placeholder.svg" x="10" y="10" width="100" height="100" clip-path="url(#filters-bands)"></image>
+                        </g>
+                        <path class="board-line"></path>
+                    </g>
+                </svg>
+            </div>
+
+            <p class="filters-placed" data-thread-placed><span data-i18n="filters.placed"></span><span class="filters-dot">.</span></p>
+        </div>
+    </div>
+</section>
