@@ -1,0 +1,215 @@
+@property --thread {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --passing {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --lifted {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 1;
+}
+
+@property --thread-inset {
+    syntax: "<length-percentage>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --thread-trim {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --thread-lead {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --thread-left {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --thread-right {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --thread-turn {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --thread-tie {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+:root {
+    --thread-read: 80%;
+}
+
+.thread-line {
+    --thread-track: color-mix(in srgb, var(--fg) 22%, transparent);
+    --thread-width: 2px;
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+    opacity: calc(1 - var(--thread-hide, 0));
+    transition: opacity .3s;
+}
+
+.thread-line svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.thread-line path {
+    fill: none;
+    stroke-width: var(--thread-width);
+}
+
+.thread-track {
+    stroke: var(--thread-track);
+    stroke-linecap: round;
+    stroke-dasharray: 0 7px;
+}
+
+.thread-trace {
+    stroke: var(--accent);
+    stroke-linejoin: round;
+    stroke-dasharray: 1px 2px;
+    stroke-dashoffset: calc((1 - var(--thread)) * 1px);
+}
+
+.thread-eyelet,
+.thread-knot {
+    --reached: clamp(0, calc((var(--thread) - var(--at)) * 1000000), 1);
+}
+
+.thread-eyelet {
+    r: 3.5px;
+    fill: color-mix(in srgb, var(--accent) calc(var(--reached) * 100%), var(--panel));
+    stroke: color-mix(in srgb, var(--accent) calc(var(--reached) * 100%), var(--thread-track));
+    stroke-width: 2px;
+    transition: fill .2s, stroke .2s;
+}
+
+.thread-knot {
+    r: 3px;
+    fill: var(--panel);
+    stroke: var(--accent);
+    stroke-width: 2px;
+    opacity: var(--reached);
+}
+
+.thread-dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    offset-anchor: center;
+    offset-rotate: 0deg;
+    offset-distance: calc(var(--thread) * 100%);
+    opacity: calc(min(1, var(--thread) * 1000) * min(1, (1 - var(--thread)) * 1000));
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 55%, transparent));
+}
+
+[data-thread="intro"] .thread-dot {
+    opacity: min(1, (1 - var(--thread)) * 1000);
+}
+
+[data-thread="drop"] .thread-track {
+    display: none;
+}
+
+[data-thread="drop"] .thread-dot {
+    scale: clamp(0, (1 - var(--thread)) * 6, 1);
+}
+
+.thread-dot::before,
+.thread-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+}
+
+.thread-dot::before {
+    background: var(--accent);
+    opacity: 0;
+    animation: thread-aura .6s ease-out infinite;
+}
+
+.thread-dot::after {
+    background: radial-gradient(circle, var(--accent) 5px, var(--panel) 5px);
+}
+
+@keyframes thread-aura {
+    from {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1.8);
+    }
+}
+
+[data-thread-stop],
+[data-thread-follow] {
+    --passing: clamp(0, (var(--thread) - var(--thread-from)) / (var(--thread-to) - var(--thread-from)), 1);
+}
+
+@media (min-width: 1200px) {
+    .thread-line {
+        --thread-width: 2.5px;
+    }
+
+    .thread-eyelet {
+        r: 4.5px;
+    }
+
+    .thread-dot {
+        width: 18px;
+        height: 18px;
+    }
+
+    .thread-dot::after {
+        background: radial-gradient(circle, var(--accent) 6px, var(--panel) 6px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .thread-line,
+    .thread-eyelet {
+        transition: none;
+    }
+
+    .thread-dot {
+        filter: none;
+    }
+
+    .thread-dot::before {
+        animation: none;
+    }
+}

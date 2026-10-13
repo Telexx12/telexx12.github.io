@@ -1,11 +1,7 @@
 .tldr {
-    --pending: #A1A1AA;
+    --thread-axis: previous;
     position: relative;
     height: var(--view);
-}
-
-:root[data-theme="dark"] .tldr {
-    --pending: #5B5B64;
 }
 
 .tldr-stage {
@@ -13,6 +9,10 @@
     inset: var(--bar) 0 0;
     overflow: hidden;
     isolation: isolate;
+}
+
+.tldr-stage:not([data-state="booting"]) {
+    --thread-hide: 1;
 }
 
 .tldr-head {
@@ -115,6 +115,7 @@
 }
 
 .tldr-loader {
+    --thread-reach: 0.4667;
     position: relative;
     width: 150px;
     height: 150px;
@@ -129,7 +130,7 @@
     animation: tldr-spin 1.2s linear infinite;
 }
 
-.tldr-stage:not([data-state="booting"]) .tldr-ring {
+.tldr-stage[data-state="ready"] .tldr-ring {
     animation-play-state: paused;
 }
 
@@ -140,14 +141,14 @@
 }
 
 .tldr-ring g {
-    transform: rotate(calc(var(--i) * 90deg + var(--gap) * 0.5deg - 90deg));
+    transform: rotate(calc(var(--i) * 120deg + var(--gap) * 0.5deg - 90deg));
     transform-origin: 60px 60px;
 }
 
 .tldr-ring circle {
     fill: none;
     stroke-width: 3.5;
-    stroke-dasharray: calc((90 - var(--gap)) * var(--fill) * 1px) 360px;
+    stroke-dasharray: calc((120 - var(--gap)) * var(--fill) * 1px) 360px;
 }
 
 .tldr-slot {
@@ -257,11 +258,11 @@
     transform: translateY(-6px);
 }
 
-.tldr-stage[data-state="booting"] .tldr-dock {
+.tldr-stage:not([data-state="ready"]) .tldr-dock {
     pointer-events: none;
 }
 
-.tldr-stage[data-state="booting"] .tldr-link {
+.tldr-stage:not([data-state="ready"]) .tldr-link {
     transition: none;
 }
 

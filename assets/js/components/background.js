@@ -26,7 +26,7 @@
         window.addEventListener("touchend", fade);
         root.addEventListener("mouseleave", fade);
         document.addEventListener("story:request", requestWave);
-        document.addEventListener("story:booted", bootWave);
+        document.addEventListener("thread:pass", passWave);
         document.addEventListener("story:navigate", navigateWave);
         document.addEventListener("story:phase", phaseWave);
         document.addEventListener("story:loaded", loadedWave);
@@ -78,8 +78,8 @@
         ripple(document.querySelector(".home-fetch"), Math.hypot(width, height), 1.6);
     }
 
-    function bootWave() {
-        ripple(document.querySelector(".studies-loader"), 320, 1);
+    function passWave(e) {
+        ripple(e.detail, 320, 1);
     }
 
     function navigateWave(e) {

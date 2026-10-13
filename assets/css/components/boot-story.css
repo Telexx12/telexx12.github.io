@@ -10,16 +10,13 @@ html::-webkit-scrollbar {
     overflow: hidden;
 }
 
-:root.is-traveling .boot-rail {
-    pointer-events: none;
-}
-
 .boot-story {
     position: relative;
 }
 
 .boot-sections {
     position: relative;
+    overflow-x: clip;
 }
 
 .boot-bar {
@@ -55,18 +52,55 @@ html::-webkit-scrollbar {
     transition: opacity .3s;
 }
 
-.bar-trace.is-visible {
+.bar-trace.is-visible,
+.bar-thread.is-visible {
     opacity: 1;
 }
 
+.bar-thread.is-away {
+    opacity: 0;
+}
+
 .bar-arrow {
-    color: var(--accent);
+    color: var(--accent-ink);
 }
 
 .bar-step {
     display: inline-block;
     font-weight: 600;
     color: var(--fg);
+}
+
+.bar-thread {
+    --progress: 0;
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.bar-thread::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(var(--progress));
+}
+
+.bar-thread::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: calc(var(--progress) * 100% - 3px);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 2px var(--rail);
 }
 
 .bar-theme,
@@ -115,111 +149,6 @@ html::-webkit-scrollbar {
     content: "HU";
 }
 
-.boot-rail {
-    position: fixed;
-    z-index: 1;
-    top: var(--bar);
-    right: 0;
-    bottom: 0;
-    width: 40px;
-    box-sizing: border-box;
-    background: var(--rail);
-    border-left: 1px solid var(--line);
-    transform: translateX(100%);
-    transition: transform .35s ease, background .3s;
-}
-
-.boot-rail:not(.is-visible) {
-    visibility: hidden;
-}
-
-.boot-rail.is-visible {
-    transform: none;
-}
-
-.boot-rail.is-away {
-    transform: translateX(100%);
-    visibility: hidden;
-    transition: transform .35s ease, visibility 0s .35s, background .3s;
-}
-
-.rail-node {
-    position: absolute;
-    left: 0;
-    width: 40px;
-    height: 44px;
-    margin-top: -22px;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.rail-icon {
-    -webkit-mask: var(--icon) center / contain no-repeat;
-    mask: var(--icon) center / contain no-repeat;
-}
-
-.rail-track {
-    position: absolute;
-    top: 32px;
-    bottom: 32px;
-    left: 0;
-    right: 0;
-    cursor: pointer;
-    touch-action: none;
-}
-
-.rail-line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 19px;
-    width: 2px;
-    border-radius: 2px;
-    background: var(--track);
-}
-
-.rail-fill {
-    width: 100%;
-    height: var(--progress, 0%);
-    border-radius: 2px;
-    background: var(--accent);
-}
-
-.rail-node > span {
-    width: 22px;
-    height: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: var(--item-bg);
-    box-shadow: 0 0 0 3px var(--rail);
-    transition: background .2s, transform .2s;
-}
-
-.rail-node .rail-icon {
-    width: 11px;
-    height: 11px;
-    background: var(--item-fg);
-}
-
-.rail-node.is-passed > span {
-    background: var(--accent);
-}
-
-.rail-node.is-passed .rail-icon {
-    background: #FFFFFF;
-}
-
-.rail-node.is-current > span {
-    transform: scale(1.15);
-}
-
 @media (min-width: 1200px) {
     .boot-bar {
         padding: 0 12px;
@@ -228,24 +157,5 @@ html::-webkit-scrollbar {
     .bar-trace {
         margin-left: 8px;
         font-size: 12px;
-    }
-
-    .boot-rail,
-    .rail-node {
-        width: 48px;
-    }
-
-    .rail-line {
-        left: 23px;
-    }
-
-    .rail-node > span {
-        width: 24px;
-        height: 24px;
-    }
-
-    .rail-node .rail-icon {
-        width: 12px;
-        height: 12px;
     }
 }

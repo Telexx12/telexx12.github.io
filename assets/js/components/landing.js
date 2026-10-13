@@ -4,9 +4,8 @@
     const BURST = 0.06;
     const FLIGHT = 0.55;
     const FOCUS = [
-        { opacity: 0.5, filter: "grayscale(0.75) blur(4px)" },
-        { opacity: 0.7, filter: "grayscale(0.5) blur(3px)" },
-        { opacity: 0.85, filter: "grayscale(0.25) blur(1.5px)" },
+        { opacity: 0.6, filter: "grayscale(0.66) blur(3.5px)" },
+        { opacity: 0.8, filter: "grayscale(0.33) blur(2px)" },
         { opacity: 1, filter: "grayscale(0) blur(0px)" },
     ];
 
@@ -106,6 +105,7 @@
     }
 
     function announceLoaded() {
+        stage.dataset.state = "loaded";
         document.dispatchEvent(new CustomEvent("story:loaded", { detail: loader }));
     }
 

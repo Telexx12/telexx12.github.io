@@ -3,26 +3,15 @@
         <p class="bar-trace" aria-hidden="true">GET / <span class="bar-arrow">→</span> <b class="bar-step"></b></p>
         <button type="button" class="bar-theme" data-action="theme" data-i18n-label="bar.theme"><span></span></button>
         <button type="button" class="bar-lang" data-action="lang" data-i18n-label="bar.lang"></button>
+        <i class="bar-thread" aria-hidden="true"></i>
     </header>
 
     <div data-component="home"></div>
 
     <main class="boot-sections">
         <div data-component="studies"></div>
-        <div data-component="cv"></div>
         <div data-component="work"></div>
-        <div data-component="blog"></div>
-        <div data-component="tldr"></div>
+        <div data-component="middlewares"></div>
+        <div data-component="landing"></div>
     </main>
-
-    <nav class="boot-rail" data-i18n-label="rail.label">
-        <div class="rail-track">
-            <div class="rail-line"><div class="rail-fill"></div></div>
-            <button type="button" class="rail-node" data-step="ServiceProvider::boot()" data-i18n-label="rail.studies" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/academic-cap.svg')"><span><span class="rail-icon"></span></span></button>
-            <button type="button" class="rail-node" data-step="Middleware::handle()" data-i18n-label="rail.cv" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/document-text.svg')"><span><span class="rail-icon"></span></span></button>
-            <button type="button" class="rail-node" data-step="Controller::__invoke()" data-i18n-label="rail.work" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/briefcase.svg')"><span><span class="rail-icon"></span></span></button>
-            <button type="button" class="rail-node" data-step="View::make()" data-i18n-label="rail.blog" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/pencil.svg')"><span><span class="rail-icon"></span></span></button>
-            <button type="button" class="rail-node" data-step="Response::send()" data-i18n-label="rail.tldr" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/bolt.svg')"><span><span class="rail-icon"></span></span></button>
-        </div>
-    </nav>
 </div>
