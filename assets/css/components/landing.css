@@ -81,6 +81,9 @@
 }
 
 .tldr-figure {
+    --smoke: 227, 30, 38;
+    --smoke-alpha: 1.5;
+    --puff-alpha: 2.6;
     position: absolute;
     z-index: 1;
     right: 0;
@@ -92,6 +95,12 @@
     pointer-events: none;
 }
 
+:root[data-theme="dark"] .tldr-figure {
+    --smoke: 255, 255, 255;
+    --smoke-alpha: 2.4;
+    --puff-alpha: 2.4;
+}
+
 .tldr-photo {
     flex: none;
     display: block;
@@ -100,6 +109,185 @@
     max-width: none;
     transform-origin: 50% 20%;
     user-select: none;
+}
+
+.tldr-figure::before,
+.tldr-figure::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    translate: -50% 0;
+    opacity: 0;
+    transition: opacity 0.8s;
+    will-change: transform;
+}
+
+.tldr-figure::before {
+    top: -20%;
+    height: 110%;
+    aspect-ratio: 1.15;
+    background:
+        radial-gradient(34% 30% at 50% 38%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.2)), rgba(var(--smoke), calc(var(--smoke-alpha) * 0.1)) 45%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.03)) 75%, transparent),
+        radial-gradient(26% 24% at 65% 30%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.15)), rgba(var(--smoke), calc(var(--smoke-alpha) * 0.07)) 45%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.02)) 75%, transparent),
+        radial-gradient(30% 26% at 35% 33%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.12)), rgba(var(--smoke), calc(var(--smoke-alpha) * 0.06)) 45%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.02)) 75%, transparent);
+    animation: tldr-smoke-high 11s ease-in-out infinite alternate;
+}
+
+.tldr-figure::after {
+    top: -8%;
+    height: 118%;
+    aspect-ratio: 1.25;
+    background:
+        radial-gradient(42% 36% at 44% 52%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.18)), rgba(var(--smoke), calc(var(--smoke-alpha) * 0.09)) 45%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.025)) 75%, transparent),
+        radial-gradient(48% 42% at 58% 48%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.14)), rgba(var(--smoke), calc(var(--smoke-alpha) * 0.07)) 45%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.02)) 75%, transparent);
+    animation: tldr-smoke-low 15s ease-in-out infinite alternate;
+}
+
+.tldr-smoke {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s;
+}
+
+.tldr-smoke i {
+    position: absolute;
+    top: var(--y);
+    left: 50%;
+    height: var(--size);
+    aspect-ratio: 1.1;
+    translate: -50% 0;
+    background: rgba(var(--smoke), calc(var(--puff-alpha) * 0.38));
+    -webkit-mask: url("../../img/smoke.webp") var(--tex) 0 / 300% 100% no-repeat;
+    mask: url("../../img/smoke.webp") var(--tex) 0 / 300% 100% no-repeat;
+    opacity: 0;
+    animation: tldr-puff var(--time) linear var(--delay) infinite;
+    will-change: transform, opacity;
+}
+
+.tldr-smoke i:nth-child(1) {
+    --x: -28%;
+    --sway: 16%;
+    --spin: 24deg;
+    --tex: 0%;
+    --y: 30%;
+    --size: 50%;
+    --time: 9s;
+    --delay: 0s;
+}
+
+.tldr-smoke i:nth-child(2) {
+    --x: 26%;
+    --sway: -14%;
+    --spin: -28deg;
+    --tex: 50%;
+    --y: 34%;
+    --size: 44%;
+    --time: 10.5s;
+    --delay: -2.1s;
+}
+
+.tldr-smoke i:nth-child(3) {
+    --x: -6%;
+    --sway: 20%;
+    --spin: 18deg;
+    --tex: 100%;
+    --y: 24%;
+    --size: 58%;
+    --time: 12s;
+    --delay: -4.6s;
+}
+
+.tldr-smoke i:nth-child(4) {
+    --x: 38%;
+    --sway: -10%;
+    --spin: -20deg;
+    --tex: 0%;
+    --y: 40%;
+    --size: 40%;
+    --time: 8.5s;
+    --delay: -6.3s;
+}
+
+.tldr-smoke i:nth-child(5) {
+    --x: -40%;
+    --sway: 12%;
+    --spin: 30deg;
+    --tex: 50%;
+    --y: 38%;
+    --size: 42%;
+    --time: 11s;
+    --delay: -8.2s;
+}
+
+.tldr-smoke i:nth-child(6) {
+    --x: -50%;
+    --sway: 14%;
+    --spin: -22deg;
+    --tex: 100%;
+    --y: 54%;
+    --size: 44%;
+    --time: 12.5s;
+    --delay: -3.4s;
+}
+
+.tldr-smoke i:nth-child(7) {
+    --x: 48%;
+    --sway: -16%;
+    --spin: 26deg;
+    --tex: 0%;
+    --y: 58%;
+    --size: 42%;
+    --time: 13.5s;
+    --delay: -9.1s;
+}
+
+.tldr-stage:not([data-state="booting"]) .tldr-figure::before,
+.tldr-stage:not([data-state="booting"]) .tldr-figure::after,
+.tldr-stage:not([data-state="booting"]) .tldr-smoke {
+    opacity: 1;
+}
+
+@keyframes tldr-smoke-high {
+    from {
+        transform: translate(-8%, 3%) rotate(-12deg) scale(0.95);
+    }
+
+    to {
+        transform: translate(9%, -5%) rotate(22deg) scale(1.18);
+    }
+}
+
+@keyframes tldr-smoke-low {
+    from {
+        transform: translate(8%, 0) rotate(10deg) scale(1.1);
+    }
+
+    to {
+        transform: translate(-9%, 4%) rotate(-20deg) scale(0.9);
+    }
+}
+
+@keyframes tldr-puff {
+    0% {
+        opacity: 0;
+        transform: translate(var(--x), 30%) rotate(0deg) scale(0.55);
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(calc(var(--x) + var(--sway)), -85%) rotate(var(--spin)) scale(1.6);
+    }
 }
 
 .tldr-boot {
@@ -298,10 +486,17 @@
 @media (min-width: 1200px) {
     .tldr-head {
         top: 24px;
+        display: grid;
+        justify-content: center;
+        justify-items: start;
     }
 
     .tldr-name {
         -webkit-text-stroke-width: 2px;
+    }
+
+    .tldr-social {
+        margin-left: 20px;
     }
 
     .tldr-figure {
@@ -372,6 +567,17 @@
 
     .tldr-link {
         transition: none;
+    }
+
+    .tldr-figure::before,
+    .tldr-figure::after,
+    .tldr-smoke {
+        animation: none;
+        transition: none;
+    }
+
+    .tldr-smoke i {
+        animation: none;
     }
 
     .tldr-link:hover {

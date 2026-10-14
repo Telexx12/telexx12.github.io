@@ -146,4 +146,20 @@ html::-webkit-scrollbar {
         height: 24px;
         margin-left: 8px;
     }
+
+    .bar-theme span {
+        width: 16px;
+        height: 16px;
+    }
+
+    .bar-lang {
+        font-size: 13px;
+        letter-spacing: 0.04em;
+    }
+}
+
+@media (min-width: 1920px) {
+    .boot-bar {
+        padding-inline: max(12px, calc(50vw - 948px));
+    }
 }
