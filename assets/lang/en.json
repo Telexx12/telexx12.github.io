@@ -68,7 +68,15 @@
 
 
     "tldr.loading": "Sending the response…",
-    "tldr.dock": "Shortcuts",
+    "tldr.dock": "Menu",
+
+    "menu.about": "About",
+    "menu.projects": "Projects",
+    "menu.blog": "Blog",
+    "menu.contact": "Contact",
+
+    "view.close": "Close",
+    "view.soon": "This section is coming soon.",
 
     "bar.theme": "Toggle theme",
     "bar.lang": "Switch language",

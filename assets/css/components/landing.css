@@ -5,6 +5,7 @@
 }
 
 .tldr-stage {
+    --dock-room: 128px;
     position: absolute;
     inset: var(--bar) 0 0;
     overflow: hidden;
@@ -16,6 +17,7 @@
 }
 
 .tldr-head {
+    --ink: var(--accent);
     position: absolute;
     top: 40px;
     right: 0;
@@ -26,14 +28,18 @@
     gap: 16px;
 }
 
+:root[data-theme="dark"] .tldr-head {
+    --ink: var(--fg);
+}
+
 .tldr-name {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: min(30vw, 340px);
+    font-family: var(--font-name);
+    font-weight: 900;
+    font-size: min(21.3vw, 242px);
     line-height: 0.9;
-    letter-spacing: -0.07em;
+    letter-spacing: -0.04em;
     color: transparent;
-    -webkit-text-stroke: 1.5px var(--fg);
+    -webkit-text-stroke: 1.5px var(--ink);
     user-select: none;
 }
 
@@ -66,7 +72,7 @@
     content: "";
     width: 18px;
     height: 18px;
-    background: var(--fg);
+    background: var(--ink);
     -webkit-mask: var(--icon) center / contain no-repeat;
     mask: var(--icon) center / contain no-repeat;
     transition: background .2s;
@@ -436,7 +442,12 @@
     align-items: center;
     gap: 6px;
     padding: 8px 2px;
+    border: 0;
     border-radius: 12px;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
     transition: transform .2s, background .2s;
 }
 
@@ -444,6 +455,10 @@
     color: var(--fg);
     background: var(--item-bg);
     transform: translateY(-6px);
+}
+
+.tldr-link[aria-expanded="true"] {
+    background: var(--item-bg);
 }
 
 .tldr-stage:not([data-state="ready"]) .tldr-dock {
@@ -484,6 +499,10 @@
 }
 
 @media (min-width: 1200px) {
+    .tldr-stage {
+        --dock-room: 180px;
+    }
+
     .tldr-head {
         top: 24px;
         display: grid;

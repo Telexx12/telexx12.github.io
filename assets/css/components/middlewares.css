@@ -64,7 +64,7 @@
     outline-offset: -1.5px;
     background: var(--panel);
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) calc((var(--on) - var(--done)) * 18%), transparent);
-    font-family: var(--font-mono);
+    font-family: var(--font-head);
     font-weight: 600;
     font-size: 13px;
     white-space: nowrap;
@@ -89,7 +89,7 @@
     border: 2px solid var(--fg);
     border-radius: 6px;
     background: var(--panel);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: 12px;
 }
 

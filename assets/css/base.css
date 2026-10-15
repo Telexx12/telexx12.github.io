@@ -1,11 +1,40 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Open+Sans:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap");
+
+@font-face {
+    font-family: "Hubot Sans";
+    src: url("../fonts/hubot-sans-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Hubot Sans";
+    src: url("../fonts/hubot-sans-semibold.woff2") format("woff2");
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Hubot Sans";
+    src: url("../fonts/hubot-sans-bold.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Hubot Sans Expanded";
+    src: url("../fonts/hubot-sans-expanded-black.woff2") format("woff2");
+    font-weight: 900;
+    font-display: swap;
+}
 
 :root {
     --accent: #E31E26;
     --accent-ink: #E31E26;
 
-    --font-body: "Open Sans", sans-serif;
-    --font-head: sans-serif;
+    --font-body: "Hubot Sans", sans-serif;
+    --font-head: "Hubot Sans", sans-serif;
+    --font-name: "Hubot Sans Expanded", sans-serif;
     --font-mono: "JetBrains Mono", monospace;
 
     --view: 100vh;

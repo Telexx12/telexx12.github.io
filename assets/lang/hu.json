@@ -68,7 +68,15 @@
 
 
     "tldr.loading": "Válasz küldése…",
-    "tldr.dock": "Gyors útvonalak",
+    "tldr.dock": "Menü",
+
+    "menu.about": "Rólam",
+    "menu.projects": "Projektek",
+    "menu.blog": "Blog",
+    "menu.contact": "Kapcsolat",
+
+    "view.close": "Bezárás",
+    "view.soon": "Ez a rész hamarosan érkezik.",
 
     "bar.theme": "Téma váltás",
     "bar.lang": "Nyelv váltása",

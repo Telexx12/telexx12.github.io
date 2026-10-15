@@ -29,19 +29,25 @@
             </p>
         </div>
 
+        <div data-component="views"></div>
+
         <nav class="tldr-dock" data-i18n-label="tldr.dock">
-            <a class="tldr-link" href="#studies">
-                <span class="tldr-tile"><span class="tldr-icon" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/academic-cap.svg')"></span></span>
-                <span class="tldr-label" data-i18n="rail.studies"></span>
-            </a>
-            <a class="tldr-link" href="#work">
-                <span class="tldr-tile"><span class="tldr-icon" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/briefcase.svg')"></span></span>
-                <span class="tldr-label" data-i18n="rail.work"></span>
-            </a>
-            <a class="tldr-link" href="#filters">
-                <span class="tldr-tile"><span class="tldr-icon" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/funnel.svg')"></span></span>
-                <span class="tldr-label" data-i18n="rail.filters"></span>
-            </a>
+            <button class="tldr-link" type="button" data-view="about" aria-controls="view-about" aria-expanded="false">
+                <span class="tldr-tile"><span class="tldr-icon" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/user.svg')"></span></span>
+                <span class="tldr-label" data-i18n="menu.about"></span>
+            </button>
+            <button class="tldr-link" type="button" data-view="projects" aria-controls="view-projects" aria-expanded="false">
+                <span class="tldr-tile"><span class="tldr-icon" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/code-bracket.svg')"></span></span>
+                <span class="tldr-label" data-i18n="menu.projects"></span>
+            </button>
+            <button class="tldr-link" type="button" data-view="blog" aria-controls="view-blog" aria-expanded="false">
+                <span class="tldr-tile"><span class="tldr-icon" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/pencil-square.svg')"></span></span>
+                <span class="tldr-label" data-i18n="menu.blog"></span>
+            </button>
+            <button class="tldr-link" type="button" data-view="contact" aria-controls="view-contact" aria-expanded="false">
+                <span class="tldr-tile"><span class="tldr-icon" style="--icon: url('https://cdn.jsdelivr.net/npm/heroicons@2.1.5/20/solid/chat-bubble-left-right.svg')"></span></span>
+                <span class="tldr-label" data-i18n="menu.contact"></span>
+            </button>
         </nav>
     </div>
 </section>

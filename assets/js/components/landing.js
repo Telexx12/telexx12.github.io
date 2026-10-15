@@ -33,7 +33,6 @@
         links.forEach(addLink);
 
         ScrollTrigger.create({ trigger: section, start: "top center", onLeaveBack: skip });
-        links.forEach((link) => link.addEventListener("click", go));
         stage.addEventListener("click", skip);
         document.addEventListener("keydown", onKey);
         document.addEventListener("story:arrived", arrive, { once: true });
@@ -107,13 +106,6 @@
     function announceLoaded() {
         stage.dataset.state = "loaded";
         document.dispatchEvent(new CustomEvent("story:loaded", { detail: loader }));
-    }
-
-    function go(e) {
-        const link = e.currentTarget;
-        e.preventDefault();
-        document.dispatchEvent(new CustomEvent("story:navigate", { detail: link.querySelector(".tldr-tile") }));
-        window.scrollTo({ top: document.querySelector(link.hash).offsetTop, behavior: "smooth" });
     }
 
     function onKey(e) {
