@@ -6,18 +6,21 @@ window.Thread = (() => {
     const ROWS = 3;
     const SEAMS = [[0.26, 1], [0.72, 1]];
     const TAB = 0.42;
-    const TRACE = 1.3;
-    const SHOW = 0.15;
-    const FILL = 0.3;
-    const STAGGER = 0.15;
+    const TRACE = 0.75;
+    const DRAW = 0.12;
+    const SHOW = 0.08;
+    const FILL = 0.1;
+    const STAGGER = 0.04;
     const ROUTE = 0.2;
     const OUTLINE = 0.06;
     const APPEAR = 0.02;
     const BANDS = 0.04;
     const REVEAL = OUTLINE + APPEAR + BANDS;
     const SNAP = 0.08;
+    const NUDGE = 0.03;
     const TAIL = 0.03;
     const MARGIN = 0.04;
+    const LAND = 0.12;
     const SLOW = 2;
     const LIFT = 1.06;
     const passes = new Map();
@@ -116,7 +119,9 @@ window.Thread = (() => {
         line.dot.style.offsetPath = `path("${route.d}")`;
         line.at = measure(line, route.marks);
         route.eyelets.forEach((point, i) => place(line.eyelets[i] ||= addMark(line, "thread-eyelet"), point, line.at[point.key]));
+        line.eyelets.splice(route.eyelets.length).forEach(drop);
         if (route.knot) place(line.knot ||= addMark(line, "thread-knot"), route.knot, line.at.knot);
+        else line.knot = drop(line.knot);
         line.stops.forEach((stop, k) => span(stop, line.at[`entry${k}`], line.at[`exit${k}`]));
         if (line.prelude) prepare(line);
         compose(line);
@@ -182,7 +187,7 @@ window.Thread = (() => {
     function axisOf(line) {
         const mode = text(line.section, "--thread-axis");
         if (mode === "center") return size(line).width / 2;
-        if (mode === "previous") return axisOf(line.previous);
+        if (mode === "previous" || !line.axis) return axisOf(line.previous);
         return box(line, line.axis).left + number(line.axis, "--thread-inset");
     }
 
@@ -377,6 +382,7 @@ window.Thread = (() => {
             const arrive = arrival(line, from, settle, end, view, below + shift);
             pace(line, rest, from, arrive, shift);
             if (line.board) settle = Math.max(settle, reveal(line, arrive, view));
+            else line.flow.call(land, [line], arrive);
         }
         if (line.board) addSnap(line, tail, settle, end, view);
         redraw(line.flow.set({}, {}, end), progress);
@@ -384,7 +390,7 @@ window.Thread = (() => {
     }
 
     function arrival(line, from, settle, end, view, edge) {
-        if (!line.board) return Math.max(from + 1, settle);
+        if (!line.board) return Math.max(from + 1, settle - LAND * view - slack());
         const visible = Math.max(from + ROUTE * view, settle - REVEAL * view, line.route.low - edge + MARGIN * view);
         return Math.max(from + 1, Math.min(visible, end - (TAIL + REVEAL + SNAP) * view));
     }
@@ -414,7 +420,7 @@ window.Thread = (() => {
     }
 
     function addSnap(line, tail, settle, end, view) {
-        const snap = SNAP * view;
+        const snap = (settle ? SNAP : NUDGE) * view;
 
         line.flow.fromTo(line.piece, lifted(line), { x: 0, y: 0, rotation: 0, scale: 1, duration: snap, ease: "back.out(3)", immediateRender: false }, settle)
           .fromTo(line.board, { "--lifted": 1 }, { "--lifted": 0, duration: snap, immediateRender: false }, settle);
@@ -457,9 +463,10 @@ window.Thread = (() => {
             stretch(line, line.prelude, pass.slice(0, line.covered), 0, TRACE);
             return;
         }
-        const at = stretch(line, line.prelude, [...pass, { from: "slot", to: "outline" }], 0, TRACE);
-        line.prelude.fromTo(line.piece, { autoAlpha: 0 }, { autoAlpha: 1, duration: SHOW, immediateRender: false }, at)
-          .fromTo(line.bands, { attr: { height: 0 } }, { attr: { height: line.band }, duration: FILL, ease: "power2.out", stagger: STAGGER, immediateRender: false }, at + SHOW);
+        const at = stretch(line, line.prelude, pass, 0, TRACE);
+        advance(line.prelude, line, "slot", "outline", DRAW, at);
+        line.prelude.fromTo(line.piece, { autoAlpha: 0 }, { autoAlpha: 1, duration: SHOW, immediateRender: false }, at + DRAW)
+          .fromTo(line.bands, { attr: { height: 0 } }, { attr: { height: line.band }, duration: FILL, ease: "power2.out", stagger: STAGGER, immediateRender: false }, at + DRAW + SHOW);
     }
 
     function coverage(line, pass) {
@@ -487,6 +494,10 @@ window.Thread = (() => {
         document.dispatchEvent(new CustomEvent("thread:pass", { detail: goal }));
     }
 
+    function land(line) {
+        if (line.flow.scrollTrigger.direction > 0) document.dispatchEvent(new CustomEvent("thread:landed", { detail: line.end }));
+    }
+
     function phase(bead) {
         document.dispatchEvent(new CustomEvent("story:phase", { detail: bead }));
     }
@@ -495,11 +506,20 @@ window.Thread = (() => {
         return text(document.documentElement, "--thread-read");
     }
 
+    function slack() {
+        return number(document.documentElement, "--thread-slack");
+    }
+
     function addMark(line, name) {
         const mark = shape("circle");
         mark.classList.add(name);
         line.svg.querySelector(".thread-marks").append(mark);
         return mark;
+    }
+
+    function drop(mark) {
+        if (mark) mark.remove();
+        return null;
     }
 
     function shape(name) {

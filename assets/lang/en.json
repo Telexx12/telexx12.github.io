@@ -67,7 +67,6 @@
     "filters.ai": "✓ still here",
 
 
-    "tldr.loading": "Sending the response…",
     "tldr.dock": "Menu",
 
     "menu.about": "About",
@@ -75,8 +74,31 @@
     "menu.blog": "Blog",
     "menu.contact": "Contact",
 
-    "view.close": "Close",
-    "view.soon": "This section is coming soon.",
+    "about.title": "I make the complex simple",
+    "about.lead": "I’m Dávid, a Laravel developer from Romania. Since 2022 I’ve been building web applications: customer management systems and high-traffic webshops. Today I work as a mid-level developer, and alongside that I help clients as a freelancer and through my own business.",
+    "about.text": "Besides development, I’ve also taught: I ran coding classes for kids aged 7–⁠14 at Logiscool, and for one school year I taught IT at a vocational high school. That’s where I learned the most important lesson:",
+    "about.quote": "A solution is only good if you can explain it.",
+    "about.write": "Get in touch",
+    "about.uni.year": "2019",
+    "about.uni.step": "Business Informatics",
+    "about.uni.note": "Sapientia University",
+    "about.junior.year": "2022",
+    "about.junior.step": "Junior developer",
+    "about.junior.note": "Leading Soft",
+    "about.freelance.year": "2023",
+    "about.freelance.step": "Freelance developer",
+    "about.freelance.note": "Upwork",
+    "about.medior.year": "2024",
+    "about.medior.step": "Mid-level developer",
+    "about.medior.note": "Scut Protection",
+    "about.business.year": "2025",
+    "about.business.step": "My own business",
+    "about.business.note": "Independent software development",
+    "about.zynex.year": "Now",
+    "about.zynex.step": "Zynex",
+    "about.zynex.note": "My own finance mobile app, built alongside my job",
+
+    "pages.soon": "Coming soon",
 
     "bar.theme": "Toggle theme",
     "bar.lang": "Switch language",

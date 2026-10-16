@@ -58,13 +58,20 @@
     initial-value: 0px;
 }
 
+@property --thread-slack {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
 :root {
     --thread-read: 80%;
+    --thread-width: 2px;
+    --thread-slack: calc(100lvh - 100svh);
 }
 
 .thread-line {
     --thread-track: color-mix(in srgb, var(--fg) 22%, transparent);
-    --thread-width: 2px;
     position: absolute;
     z-index: 1;
     inset: 0;
@@ -142,7 +149,7 @@
 }
 
 [data-thread="drop"] .thread-dot {
-    scale: clamp(0, (1 - var(--thread)) * 6, 1);
+    transform: scale(clamp(0, (1 - var(--thread)) * 6, 1));
 }
 
 .thread-dot::before,
@@ -181,7 +188,7 @@
 }
 
 @media (min-width: 1200px) {
-    .thread-line {
+    :root {
         --thread-width: 2.5px;
     }
 

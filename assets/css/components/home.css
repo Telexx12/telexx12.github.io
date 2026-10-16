@@ -31,6 +31,10 @@
     pointer-events: none;
 }
 
+:root:has(.home) .screen {
+    visibility: hidden;
+}
+
 .home-stage {
     margin-bottom: auto;
     box-sizing: border-box;

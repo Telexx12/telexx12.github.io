@@ -14,10 +14,10 @@
     function open(e) {
         const opening = gsap.timeline({ defaults: { ease: "power2.inOut" }, onComplete: opened, onCompleteParams: [e.detail] })
           .set(browser, { autoAlpha: 1 })
-          .fromTo(browser, { scale: 0.03, xPercent: buttonX, yPercent: buttonY }, { scale: 1, xPercent: 0, yPercent: 0, duration: 1 }, 0)
-          .fromTo(find(".browser-loading"), { scaleX: 0 }, { scaleX: 1, duration: 0.75, ease: "none" }, 0.15)
-          .to(browser, { borderRadius: 0, "--edge": 0, duration: 0.15, ease: "none" }, 0.85)
-          .to(find(".browser-bar"), { yPercent: -110, duration: 0.3 }, 1.05);
+          .fromTo(browser, { scale: 0.03, xPercent: buttonX, yPercent: buttonY }, { scale: 1, xPercent: 0, yPercent: 0, duration: 0.75 }, 0)
+          .fromTo(find(".browser-loading"), { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "none" }, 0.1)
+          .to(browser, { borderRadius: 0, "--edge": 0, duration: 0.12, ease: "none" }, 0.63)
+          .to(find(".browser-bar"), { yPercent: -110, duration: 0.25 }, 0.75);
 
         if (e.detail === "instant" || matchMedia(REDUCED).matches) opening.progress(1);
     }

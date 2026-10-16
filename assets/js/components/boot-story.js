@@ -1,5 +1,7 @@
 (() => {
-    const LEG = 1.8;
+    const LEG = 1.2;
+    const CALM = 0.25;
+    const REDUCED = "(prefers-reduced-motion: reduce)";
     const HURRY_KEYS = ["Escape", "Enter", " ", "ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End"];
     const root = document.documentElement;
     const page = document.scrollingElement;
@@ -8,7 +10,7 @@
         lang: () => window.I18n.set(root.lang === "en" ? "hu" : "en").then(() => ScrollTrigger.refresh()),
     };
 
-    let story, sections, thread, journey;
+    let story, sections, thread, journey, calm;
 
     function init() {
         story = document.querySelector(".boot-story");
@@ -18,6 +20,7 @@
         addProgress();
         watchLanding();
         story.addEventListener("click", runAction);
+        story.addEventListener("click", navigate);
         document.addEventListener("story:opened", start, { once: true });
     }
 
@@ -30,12 +33,12 @@
     }
 
     function watchLanding() {
-        ScrollTrigger.create({ trigger: sections.at(-1), start: "top center", toggleClass: { targets: thread, className: "is-away" } });
+        ScrollTrigger.create({ trigger: sections.at(-1), endTrigger: story, start: "top center", toggleClass: { targets: thread, className: "is-away" } });
     }
 
     function start(e) {
         thread.classList.add("is-visible");
-        if (e.detail === "instant" || matchMedia("(prefers-reduced-motion: reduce)").matches) land();
+        if (e.detail === "instant" || matchMedia(REDUCED).matches) land();
         else travel();
     }
 
@@ -60,7 +63,8 @@
     function hurry(e) {
         if (e.target.closest(".boot-bar")) return;
         journey.progress(1, true);
-        arrive("instant");
+        if (calm) calm.kill();
+        calm = gsap.delayedCall(CALM, arrive, ["instant"]);
     }
 
     function hurryKey(e) {
@@ -91,6 +95,16 @@
         if (!el) return;
         actions[el.dataset.action]();
         if (e.detail) el.blur();
+    }
+
+    function navigate(e) {
+        const link = e.target.closest("a[href^='#']");
+        const target = link && link.hash && document.getElementById(link.hash.slice(1));
+        if (!target || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        document.dispatchEvent(new CustomEvent("story:navigate", { detail: link }));
+        target.scrollIntoView({ behavior: matchMedia(REDUCED).matches ? "auto" : "smooth" });
+        target.focus({ preventScroll: true });
     }
 
     document.addEventListener("components:loaded", init, { once: true });

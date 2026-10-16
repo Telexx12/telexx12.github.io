@@ -39,6 +39,7 @@
 
     --view: 100vh;
     --bar: 48px;
+    --dock-space: 136px;
     --column: 560px;
     --board: 176px;
 
@@ -69,6 +70,7 @@
 @media (min-width: 1200px) {
     :root {
         --board: 300px;
+        --dock-space: 172px;
     }
 }
 
@@ -149,6 +151,49 @@ a:focus-visible {
     color: var(--muted);
 }
 
+.screen {
+    position: relative;
+    isolation: isolate;
+    min-height: var(--view);
+    box-sizing: border-box;
+    padding: calc(var(--bar) + 32px) max(16px, calc(50% - 280px)) var(--dock-space);
+    overflow-x: clip;
+}
+
+.screen:focus {
+    outline: none;
+}
+
+.screen-soon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.screen-eyebrow {
+    margin: 0;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.screen-title {
+    margin: 14px 0 0;
+    font-family: var(--font-name);
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.025em;
+}
+
+.screen-dot {
+    color: var(--accent-ink);
+}
+
 .board {
     position: relative;
     flex: none;
@@ -220,6 +265,16 @@ a:focus-visible {
         padding: 0 24px 0 0;
         text-align: right;
         font-size: 14px;
+    }
+
+    .screen {
+        padding: var(--bar) max(72px, calc(50% - 648px)) var(--dock-space);
+    }
+
+    .screen-title {
+        margin-top: 16px;
+        font-size: 58px;
+        line-height: 62px;
     }
 
     .board-label {

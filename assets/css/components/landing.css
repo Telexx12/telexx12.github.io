@@ -5,14 +5,24 @@
 }
 
 .tldr-stage {
-    --dock-room: 128px;
+    --fade-end: 60px;
+    --fade-size: min(130px, 18%);
+    --fade: linear-gradient(
+        #000000 calc(100% - var(--fade-end) - var(--fade-size)),
+        rgba(0, 0, 0, 0.84) calc(100% - var(--fade-end) - var(--fade-size) * 0.75),
+        rgba(0, 0, 0, 0.5) calc(100% - var(--fade-end) - var(--fade-size) * 0.5),
+        rgba(0, 0, 0, 0.16) calc(100% - var(--fade-end) - var(--fade-size) * 0.25),
+        transparent calc(100% - var(--fade-end))
+    );
     position: absolute;
     inset: var(--bar) 0 0;
     overflow: hidden;
     isolation: isolate;
+    -webkit-mask-image: var(--fade);
+    mask-image: var(--fade);
 }
 
-.tldr-stage:not([data-state="booting"]) {
+.tldr:has(.tldr-stage:not([data-state="booting"])) {
     --thread-hide: 1;
 }
 
@@ -90,6 +100,7 @@
     --smoke: 227, 30, 38;
     --smoke-alpha: 1.5;
     --puff-alpha: 2.6;
+    --rise: 0;
     position: absolute;
     z-index: 1;
     right: 0;
@@ -123,9 +134,8 @@
     position: absolute;
     z-index: -1;
     left: 50%;
-    translate: -50% 0;
-    opacity: 0;
-    transition: opacity 0.8s;
+    translate: -50% calc((1 - var(--rise)) * 30%);
+    opacity: var(--rise);
     will-change: transform;
 }
 
@@ -154,8 +164,8 @@
     position: absolute;
     z-index: -1;
     inset: 0;
-    opacity: 0;
-    transition: opacity 0.8s;
+    translate: 0 calc((1 - var(--rise)) * 30%);
+    opacity: var(--rise);
 }
 
 .tldr-smoke i {
@@ -181,7 +191,7 @@
     --y: 30%;
     --size: 50%;
     --time: 9s;
-    --delay: 0s;
+    --delay: -0.2s;
 }
 
 .tldr-smoke i:nth-child(2) {
@@ -192,7 +202,7 @@
     --y: 34%;
     --size: 44%;
     --time: 10.5s;
-    --delay: -2.1s;
+    --delay: -2.9s;
 }
 
 .tldr-smoke i:nth-child(3) {
@@ -203,7 +213,7 @@
     --y: 24%;
     --size: 58%;
     --time: 12s;
-    --delay: -4.6s;
+    --delay: -0.2s;
 }
 
 .tldr-smoke i:nth-child(4) {
@@ -214,7 +224,7 @@
     --y: 40%;
     --size: 40%;
     --time: 8.5s;
-    --delay: -6.3s;
+    --delay: -2.2s;
 }
 
 .tldr-smoke i:nth-child(5) {
@@ -225,7 +235,7 @@
     --y: 38%;
     --size: 42%;
     --time: 11s;
-    --delay: -8.2s;
+    --delay: -0.8s;
 }
 
 .tldr-smoke i:nth-child(6) {
@@ -236,7 +246,7 @@
     --y: 54%;
     --size: 44%;
     --time: 12.5s;
-    --delay: -3.4s;
+    --delay: -12s;
 }
 
 .tldr-smoke i:nth-child(7) {
@@ -247,13 +257,11 @@
     --y: 58%;
     --size: 42%;
     --time: 13.5s;
-    --delay: -9.1s;
+    --delay: -12.5s;
 }
 
-.tldr-stage:not([data-state="booting"]) .tldr-figure::before,
-.tldr-stage:not([data-state="booting"]) .tldr-figure::after,
-.tldr-stage:not([data-state="booting"]) .tldr-smoke {
-    opacity: 1;
+.tldr-stage[data-state="booting"] .tldr-smoke i {
+    animation: none;
 }
 
 @keyframes tldr-smoke-high {
@@ -316,48 +324,27 @@
 }
 
 .tldr-ring {
-    --gap: 10;
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    animation: tldr-spin 1.2s linear infinite;
-}
-
-.tldr-stage[data-state="ready"] .tldr-ring {
-    animation-play-state: paused;
-}
-
-@keyframes tldr-spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.tldr-ring g {
-    transform: rotate(calc(var(--i) * 120deg + var(--gap) * 0.5deg - 90deg));
-    transform-origin: 60px 60px;
+    rotate: -90deg;
 }
 
 .tldr-ring circle {
     fill: none;
-    stroke-width: 3.5;
-    stroke-dasharray: calc((120 - var(--gap)) * var(--fill) * 1px) 360px;
+    stroke-width: calc(var(--thread-width) * 0.8);
 }
 
 .tldr-slot {
-    --fill: 1;
     stroke: var(--pending);
-    opacity: 0.35;
+    opacity: 0.5;
 }
 
 .tldr-arc {
     --fill: 0;
     stroke: var(--accent);
-}
-
-.tldr-ring g:first-child .tldr-arc {
-    --fill: 0.2;
+    stroke-dasharray: calc(var(--fill) * 360px) 360px;
 }
 
 .tldr-face {
@@ -388,21 +375,6 @@
     text-align: center;
 }
 
-.tldr-status > span {
-    grid-area: 1 / 1;
-}
-
-.tldr-loading {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--muted);
-}
-
-.tldr-loading b {
-    font-weight: 600;
-    color: var(--fg);
-}
-
 .tldr-done {
     font-family: var(--font-head);
     font-weight: 600;
@@ -419,7 +391,7 @@
 
 .tldr-dock {
     --frame: 1;
-    position: absolute;
+    position: fixed;
     z-index: 2;
     right: 12px;
     bottom: 20px;
@@ -432,6 +404,12 @@
     background: color-mix(in srgb, var(--panel) calc(var(--frame) * 78%), transparent);
     backdrop-filter: blur(calc(var(--frame) * 12px));
     box-shadow: 0 20px 40px -20px color-mix(in srgb, rgba(24, 24, 27, 0.35) calc(var(--frame) * 100%), transparent);
+    transition: opacity .3s, visibility .3s;
+}
+
+.tldr-dock:not(.is-shown) {
+    opacity: 0;
+    visibility: hidden;
 }
 
 .tldr-link {
@@ -457,15 +435,11 @@
     transform: translateY(-6px);
 }
 
-.tldr-link[aria-expanded="true"] {
-    background: var(--item-bg);
-}
-
-.tldr-stage:not([data-state="ready"]) .tldr-dock {
+.tldr-stage:not([data-state="ready"]) ~ .tldr-dock {
     pointer-events: none;
 }
 
-.tldr-stage:not([data-state="ready"]) .tldr-link {
+.tldr-stage:not([data-state="ready"]) ~ .tldr-dock .tldr-link {
     transition: none;
 }
 
@@ -500,7 +474,8 @@
 
 @media (min-width: 1200px) {
     .tldr-stage {
-        --dock-room: 180px;
+        --fade-end: 0px;
+        --fade-size: min(170px, 20%);
     }
 
     .tldr-head {
@@ -529,15 +504,11 @@
     }
 
     .tldr-ring circle {
-        stroke-width: 3;
+        stroke-width: calc(var(--thread-width) * 0.6);
     }
 
     .tldr-face {
         inset: 18px;
-    }
-
-    .tldr-loading {
-        font-size: 13px;
     }
 
     .tldr-done {
@@ -580,19 +551,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .tldr-ring {
-        animation: none;
-    }
-
     .tldr-link {
         transition: none;
     }
 
     .tldr-figure::before,
-    .tldr-figure::after,
-    .tldr-smoke {
+    .tldr-figure::after {
         animation: none;
-        transition: none;
     }
 
     .tldr-smoke i {

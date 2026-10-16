@@ -8,6 +8,11 @@ html::-webkit-scrollbar {
 
 :root.is-traveling {
     overflow: hidden;
+    touch-action: none;
+}
+
+:root.is-traveling .screen {
+    visibility: hidden;
 }
 
 .boot-story {
