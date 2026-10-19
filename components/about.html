@@ -13,12 +13,20 @@
         <img class="about-photo" src="assets/img/portrait.webp" alt="Dávid" loading="lazy">
     </figure>
 
-    <ol class="about-path">
-        <li><span class="about-year" data-i18n="about.uni.year"></span><span class="about-step" data-i18n="about.uni.step"></span><span class="about-note" data-i18n="about.uni.note"></span></li>
-        <li><span class="about-year" data-i18n="about.junior.year"></span><span class="about-step" data-i18n="about.junior.step"></span><span class="about-note" data-i18n="about.junior.note"></span></li>
-        <li><span class="about-year" data-i18n="about.freelance.year"></span><span class="about-step" data-i18n="about.freelance.step"></span><span class="about-note" data-i18n="about.freelance.note"></span></li>
-        <li><span class="about-year" data-i18n="about.medior.year"></span><span class="about-step" data-i18n="about.medior.step"></span><span class="about-note" data-i18n="about.medior.note"></span></li>
-        <li><span class="about-year" data-i18n="about.business.year"></span><span class="about-step" data-i18n="about.business.step"></span><span class="about-note" data-i18n="about.business.note"></span></li>
-        <li><span class="about-year" data-i18n="about.zynex.year"></span><span class="about-step" data-i18n="about.zynex.step"></span><span class="about-note" data-i18n="about.zynex.note"></span></li>
-    </ol>
+    <div class="about-branch">
+        <ol class="about-path" role="list">
+            <li class="about-stop" data-lane="0" data-year="2019"><i class="about-dot" aria-hidden="true"></i><span class="about-year">2019</span> <span class="about-name" data-i18n="about.path.uni.name"></span><span class="about-note" data-i18n="about.path.uni.note"></span></li>
+            <li class="about-stop" data-lane="0" data-year="2022"><i class="about-dot" aria-hidden="true"></i><span class="about-year">2022</span> <span class="about-name" data-i18n="about.path.leading.name"></span><span class="about-note" data-i18n="about.path.leading.note"></span></li>
+            <li class="about-stop" data-lane="2" data-year="2022" data-fork="0"><i class="about-dot" aria-hidden="true"></i><span class="about-year">2022</span> <span class="about-name" data-i18n="about.path.logiscool.name"></span><span class="about-note" data-i18n="about.path.logiscool.note"></span></li>
+            <li class="about-stop" data-lane="2" data-year="2023"><i class="about-dot" aria-hidden="true"></i><span class="about-year">2023</span> <span class="about-name" data-i18n="about.path.school.name"></span><span class="about-note" data-i18n="about.path.school.note"></span></li>
+            <li class="about-stop" data-lane="1" data-year="2023" data-fork="0"><i class="about-dot" aria-hidden="true"></i><span class="about-year">2023</span> <span class="about-name" data-i18n="about.path.upwork.name"></span><span class="about-note" data-i18n="about.path.upwork.note"></span></li>
+            <li class="about-stop" data-lane="0" data-year="2024"><i class="about-dot" aria-hidden="true"></i><span class="about-year">2024</span> <span class="about-name" data-i18n="about.path.scut.name"></span><span class="about-note" data-i18n="about.path.scut.note"></span></li>
+            <li class="about-stop is-merge" data-lane="2" data-year="2024" data-merge="0" aria-hidden="true"><i class="about-dot"></i></li>
+            <li class="about-stop" data-lane="1" data-year="2025"><i class="about-dot" aria-hidden="true"></i><span class="about-year">2025</span> <span class="about-name" data-i18n="about.path.business.name"></span><span class="about-note" data-i18n="about.path.business.note"></span></li>
+            <li class="about-stop is-now" aria-hidden="true">
+                <span class="about-tip" data-lane="0"><i class="about-dot"></i></span>
+                <span class="about-tip" data-lane="1"><i class="about-dot"></i></span>
+            </li>
+        </ol>
+    </div>
 </section>

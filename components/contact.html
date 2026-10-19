@@ -1,4 +1,33 @@
-<section class="screen screen-soon" id="contact" data-i18n-label="menu.contact" tabindex="-1">
-    <h2 class="screen-eyebrow" data-i18n="menu.contact"></h2>
-    <p class="screen-title"><span data-i18n="pages.soon"></span><span class="screen-dot">.</span></p>
+<section class="screen contact" id="contact" data-i18n-label="menu.contact" tabindex="-1">
+    <div class="contact-stage">
+        <div class="contact-head">
+            <p class="screen-eyebrow" data-i18n="menu.contact"></p>
+            <h2 class="screen-title"><span data-i18n="contact.title"></span><span class="screen-dot">.</span></h2>
+            <p class="contact-lead" data-i18n="contact.lead"></p>
+            <p class="contact-links"><span data-i18n="contact.elsewhere"></span> <a href="https://github.com/Telexx12" target="_blank" rel="noopener">GitHub</a> · <a href="#" target="_blank" rel="noopener">LinkedIn</a></p>
+        </div>
+        <div class="contact-desk">
+            <form class="letter" method="post" data-endpoint="" data-sitekey="">
+                <input type="hidden" name="_subject" value="Új üzenet a weboldalról">
+                <p class="letter-hi" data-i18n="contact.hi"></p>
+                <p class="letter-line"><label for="letter-name" data-i18n="contact.name"></label><input id="letter-name" name="name" required autocomplete="name" data-i18n-placeholder="contact.name.hint"></p>
+                <p class="letter-line"><label for="letter-email" data-i18n="contact.email"></label><input id="letter-email" name="email" type="email" required autocomplete="email" data-i18n-placeholder="contact.email.hint"></p>
+                <label class="letter-hidden" for="letter-message" data-i18n="contact.message"></label>
+                <textarea id="letter-message" name="message" rows="5" required data-i18n-placeholder="contact.message.hint"></textarea>
+                <p class="letter-bye"><span data-i18n="contact.bye"></span><br><span class="letter-sign" data-sign>…</span></p>
+                <div class="letter-trap" aria-hidden="true"><label for="letter-gotcha">Website</label><input id="letter-gotcha" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+                <p class="letter-shield"><i aria-hidden="true"></i><span data-i18n="contact.shield"></span></p>
+                <div class="letter-guard" data-guard></div>
+                <button class="letter-send" type="submit"><span data-i18n="contact.send"></span><i aria-hidden="true"></i></button>
+                <p class="letter-status" role="status" data-status></p>
+                <p class="letter-privacy" data-i18n="contact.privacy"></p>
+            </form>
+            <svg class="envelope" viewBox="0 0 240 160" aria-hidden="true"><rect class="envelope-body" x="2" y="2" width="236" height="156" rx="10"></rect><path class="envelope-fold" d="M4 152 L120 78 L236 152"></path><path class="envelope-flap" d="M2 6 L120 96 L238 6 Z"></path></svg>
+            <div class="letter-sent" data-sent hidden tabindex="-1">
+                <p class="letter-sent-title"><span data-i18n="contact.sent.title"></span><span class="screen-dot">!</span></p>
+                <p class="letter-sent-text" data-i18n="contact.sent.text"></p>
+                <button class="letter-again" type="button" data-again data-i18n="contact.again"></button>
+            </div>
+        </div>
+    </div>
 </section>

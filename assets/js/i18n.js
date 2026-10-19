@@ -17,6 +17,7 @@ window.I18n = (() => {
         };
         root.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = text(el.dataset.i18n); });
         root.querySelectorAll("[data-i18n-label]").forEach((el) => el.setAttribute("aria-label", text(el.dataset.i18nLabel)));
+        root.querySelectorAll("[data-i18n-placeholder]").forEach((el) => el.setAttribute("placeholder", text(el.dataset.i18nPlaceholder)));
     }
 
     async function set(lang) {

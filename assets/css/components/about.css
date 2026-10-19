@@ -103,30 +103,6 @@
     margin: 12px 0 0;
 }
 
-.about-figure::before {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    top: calc(100% - 1px);
-    left: 5.5px;
-    width: 24px;
-    height: 16px;
-    border-top: var(--track) solid var(--accent);
-    border-left: var(--track) solid var(--accent);
-    border-top-left-radius: 16px;
-}
-
-.about-figure::after {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    top: calc(100% - 1px);
-    right: 0;
-    left: 31.5px;
-    height: var(--track);
-    background: linear-gradient(90deg, var(--accent) 0 72%, transparent);
-}
-
 .about-smoke {
     position: absolute;
     z-index: 0;
@@ -165,7 +141,6 @@
 
 .about-photo {
     position: relative;
-    z-index: 1;
     display: block;
     width: 100%;
     height: 100%;
@@ -173,99 +148,141 @@
     mask-image: linear-gradient(90deg, transparent 0, #000000 10%, #000000 90%, transparent 100%);
 }
 
-.about-path {
+.about-branch {
+    --lane-gap: 24px;
+    --dot: 13px;
+    --live: var(--accent);
+    --done: color-mix(in srgb, var(--accent) 36%, var(--panel));
     position: relative;
     order: 3;
+    margin: 15px 0 0;
+}
+
+:root[data-theme="dark"] .about-branch {
+    --done: color-mix(in srgb, var(--accent) 50%, var(--panel));
+}
+
+.about-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.about-line {
+    fill: none;
+    stroke: var(--live);
+    stroke-width: var(--stroke, var(--track));
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.about-line.is-done {
+    stroke: var(--done);
+}
+
+.about-gap {
+    fill: none;
+    stroke: var(--panel);
+    stroke-width: calc(var(--stroke, var(--track)) + 6px);
+}
+
+.about-floor {
+    fill: none;
+    stroke: url(#about-fade);
+    stroke-width: var(--stroke, var(--track));
+}
+
+.about-path {
+    position: relative;
     display: flex;
     flex-direction: column-reverse;
-    margin: 15px 0 0;
-    padding: 0 0 0 30px;
+    margin: 0;
+    padding: 0;
     list-style: none;
 }
 
-.about-path::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 5.5px;
-    height: 13px;
-    border-left: var(--track) solid var(--accent);
-}
-
-.about-path li {
+.about-stop {
+    --lane: 0;
+    --shift: 0px;
     position: relative;
-    display: grid;
-    grid-template-columns: 72px minmax(0, 1fr);
-    column-gap: 8px;
-    padding-bottom: 14px;
+    padding: 0 0 14px calc(var(--lane-gap) * 3);
 }
 
-.about-path li:first-child {
+.about-stop:first-child {
     padding-bottom: 0;
 }
 
-.about-path li::before {
-    content: "";
+.about-stop.is-merge {
+    padding: 0;
+}
+
+.about-stop.is-now {
+    min-height: 24px;
+}
+
+.about-branch [data-lane="1"] {
+    --lane: 1;
+}
+
+.about-branch [data-lane="2"] {
+    --lane: 2;
+}
+
+.about-branch [data-fork] {
+    --shift: 26px;
+}
+
+.about-dot {
     position: absolute;
     z-index: 1;
     top: 6px;
-    left: -30px;
-    width: 9px;
-    height: 9px;
-    border: var(--track) solid var(--accent);
+    left: calc(var(--lane) * var(--lane-gap));
+    width: var(--dot);
+    height: var(--dot);
+    box-sizing: border-box;
+    border: var(--track) solid var(--live);
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--live);
 }
 
-.about-path li::after {
-    content: "";
-    position: absolute;
-    top: 13px;
-    bottom: -13px;
-    left: -24.5px;
-    border-left: var(--track) solid var(--accent);
+.about-stop.is-done .about-dot {
+    border-color: var(--done);
+    background: var(--done);
 }
 
-.about-path li:first-child::after {
-    content: none;
+.about-stop.is-merge .about-dot {
+    visibility: hidden;
 }
 
-.about-path li:last-child::before {
+.about-tip .about-dot {
     top: 4px;
-    left: -32px;
-    width: 13px;
-    height: 13px;
+    left: calc(var(--lane) * var(--lane-gap) - 2px);
+    width: calc(var(--dot) + 4px);
+    height: calc(var(--dot) + 4px);
     background: var(--panel);
     animation: about-pulse 1.6s ease-out infinite;
 }
 
-.about-year,
-.about-step,
-.about-note {
-    display: block;
-}
-
 .about-year {
-    grid-row: 1 / span 2;
-    font-family: var(--font-name);
-    font-weight: 900;
-    font-size: 18px;
-    line-height: 26px;
-    letter-spacing: -0.01em;
-}
-
-.about-path li:last-child .about-year {
+    margin-right: 5.5px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 24px;
     color: var(--accent-ink);
 }
 
-.about-step {
+.about-name {
     font-weight: 600;
     font-size: 15px;
-    line-height: 26px;
+    line-height: 24px;
 }
 
 .about-note {
-    margin-top: 2px;
+    display: block;
     font-size: 14px;
     line-height: 20px;
     color: var(--body);
@@ -316,22 +333,22 @@
         grid-row: 1;
         align-self: center;
         max-width: 680px;
-        padding: 8px 0 16px;
+        padding: 0 0 8px;
     }
 
     .about-lead {
-        margin-top: 24px;
-        font-size: 19px;
-        line-height: 31px;
+        margin-top: 16px;
+        font-size: 18px;
+        line-height: 28px;
     }
 
     .about-text {
         max-width: 620px;
-        font-size: 16px;
-        line-height: 27px;
+        margin-top: 12px;
     }
 
     .about-quote {
+        margin-top: 10px;
         font-size: 24px;
         line-height: 32px;
     }
@@ -339,7 +356,7 @@
     .about-button {
         width: fit-content;
         height: 48px;
-        margin-top: 28px;
+        margin-top: 20px;
     }
 
     .about-figure {
@@ -348,81 +365,103 @@
         align-self: end;
         justify-self: center;
         width: 100%;
-        max-width: 520px;
+        max-width: clamp(490px, calc(var(--view) - var(--bar) - var(--dock-space) - 210px), 520px);
         margin: 0;
-    }
-
-    .about-figure::before,
-    .about-figure::after {
-        content: none;
     }
 
     .about-smoke {
         inset: 4% -6% 0;
     }
 
-    .about-path {
-        --gap: 24px;
+    .about-branch {
         grid-column: 1 / -1;
         grid-row: 2;
-        display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        gap: var(--gap);
         margin: 0;
+    }
+
+    .about-path {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr)) 0;
+        grid-template-rows: repeat(3, auto);
+    }
+
+    .about-stop {
+        padding: 10px 10px 12px calc(var(--shift) + 14px);
+    }
+
+    .about-branch [data-lane="0"] {
+        grid-row: 1;
+    }
+
+    .about-branch [data-lane="1"] {
+        grid-row: 2;
+    }
+
+    .about-branch [data-lane="2"] {
+        grid-row: 3;
+    }
+
+    .about-branch [data-year="2019"] {
+        grid-column: 1;
+    }
+
+    .about-branch [data-year="2022"] {
+        grid-column: 2;
+    }
+
+    .about-branch [data-year="2023"] {
+        grid-column: 3;
+    }
+
+    .about-branch [data-year="2024"] {
+        grid-column: 4;
+    }
+
+    .about-branch [data-year="2025"] {
+        grid-column: 5;
+    }
+
+    .about-stop.is-now {
+        grid-column: -2;
+        grid-row: 1 / span 3;
+        display: grid;
+        grid-template-rows: subgrid;
+        min-height: 0;
         padding: 0;
     }
 
-    .about-path::before {
-        content: none;
-    }
-
-    .about-path li {
+    .about-tip {
+        position: relative;
         display: block;
-        padding: 28px 0 0;
     }
 
-    .about-path li::before {
-        top: -7px;
-        left: 0;
+    .about-dot {
+        top: calc(var(--dot) / -2);
+        left: calc(var(--shift) - var(--dot) / 2);
     }
 
-    .about-path li::after,
-    .about-path li:first-child::after {
-        content: "";
-        top: -1.25px;
-        right: calc(var(--gap) * -1 - 7px);
-        bottom: auto;
-        left: 7px;
-        border-left: 0;
-        border-top: var(--track) solid var(--accent);
-    }
-
-    .about-path li:last-child::before {
-        top: -9px;
-        left: -2px;
-    }
-
-    .about-path li:last-child::after {
-        right: 0;
-        height: var(--track);
-        border: 0;
-        background: linear-gradient(90deg, var(--accent), transparent);
+    .about-tip .about-dot {
+        top: calc(var(--dot) / -2 - 2px);
+        left: calc(var(--dot) / -2 - 2px);
     }
 
     .about-year {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 11px;
+        line-height: 22px;
     }
 
-    .about-step {
-        margin-top: 8px;
-        font-size: 16px;
+    .about-name {
         line-height: 22px;
+    }
+
+    .about-note {
+        font-size: 13px;
+        line-height: 18px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .about-path li:last-child::before,
+    .about-tip .about-dot,
     .about-smoke::before,
     .about-smoke::after {
         animation: none;
