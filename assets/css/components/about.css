@@ -17,6 +17,7 @@
 
 .about .screen-title {
     order: 1;
+    text-wrap: balance;
 }
 
 .about-lead {
@@ -336,6 +337,10 @@
         padding: 0 0 8px;
     }
 
+    .about .screen-title {
+        font-size: min(58px, 4.4vw);
+    }
+
     .about-lead {
         margin-top: 16px;
         font-size: 18px;
@@ -357,6 +362,7 @@
         width: fit-content;
         height: 48px;
         margin-top: 20px;
+        margin-bottom: 24px;
     }
 
     .about-figure {
