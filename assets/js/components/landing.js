@@ -9,7 +9,7 @@
         { opacity: 1, filter: "grayscale(0) blur(0px)" },
     ];
 
-    let section, stage, loader, face, dock, photo, figure, boot;
+    let section, stage, loader, face, dock, up, photo, figure, boot;
     let links, letters, contacts;
     let state = "idle";
 
@@ -19,6 +19,7 @@
         loader = find(".tldr-loader");
         face = find(".tldr-face img");
         dock = find(".tldr-dock");
+        up = find(".tldr-up");
         photo = find(".tldr-photo");
         figure = find(".tldr-figure");
         links = [...section.querySelectorAll(".tldr-link")];
@@ -31,8 +32,7 @@
         addFinale();
         links.forEach(addLink);
 
-        ScrollTrigger.create({ trigger: section, start: "top bottom", onLeaveBack: reset });
-        ScrollTrigger.create({ trigger: section, endTrigger: document.body, start: "top center", toggleClass: { targets: dock, className: "is-shown" } });
+        ScrollTrigger.create({ trigger: section, endTrigger: document.body, start: "bottom center", toggleClass: { targets: up, className: "is-shown" } });
         stage.addEventListener("click", tap);
         document.addEventListener("keydown", onKey);
         document.addEventListener("thread:landed", land);
@@ -101,6 +101,7 @@
 
     function play() {
         state = "booting";
+        dock.classList.add("is-shown");
         boot.restart();
     }
 
@@ -116,13 +117,6 @@
         gsap.set(links, { clearProps: "transform" });
     }
 
-    function reset() {
-        if (state === "idle") return;
-        state = "idle";
-        boot.progress(0, true).pause().invalidate();
-        stage.dataset.state = "booting";
-    }
-
     function pulse(from) {
         document.dispatchEvent(new CustomEvent("story:phase", { detail: from }));
     }
@@ -134,6 +128,18 @@
 
     function onKey(e) {
         if (e.key === "Escape" || (e.key === "Enter" && !e.target.closest("a, button"))) skip();
+        else if (homeKey(e) && state !== "idle" && !document.documentElement.classList.contains("is-traveling")) goHome(e);
+    }
+
+    function homeKey(e) {
+        if (e.target.closest("input, textarea, select")) return false;
+        if (e.key === "Home") return !e.altKey && !e.shiftKey;
+        return e.key === "ArrowUp" && e.metaKey;
+    }
+
+    function goHome(e) {
+        e.preventDefault();
+        up.click();
     }
 
     function fromLoader(link) {

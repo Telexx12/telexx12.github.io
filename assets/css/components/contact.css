@@ -3,6 +3,7 @@
     --paper: color-mix(in srgb, var(--panel) 96%, #F2DFB8);
     --ruled: color-mix(in srgb, var(--line) 85%, transparent);
     --margin-line: color-mix(in srgb, var(--accent) 45%, transparent);
+    padding-bottom: calc(var(--dock-space) + 48px);
 }
 
 :root[data-theme="dark"] .contact {
@@ -328,6 +329,7 @@
     .contact {
         display: grid;
         align-content: center;
+        padding-bottom: var(--dock-space);
     }
 
     .contact-stage {

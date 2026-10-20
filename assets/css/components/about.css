@@ -136,7 +136,7 @@
     aspect-ratio: 1.25;
     background:
         radial-gradient(42% 36% at 44% 54%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.18)), rgba(var(--smoke), calc(var(--smoke-alpha) * 0.09)) 45%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.025)) 75%, transparent),
-        radial-gradient(48% 42% at 58% 50%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.14)), rgba(var(--smoke), calc(var(--smoke-alpha) * 0.07)) 45%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.02)) 75%, transparent);
+        radial-gradient(48% 42% at 58% 50%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.14)), rgba(var(--smoke), calc(var(--smoke-alpha) * 0.07)) 45%, rgba(var(--smoke), calc(var(--smoke-alpha) * 0.02)) 75%, transparent 87.5%);
     animation: about-smoke-low 15s ease-in-out infinite alternate;
 }
 
