@@ -1,10 +1,9 @@
 window.I18n = (() => {
-    const base = new URL("../lang/", document.currentScript.src);
     const dictionaries = new Map();
 
     function load(lang) {
         if (!dictionaries.has(lang)) {
-            dictionaries.set(lang, fetch(new URL(`${lang}.json`, base)).then((response) => response.json()));
+            dictionaries.set(lang, fetch(`assets/lang/${lang}.json`).then((response) => response.json()));
         }
         return dictionaries.get(lang);
     }

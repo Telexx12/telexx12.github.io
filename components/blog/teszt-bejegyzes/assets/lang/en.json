@@ -1,0 +1,25 @@
+{
+    "menu.blog": "Blog",
+    "bar.theme": "Toggle theme",
+    "bar.lang": "Switch language",
+
+    "meta": "October 22, 2026 · 1 min read",
+    "title": "Test: what a post looks like",
+    "lead": "This is a test post. It’s here so we can see, live, what a piece of writing looks like on the blog.",
+
+    "open.title": "How does it open?",
+    "open.text": "Clicking a row in the blog list opens the post on its own page. Its address is the post’s folder, so the link can be shared anywhere.",
+    "open.back": "The Blog link on the left of the header takes you back to the main page.",
+    "open.prefs": "The language and theme switches carry over whatever you picked on the main page.",
+    "open.texts": "The text comes from the hu.json and en.json files in the post’s own assets/lang folder, and the language switch translates it just like the rest of the site.",
+
+    "image.title": "An image from the post’s folder",
+    "image.caption": "The image loads from the post’s own folder, like the rest of its files.",
+
+    "share.title": "Sharing",
+    "share.text": "The post’s own address is the one to share. Whoever opens it sees this same page, and the link preview comes from the post’s header:",
+
+    "own.title": "Its own CSS and JS",
+    "own.text": "A post can have its own stylesheet and script. The red subheadings and the grid below both come from this post’s own files. Try it: click the squares.",
+    "own.total": "Selected:"
+}

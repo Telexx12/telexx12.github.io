@@ -133,6 +133,9 @@
     "blog.lead": "Rövid írások arról, amit fejlesztés és tanítás közben tanultam.",
     "blog.empty.title": "Az első bejegyzéseken dolgozom.",
     "blog.empty.text": "Amint elkészülnek, itt találod őket, legfelül mindig a legfrissebbet.",
+    "blog.teszt-bejegyzes.date": "2026. október 22.",
+    "blog.teszt-bejegyzes.title": "Teszt: így néz ki egy bejegyzés",
+    "blog.teszt-bejegyzes.line": "Próbabejegyzés, hogy lássuk, hogyan nyílik meg és hogyan néz ki egy írás.",
 
     "contact.title": "Írj nekem",
     "contact.lead": "Projekted van, kérdésed, vagy csak köszönnél? Írj pár sort, és hamarosan válaszolok.",

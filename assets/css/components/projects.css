@@ -21,7 +21,7 @@
 
 .projects-plane {
     --pw: 1040px;
-    --ph: 2090px;
+    --ph: 1410px;
     --hx: 120px;
     --hy: 16px;
     --hw: 800px;
@@ -66,21 +66,22 @@
 }
 
 .projects-cell:nth-child(2) {
-    --x: 676px;
-    --y: 340px;
-    --size: 0.9;
-}
-
-.projects-cell:nth-child(3) {
     --x: 364px;
-    --y: 990px;
+    --y: 684px;
     --pull: 1;
     --size: 0.9;
 }
 
-.projects-cell:nth-child(4) {
+.projects-cell:nth-child(3) {
     --x: 676px;
-    --y: 1640px;
+    --y: 684px;
+    --size: 0.9;
+}
+
+.projects-cell:nth-child(4) {
+    --x: 364px;
+    --y: 1068px;
+    --pull: 1;
     --size: 0.9;
 }
 
@@ -99,16 +100,15 @@
 }
 
 .projects-cell:nth-child(7) {
-    --x: 520px;
-    --y: 1312px;
-    --pull: 0.5;
+    --x: 364px;
+    --y: 300px;
+    --pull: 1;
     --size: 0.9;
 }
 
 .projects-cell:nth-child(8) {
-    --x: 520px;
-    --y: 1696px;
-    --pull: 0.5;
+    --x: 676px;
+    --y: 300px;
     --size: 0.9;
 }
 
@@ -456,24 +456,21 @@
 }
 
 @media (min-width: 700px) {
-    .projects-cell:nth-child(2) {
-        --x: 710px;
-    }
-
-    .projects-cell:nth-child(3) {
+    .projects-cell:nth-child(2),
+    .projects-cell:nth-child(4),
+    .projects-cell:nth-child(7) {
         --x: 330px;
-        --y: 760px;
     }
 
-    .projects-cell:nth-child(4) {
+    .projects-cell:nth-child(3),
+    .projects-cell:nth-child(8) {
         --x: 710px;
-        --y: 1180px;
     }
 }
 
 @media (min-width: 1200px) and (pointer: fine) {
     .projects {
-        height: var(--view);
+        height: min(var(--view), 1240px);
         min-height: 640px;
         padding: 0;
     }
@@ -497,7 +494,7 @@
     }
 
     .projects-cell {
-        translate: none;
+        translate: 0 calc(var(--lift, 0) * -100%);
     }
 
     .projects-cell:nth-child(1) {
@@ -508,19 +505,19 @@
 
     .projects-cell:nth-child(2) {
         --x: 318px;
-        --y: 392px;
+        --y: 466px;
         --size: 0.84;
     }
 
     .projects-cell:nth-child(3) {
         --x: 1983px;
-        --y: 697px;
+        --y: 506px;
         --size: 0.84;
     }
 
     .projects-cell:nth-child(4) {
-        --x: 318px;
-        --y: 827px;
+        --x: 1150px;
+        --y: 760px;
         --size: 0.84;
     }
 
@@ -543,8 +540,9 @@
     }
 
     .projects-cell:nth-child(8) {
-        --x: 1983px;
-        --y: 262px;
+        --x: 1150px;
+        --y: 520px;
+        --lift: 1;
         --size: 0.84;
     }
 

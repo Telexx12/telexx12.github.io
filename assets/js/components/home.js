@@ -4,6 +4,7 @@
     const BEAT = 0.08;
     const PAUSE = 0.15;
     const OPEN = 0.2;
+    const root = document.documentElement;
 
     let section, tl, installs, cursorLine;
     let state = "booting";
@@ -28,6 +29,7 @@
         document.addEventListener("story:opened", leave, { once: true });
         section.focus({ preventScroll: true });
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) skip();
+        if (root.dataset.entry) queueMicrotask(enter);
     }
 
     function addIntro() {
@@ -134,6 +136,18 @@
     function jumpToStory() {
         if (state !== "ready" || held) return;
         document.dispatchEvent(new CustomEvent("story:open", { detail: "instant" }));
+    }
+
+    function enter() {
+        skip();
+        document.addEventListener("story:arrived", land, { once: true });
+        jumpToStory();
+    }
+
+    function land() {
+        const top = Number(root.dataset.entry);
+        delete root.dataset.entry;
+        window.scrollTo({ top, behavior: "instant" });
     }
 
     function leave() {

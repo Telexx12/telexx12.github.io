@@ -1,0 +1,36 @@
+h2 {
+    color: var(--accent-ink);
+}
+
+.demo-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 6px;
+    margin: 20px 0 0;
+}
+
+.demo-cell {
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 4px;
+    padding: 0;
+    background: var(--item-bg);
+    cursor: pointer;
+}
+
+.demo-cell[aria-pressed="true"] {
+    background: var(--accent);
+}
+
+.demo-total {
+    display: flex;
+    gap: 0.5ch;
+    font-family: var(--font-mono);
+    font-size: 14px;
+}
+
+@media (min-width: 600px) {
+    .demo-grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+}

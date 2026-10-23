@@ -324,3 +324,7 @@
         transition: none;
     }
 }
+
+:root[data-entry] .home {
+    visibility: hidden;
+}

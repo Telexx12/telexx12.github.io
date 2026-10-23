@@ -1,0 +1,25 @@
+{
+    "menu.blog": "Blog",
+    "bar.theme": "Téma váltás",
+    "bar.lang": "Nyelv váltása",
+
+    "meta": "2026. október 22. · 1 perc olvasás",
+    "title": "Teszt: így néz ki egy bejegyzés",
+    "lead": "Ez egy próbabejegyzés. Azért készült, hogy élőben lássuk, hogyan néz ki egy írás a blogon.",
+
+    "open.title": "Hogyan nyílik meg?",
+    "open.text": "A blog listában a sorra kattintva a bejegyzés a saját oldalán nyílik meg. A címe a bejegyzés mappája, ezért a link bárhol megosztható.",
+    "open.back": "A fejléc bal oldalán a Blog link visszavisz a főoldalra.",
+    "open.prefs": "A nyelv- és a témaváltó a főoldalon beállított értéket viszi tovább.",
+    "open.texts": "A szöveg a bejegyzés saját assets/lang mappájában lévő hu.json és en.json fájlból jön, a nyelvváltó ugyanúgy fordítja, mint az oldal többi részét.",
+
+    "image.title": "Kép a bejegyzés mappájából",
+    "image.caption": "A kép a bejegyzés saját mappájából töltődik be, ahogy a többi fájlja is.",
+
+    "share.title": "Megosztás",
+    "share.text": "Megosztásra a bejegyzés saját címe való. Aki megnyitja, ugyanezt az oldalt látja, a link előnézete pedig a bejegyzés fejlécéből jön:",
+
+    "own.title": "Saját CSS és JS",
+    "own.text": "Egy bejegyzésnek lehet saját stílusa és szkriptje. A piros alcímek és az alábbi rács is ennek a bejegyzésnek a saját fájljaiból jönnek. Próbáld ki: kattints a négyzetekre.",
+    "own.total": "Kijelölve:"
+}
