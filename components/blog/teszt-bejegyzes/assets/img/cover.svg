@@ -1,5 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300">
-    <rect width="680" height="300" rx="16" fill="#E31E26"/>
+    <defs>
+        <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.4" fill="#FFFFFF" fill-opacity=".16"/></pattern>
+        <radialGradient id="glow" cx="72%" cy="18%" r="75%"><stop offset="0" stop-color="#FF4D55"/><stop offset="1" stop-color="#E31E26" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="680" height="300" fill="#E31E26"/>
+    <rect width="680" height="300" fill="url(#glow)"/>
+    <rect width="680" height="300" fill="url(#dots)"/>
     <rect x="44" y="36" width="440" height="228" rx="12" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="2"/>
     <path d="M44 74h440" stroke="#FFFFFF" stroke-opacity=".3" stroke-width="2"/>
     <circle cx="66" cy="55" r="5" fill="#FFFFFF" fill-opacity=".5"/>

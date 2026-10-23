@@ -27,32 +27,74 @@
 <body class="post-page">
     <div data-component="post"></div>
     <article class="post">
-        <p class="post-meta" data-i18n="meta"></p>
+        <figure class="post-hero post-wide">
+            <div class="post-frame">
+                <div class="post-bar"><i></i><span data-i18n="tag1"></span><time datetime="2026-10-22" data-i18n="meta.date"></time></div>
+                <img src="assets/img/cover.svg" alt="" width="680" height="300">
+            </div>
+        </figure>
         <h1 data-i18n="title"></h1>
         <p class="post-lead" data-i18n="lead"></p>
+        <ul class="post-tags" role="list"><li data-i18n="tag1"></li><li data-i18n="tag2"></li><li data-i18n="meta.read"></li></ul>
 
-        <h2 data-i18n="open.title"></h2>
-        <p data-i18n="open.text"></p>
+        <h2 data-i18n="s1.title"></h2>
+        <p><span data-i18n="s1.a"></span><strong data-i18n="s1.strong"></strong><span data-i18n="s1.b"></span><em data-i18n="s1.em"></em><span data-i18n="s1.c"></span><code>artisan queue:work</code><span data-i18n="s1.d"></span><a href="https://laravel.com/docs/queues" data-i18n="s1.link"></a><span data-i18n="s1.e"></span></p>
+        <p data-i18n="s1.p2"></p>
+
+        <h2 data-i18n="s2.title"></h2>
         <ul>
-            <li data-i18n="open.back"></li>
-            <li data-i18n="open.prefs"></li>
-            <li data-i18n="open.texts"></li>
+            <li data-i18n="s2.u1"></li>
+            <li data-i18n="s2.u2"></li>
+            <li data-i18n="s2.u3"></li>
         </ul>
-
-        <h2 data-i18n="image.title"></h2>
-        <figure>
-            <img src="assets/img/cover.svg" alt="" width="680" height="300">
-            <figcaption data-i18n="image.caption"></figcaption>
+        <ol>
+            <li data-i18n="s2.o1"></li>
+            <li data-i18n="s2.o2"></li>
+            <li data-i18n="s2.o3"></li>
+        </ol>
+        <figure class="post-quote">
+            <blockquote><p data-i18n="s2.quote"></p></blockquote>
+            <figcaption><cite>Kent Beck</cite></figcaption>
         </figure>
 
-        <h2 data-i18n="share.title"></h2>
-        <p data-i18n="share.text"></p>
-        <pre><code>https://telexx12.github.io/components/blog/teszt-bejegyzes/</code></pre>
+        <h2 data-i18n="s3.title"></h2>
+        <p data-i18n="s3.p"></p>
+        <figure class="post-wide post-code">
+            <figcaption class="post-bar"><i></i>app/Http/Controllers/PostController.php</figcaption>
+            <pre><code>$posts = Post::with('author')-&gt;latest()-&gt;get();
+
+foreach ($posts as $post) {
+    echo $post-&gt;author-&gt;name;
+}</code></pre>
+        </figure>
+        <h3 data-i18n="s3.sub"></h3>
+        <div class="post-table">
+            <table>
+                <thead>
+                    <tr><th data-i18n="s3.th1"></th><th data-i18n="s3.th2"></th><th data-i18n="s3.th3"></th></tr>
+                </thead>
+                <tbody>
+                    <tr><td data-i18n="s3.r1c1"></td><td>N + 1</td><td data-i18n="s3.r1c3"></td></tr>
+                    <tr><td data-i18n="s3.r2c1"></td><td>2</td><td data-i18n="s3.r2c3"></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <aside class="post-note">
+            <div class="post-bar"><i></i><strong data-i18n="s3.noteLabel"></strong></div>
+            <p class="post-note-text"><span data-i18n="s3.note"></span></p>
+        </aside>
+
+        <h2 data-i18n="s4.title"></h2>
+        <figure class="post-wide">
+            <img src="assets/img/cover.svg" alt="" width="680" height="300">
+            <figcaption data-i18n="s4.caption"></figcaption>
+        </figure>
 
         <h2 data-i18n="own.title"></h2>
         <p data-i18n="own.text"></p>
         <div class="demo-grid"></div>
         <p class="demo-total" aria-live="polite"><span data-i18n="own.total"></span><b class="demo-count">0</b></p>
+
     </article>
 </body>
 </html>

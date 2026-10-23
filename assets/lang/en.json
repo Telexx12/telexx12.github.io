@@ -131,11 +131,13 @@
 
     "blog.title": "What I’ve written",
     "blog.lead": "Short pieces about what I’ve learned while building and teaching.",
-    "blog.empty.title": "I’m working on the first posts.",
-    "blog.empty.text": "As soon as they’re ready, you’ll find them here, with the newest always on top.",
+    "blog.latest": "Newest",
     "blog.teszt-bejegyzes.date": "October 22, 2026",
     "blog.teszt-bejegyzes.title": "Test: what a post looks like",
     "blog.teszt-bejegyzes.line": "A test post to show how a piece of writing opens and what it looks like.",
+    "blog.teszt-bejegyzes.tag1": "Blog",
+    "blog.teszt-bejegyzes.tag2": "Test",
+    "blog.teszt-bejegyzes.read": "4 min",
 
     "contact.title": "Get in touch",
     "contact.lead": "Have a project, a question, or just want to say hi? Write a few lines and I’ll get back to you soon.",
