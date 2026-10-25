@@ -1,6 +1,7 @@
 (() => {
     const WIDE = matchMedia("(min-width: 1200px) and (pointer: fine)");
     const REDUCED = matchMedia("(prefers-reduced-motion: reduce)");
+    const MOUSE = matchMedia("(any-pointer: fine)");
     const EDGE = 32;
     const TOP = 96;
     const BOTTOM = 200;
@@ -18,6 +19,7 @@
         build();
         plane.addEventListener("focusin", reveal);
         WIDE.addEventListener("change", build);
+        MOUSE.addEventListener("change", build);
         window.addEventListener("resize", fit);
         new IntersectionObserver(nudge, { threshold: 0.3 }).observe(field);
         document.fonts.ready.then(home);
@@ -34,8 +36,8 @@
             zIndexBoost: false,
             minimumMovement: 6,
             allowContextMenu: true,
-            cursor: "grab",
-            activeCursor: "grabbing",
+            cursor: MOUSE.matches ? "grab" : "auto",
+            activeCursor: MOUSE.matches ? "grabbing" : "auto",
             onDragStart: () => field.classList.add("is-dragging"),
             onRelease: () => field.classList.remove("is-dragging"),
         })[0];

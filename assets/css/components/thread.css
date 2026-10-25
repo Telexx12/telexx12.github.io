@@ -137,7 +137,6 @@
     offset-rotate: 0deg;
     offset-distance: calc(var(--thread) * 100%);
     opacity: calc(min(1, var(--thread) * 1000) * min(1, (1 - var(--thread)) * 1000));
-    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 55%, transparent));
 }
 
 [data-thread="intro"] .thread-dot {
@@ -168,6 +167,7 @@
 
 .thread-dot::after {
     background: radial-gradient(circle, var(--accent) 5px, var(--panel) 5px);
+    box-shadow: 0 0 12px 1px color-mix(in srgb, var(--accent) 45%, transparent);
 }
 
 @keyframes thread-aura {
@@ -212,8 +212,8 @@
         transition: none;
     }
 
-    .thread-dot {
-        filter: none;
+    .thread-dot::after {
+        box-shadow: none;
     }
 
     .thread-dot::before {

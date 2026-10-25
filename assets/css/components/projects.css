@@ -135,8 +135,10 @@
     outline: 2px solid var(--accent);
 }
 
-.projects-field.is-dragging .projects-card {
-    pointer-events: none;
+@media (any-hover: hover) {
+    .projects-field.is-dragging .projects-card {
+        pointer-events: none;
+    }
 }
 
 .projects-frame {
@@ -558,6 +560,12 @@
     .projects-line {
         font-size: 15px;
         line-height: 22px;
+    }
+}
+
+@media (pointer: coarse) {
+    .projects-plane {
+        will-change: transform;
     }
 }
 

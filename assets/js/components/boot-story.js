@@ -1,6 +1,7 @@
 (() => {
     const LEG = 1.2;
     const CALM = 0.25;
+    const SIGHT = "-1px 0px";
     const REDUCED = "(prefers-reduced-motion: reduce)";
     const HURRY_KEYS = ["Escape", "Enter", " ", "ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End"];
     const root = document.documentElement;
@@ -19,6 +20,7 @@
 
         addProgress();
         watchLanding();
+        watchSight();
         story.addEventListener("click", runAction);
         story.addEventListener("click", navigate);
         document.addEventListener("story:opened", start, { once: true });
@@ -34,6 +36,16 @@
 
     function watchLanding() {
         ScrollTrigger.create({ trigger: sections.at(-1), endTrigger: story, start: "top center", toggleClass: { targets: thread, className: "is-away" } });
+    }
+
+    function watchSight() {
+        const observer = new IntersectionObserver(rest, { rootMargin: SIGHT });
+
+        story.querySelectorAll("section").forEach((section) => observer.observe(section));
+    }
+
+    function rest(entries) {
+        entries.forEach((entry) => entry.target.classList.toggle("is-resting", !entry.isIntersecting));
     }
 
     function start(e) {

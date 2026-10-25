@@ -19,6 +19,18 @@ html::-webkit-scrollbar {
     position: relative;
 }
 
+.is-resting .term-line[data-cursor="on"]::after,
+.is-resting .log-type::after,
+.is-resting .thread-dot::before,
+.is-resting .tldr-figure::before,
+.is-resting .tldr-figure::after,
+.is-resting .tldr-smoke i,
+.is-resting .about-smoke::before,
+.is-resting .about-smoke::after,
+.is-resting .about-tip .about-dot::before {
+    animation-play-state: paused;
+}
+
 .boot-sections {
     position: relative;
     overflow-x: clip;
