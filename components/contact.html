@@ -7,6 +7,7 @@
             <p class="contact-links"><span data-i18n="contact.elsewhere"></span> <a href="https://github.com/Telexx12" target="_blank" rel="noopener">GitHub</a> · <a href="#" target="_blank" rel="noopener">LinkedIn</a></p>
         </div>
         <div class="contact-desk">
+            <div class="envelope-flap" aria-hidden="true"><i></i></div>
             <form class="letter" method="post" novalidate data-endpoint="https://formspree.io/f/mljjjjoj" data-sitekey="">
                 <input type="hidden" name="_subject" value="Új üzenet a weboldalról">
                 <p class="letter-hi" data-i18n="contact.hi"></p>
@@ -27,14 +28,12 @@
                 <p class="letter-error" id="letter-message-error" aria-live="polite"></p>
                 <p class="letter-bye"><span data-i18n="contact.bye"></span><br><span class="letter-sign" data-sign>…</span></p>
                 <div class="letter-trap" aria-hidden="true"><label for="letter-gotcha">Website</label><input id="letter-gotcha" name="_gotcha" tabindex="-1" autocomplete="off"></div>
-                <p class="letter-shield"><i aria-hidden="true"></i><span data-i18n="contact.shield"></span></p>
                 <div class="letter-guard" data-guard></div>
                 <button class="letter-send" type="submit"><span class="letter-send-text" data-i18n="contact.send"></span><span class="letter-send-busy" data-i18n="contact.sending"></span><i aria-hidden="true"></i></button>
                 <p class="letter-hidden" role="status" data-busy></p>
                 <p class="letter-status" role="status" data-status></p>
-                <p class="letter-privacy" data-i18n="contact.privacy"></p>
             </form>
-            <svg class="envelope" viewBox="0 0 240 160" aria-hidden="true"><rect class="envelope-body" x="2" y="2" width="236" height="156" rx="10"></rect><path class="envelope-fold" d="M4 152 L120 78 L236 152"></path><path class="envelope-flap" d="M2 6 L120 96 L238 6 Z"></path></svg>
+            <svg class="envelope" viewBox="0 0 240 160" aria-hidden="true"><rect class="envelope-body" x="2" y="2" width="236" height="156" rx="10"></rect><path class="envelope-fold" d="M4 152 L120 78 L236 152"></path></svg>
             <div class="letter-sent" data-sent hidden tabindex="-1">
                 <p class="letter-sent-title"><span data-i18n="contact.sent.title"></span><span class="screen-dot">!</span></p>
                 <p class="letter-sent-text" data-i18n="contact.sent.text"></p>

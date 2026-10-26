@@ -61,6 +61,7 @@
 .letter {
     --rule: 34px;
     position: relative;
+    z-index: 2;
     isolation: isolate;
     display: grid;
     box-sizing: border-box;
@@ -255,27 +256,6 @@
     overflow: hidden;
 }
 
-.letter-shield {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin: 14px 0 0;
-    font-size: 13px;
-    line-height: 20px;
-    color: var(--muted);
-}
-
-.letter-shield i {
-    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E");
-    flex: none;
-    width: 18px;
-    height: 18px;
-    margin-top: 1px;
-    background: currentColor;
-    -webkit-mask: var(--icon) center / contain no-repeat;
-    mask: var(--icon) center / contain no-repeat;
-}
-
 .letter-guard.is-open {
     margin-top: 14px;
 }
@@ -356,22 +336,34 @@
     margin-top: 10px;
 }
 
-.letter-privacy {
-    margin: 10px 0 0;
-    font-size: 13px;
-    line-height: 20px;
-    color: var(--muted);
+.envelope,
+.envelope-flap {
+    position: absolute;
+    top: 50%;
+    left: min(50%, 320px);
+    width: 240px;
+    pointer-events: none;
+    visibility: hidden;
 }
 
 .envelope {
-    position: absolute;
-    z-index: 2;
-    top: 40%;
-    left: min(50%, 320px);
-    width: 240px;
-    translate: -50% -50%;
+    z-index: 3;
     overflow: visible;
-    visibility: hidden;
+}
+
+.envelope-flap {
+    z-index: 1;
+    height: 160px;
+}
+
+.envelope-flap i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 98px;
+    background: var(--accent);
+    clip-path: path("M12 1.25 H228 A10.75 10.75 0 0 1 238.75 12 L120 96 L1.25 12 A10.75 10.75 0 0 1 12 1.25 Z");
 }
 
 .envelope-body {
@@ -382,12 +374,6 @@
 
 .envelope-fold {
     fill: none;
-    stroke: var(--line);
-    stroke-width: 1.5;
-}
-
-.envelope-flap {
-    fill: color-mix(in srgb, var(--paper) 92%, var(--fg));
     stroke: var(--line);
     stroke-width: 1.5;
 }

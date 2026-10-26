@@ -2,6 +2,11 @@
     const GUARD = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     const PASSING = ["contact.wait", "contact.tick", "contact.blocked"];
     const TIMEOUT = 30000;
+    const SLEEVE = 192;
+    const FOLDED = 96;
+    const CREASE = 0.6;
+    const LIP = 24;
+    const POCKET = 80;
     const BLANKS = [
         { id: "letter-name", error: "contact.name.error" },
         { id: "letter-email", error: "contact.email.error" },
@@ -10,7 +15,7 @@
     const REDUCED = matchMedia("(prefers-reduced-motion: reduce)");
     const root = document.documentElement;
 
-    let form, name, message, paper, sign, button, busy, status, guard, envelope, flap, sent, blanks;
+    let form, name, message, paper, sign, button, busy, status, guard, envelope, flap, lid, sent, blanks, folding;
     let widget = null;
     let blocked = false;
     let shown = "";
@@ -26,7 +31,8 @@
         status = form.querySelector("[data-status]");
         guard = form.querySelector("[data-guard]");
         envelope = document.querySelector(".envelope");
-        flap = envelope.querySelector(".envelope-flap");
+        flap = document.querySelector(".envelope-flap");
+        lid = flap.querySelector("i");
         sent = document.querySelector("[data-sent]");
         blanks = BLANKS.map(findBlank);
 
@@ -171,13 +177,19 @@
             gsap.set(form, { autoAlpha: 0 });
             return reveal();
         }
-        gsap.set(flap, { transformOrigin: "50% 0%", scaleY: -1 });
-        gsap.timeline({ onComplete: reveal })
-            .to(form, { scale: 0.4, y: 40, rotation: 0, duration: 0.55, ease: "power3.inOut" })
-            .fromTo(envelope, { autoAlpha: 0, y: 70 }, { autoAlpha: 1, y: 40, duration: 0.35, ease: "power2.out" }, "-=0.25")
-            .to(form, { y: 140, autoAlpha: 0, duration: 0.35, ease: "power2.in" })
-            .to(flap, { scaleY: 1, duration: 0.35, ease: "power2.inOut" })
-            .to(envelope, { x: "+=320", y: "-=220", rotation: 16, autoAlpha: 0, duration: 0.75, ease: "power2.in" }, "+=0.1");
+        const across = SLEEVE / form.offsetWidth;
+        const down = Math.min(across * CREASE, FOLDED / form.offsetHeight);
+        const rest = (form.offsetHeight * down) / 2 + POCKET - LIP;
+        gsap.set([envelope, flap], { xPercent: -50, yPercent: -50 });
+        gsap.set(lid, { transformOrigin: "50% 1.25px", scaleY: -1 });
+        folding = gsap.timeline({ onComplete: reveal })
+            .to(form, { scaleX: across, scaleY: down, rotation: 0, duration: 0.55, ease: "power3.inOut" })
+            .fromTo([envelope, flap], { autoAlpha: 0, x: 0, y: rest + 70, rotation: 0 }, { autoAlpha: 1, y: rest, duration: 0.35, ease: "power2.out" }, "-=0.25")
+            .to(form, { y: rest, duration: 0.5, ease: "power2.inOut" })
+            .set(form, { autoAlpha: 0 })
+            .to(lid, { scaleY: 1, duration: 0.35, ease: "power2.inOut" })
+            .set(flap, { zIndex: 4 }, "<0.175")
+            .to([envelope, flap], { x: 320, y: rest - 220, rotation: 16, autoAlpha: 0, duration: 0.75, ease: "power2.in" }, "+=0.1");
     }
 
     function reveal() {
@@ -186,15 +198,20 @@
         sent.focus({ preventScroll: true });
     }
 
+    function unfold() {
+        if (folding) folding.kill();
+        gsap.set([form, envelope, flap, lid, sent], { clearProps: "all" });
+        sent.hidden = true;
+    }
+
     function again() {
-        gsap.set([form, envelope, flap, sent], { clearProps: "all" });
+        unfold();
         form.reset();
         release();
         blanks.forEach((blank) => flag(blank, false));
         mirror();
         fit();
         say("");
-        sent.hidden = true;
         name.focus();
     }
 
