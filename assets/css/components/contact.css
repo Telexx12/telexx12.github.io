@@ -1,16 +1,29 @@
 .contact {
     --lift: rgba(24, 24, 27, 0.18);
     --paper: color-mix(in srgb, var(--panel) 96%, #F2DFB8);
-    --ruled: color-mix(in srgb, var(--line) 85%, transparent);
+    --ruled: color-mix(in srgb, var(--fg) 10%, transparent);
     --margin-line: color-mix(in srgb, var(--accent) 45%, transparent);
+    --blank-line: color-mix(in srgb, var(--muted) 85%, var(--paper));
+    --blank-line-hover: color-mix(in srgb, var(--fg) 65%, var(--paper));
+    --blank-fill: color-mix(in srgb, var(--fg) 5%, transparent);
+    --blank-hover: color-mix(in srgb, var(--fg) 8%, transparent);
+    --blank-focus: color-mix(in srgb, var(--fg) 9%, transparent);
+    --blank-wrong: color-mix(in srgb, var(--accent) 7%, transparent);
+    --blank-ring: color-mix(in srgb, var(--fg) 12%, transparent);
+    --blank-hint: color-mix(in srgb, var(--muted) 80%, var(--fg));
     padding-bottom: calc(var(--dock-space) + 48px);
 }
 
 :root[data-theme="dark"] .contact {
     --lift: rgba(0, 0, 0, 0.55);
     --paper: color-mix(in srgb, var(--panel) 95%, #4A3C26);
-    --ruled: color-mix(in srgb, var(--line) 70%, transparent);
+    --ruled: color-mix(in srgb, var(--fg) 11%, transparent);
     --margin-line: color-mix(in srgb, var(--accent) 40%, transparent);
+    --blank-fill: color-mix(in srgb, var(--fg) 7%, transparent);
+    --blank-hover: color-mix(in srgb, var(--fg) 9%, transparent);
+    --blank-focus: color-mix(in srgb, var(--fg) 11%, transparent);
+    --blank-wrong: color-mix(in srgb, var(--accent) 12%, transparent);
+    --blank-ring: color-mix(in srgb, var(--fg) 16%, transparent);
 }
 
 .contact-stage {
@@ -46,7 +59,7 @@
 }
 
 .letter {
-    --rule: 32px;
+    --rule: 34px;
     position: relative;
     isolation: isolate;
     display: grid;
@@ -56,7 +69,13 @@
     border-radius: 4px;
     background: var(--paper);
     box-shadow: 0 30px 60px -34px var(--lift);
+    font-size: 16px;
     line-height: var(--rule);
+    color-scheme: light;
+}
+
+:root[data-theme="dark"] .letter {
+    color-scheme: dark;
 }
 
 .letter::before {
@@ -82,54 +101,129 @@
     flex-wrap: wrap;
     align-items: baseline;
     column-gap: 8px;
-    margin: 0;
+    margin: 0 0 6px;
 }
 
 .letter-line label {
     color: var(--body);
 }
 
+.letter-blank,
+.letter-paper {
+    box-sizing: border-box;
+    min-width: 0;
+    border-bottom: 2px solid var(--blank-line);
+    border-radius: 6px 6px 0 0;
+    background-color: var(--blank-fill);
+    scroll-margin-top: calc(var(--bar) + 24px);
+    transition: border-color .2s, background-color .2s, box-shadow .2s;
+}
+
+.letter-blank {
+    flex: 1 1 160px;
+}
+
+.letter-blank:hover,
+.letter-paper:hover {
+    border-bottom-color: var(--blank-line-hover);
+    background-color: var(--blank-hover);
+}
+
+.letter-blank:focus-within,
+.letter-paper:focus-within {
+    border-bottom-color: var(--fg);
+    background-color: var(--blank-focus);
+    box-shadow: 0 0 0 2px var(--blank-ring);
+    outline: 2px solid transparent;
+}
+
+.letter-blank[data-invalid],
+.letter-paper[data-invalid] {
+    border-bottom-color: var(--accent-ink);
+    background-color: var(--blank-wrong);
+}
+
 .letter input,
 .letter textarea {
+    display: block;
+    width: 100%;
     min-width: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 8px;
     border: 0;
-    border-bottom: 1px solid var(--ruled);
     border-radius: 0;
     background: transparent;
     font: inherit;
     font-weight: 600;
-    line-height: calc(var(--rule) - 1px);
     color: var(--fg);
+    caret-color: var(--accent);
     outline: none;
-    transition: border-color .2s;
+    scroll-margin-top: calc(var(--bar) + 24px);
 }
 
 .letter input {
-    flex: 1 1 160px;
+    line-height: calc(var(--rule) - 2px);
 }
 
-.letter textarea {
-    margin-top: 4px;
-    min-height: calc(var(--rule) * 5);
-    padding: 0;
-    border: 0;
-    background: repeating-linear-gradient(to bottom, transparent 0 calc(var(--rule) - 1px), var(--ruled) 0 var(--rule));
-    background-attachment: local;
-    resize: vertical;
-}
-
-.letter input:focus {
-    border-bottom-color: var(--accent);
-}
-
-.letter textarea:focus-visible {
-    box-shadow: inset 2px 0 0 var(--accent);
+.letter input:-webkit-autofill,
+.letter input:-webkit-autofill:hover,
+.letter input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--fg);
+    transition: background-color 600000s 0s;
 }
 
 .letter input::placeholder,
 .letter textarea::placeholder {
     font-weight: 400;
-    color: color-mix(in srgb, var(--muted) 75%, transparent);
+    color: var(--blank-hint);
+    opacity: 1;
+}
+
+.letter-paper {
+    position: relative;
+    display: grid;
+    min-height: calc(var(--rule) * 3 + 2px);
+    margin-top: 6px;
+}
+
+.letter-paper::after {
+    content: attr(data-value) " ";
+    grid-area: 1 / 1;
+    max-height: calc(var(--rule) * 10);
+    padding: 0 8px;
+    overflow: hidden;
+    font-weight: 600;
+    line-height: var(--rule);
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.letter textarea {
+    grid-area: 1 / 1;
+    max-height: calc(var(--rule) * 10);
+    line-height: var(--rule);
+    background-image: repeating-linear-gradient(to bottom, transparent 0 calc(var(--rule) - 1px), var(--ruled) 0 var(--rule));
+    background-attachment: local;
+    resize: none;
+    scrollbar-width: thin;
+}
+
+.letter-error {
+    flex: 1 0 100%;
+    margin: 2px 0 6px;
+    padding: 0 8px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--accent-ink);
+}
+
+.letter-error:empty {
+    margin: 0;
+    padding: 0;
 }
 
 .letter-hidden {
@@ -187,6 +281,7 @@
 }
 
 .letter-send {
+    --icon-busy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 3a9 9 0 1 1-9 9'/%3E%3C/svg%3E");
     justify-self: stretch;
     height: 52px;
     box-sizing: border-box;
@@ -226,9 +321,27 @@
     translate: 4px 0;
 }
 
+.letter-send-busy {
+    display: none;
+}
+
 .letter-send[aria-busy="true"] {
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.85;
+}
+
+.letter-send[aria-busy="true"] .letter-send-text {
+    display: none;
+}
+
+.letter-send[aria-busy="true"] .letter-send-busy {
+    display: inline;
+}
+
+.letter-send[aria-busy="true"] i {
+    -webkit-mask-image: var(--icon-busy);
+    mask-image: var(--icon-busy);
+    animation: letter-spin .8s linear infinite;
 }
 
 .letter-status {
@@ -325,6 +438,22 @@
     cursor: pointer;
 }
 
+@keyframes letter-spin {
+    to {
+        rotate: 360deg;
+    }
+}
+
+@media (max-width: 599px) {
+    .letter {
+        --rule: 36px;
+    }
+
+    .letter-line label {
+        flex: 0 0 100%;
+    }
+}
+
 @media (min-width: 1200px) {
     .contact {
         display: grid;
@@ -344,7 +473,6 @@
     }
 
     .letter {
-        --rule: 34px;
         max-width: 640px;
         padding: 30px 40px 30px 76px;
         font-size: 17px;
@@ -366,9 +494,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .letter input,
+    .letter-blank,
+    .letter-paper,
     .letter-send,
     .letter-send i {
         transition: none;
+    }
+
+    .letter-send[aria-busy="true"] i {
+        animation: none;
     }
 }

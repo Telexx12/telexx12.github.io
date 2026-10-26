@@ -1,10 +1,16 @@
 (() => {
     const GUARD = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     const PASSING = ["contact.wait", "contact.tick", "contact.blocked"];
+    const TIMEOUT = 30000;
+    const BLANKS = [
+        { id: "letter-name", error: "contact.name.error" },
+        { id: "letter-email", error: "contact.email.error" },
+        { id: "letter-message", error: "contact.message.error" },
+    ];
     const REDUCED = matchMedia("(prefers-reduced-motion: reduce)");
     const root = document.documentElement;
 
-    let form, name, sign, button, status, guard, envelope, flap, sent;
+    let form, name, message, paper, sign, button, busy, status, guard, envelope, flap, sent, blanks;
     let widget = null;
     let blocked = false;
     let shown = "";
@@ -12,18 +18,65 @@
     function init() {
         form = document.querySelector(".letter");
         name = form.querySelector("#letter-name");
+        message = form.querySelector("#letter-message");
+        paper = form.querySelector("[data-paper]");
         sign = form.querySelector("[data-sign]");
         button = form.querySelector(".letter-send");
+        busy = form.querySelector("[data-busy]");
         status = form.querySelector("[data-status]");
         guard = form.querySelector("[data-guard]");
         envelope = document.querySelector(".envelope");
         flap = envelope.querySelector(".envelope-flap");
         sent = document.querySelector("[data-sent]");
+        blanks = BLANKS.map(findBlank);
 
         name.addEventListener("input", mirror);
+        message.addEventListener("input", fit);
+        message.addEventListener("focus", fit);
+        blanks.forEach(watch);
         form.addEventListener("submit", submit);
         form.addEventListener("focusin", loadGuard, { once: true });
         sent.querySelector("[data-again]").addEventListener("click", again);
+    }
+
+    function findBlank(spec) {
+        const input = form.querySelector(`#${spec.id}`);
+        return { input, box: input.closest(".letter-blank, .letter-paper"), note: form.querySelector(`#${spec.id}-error`), error: spec.error };
+    }
+
+    function watch(blank) {
+        blank.input.addEventListener("input", () => recheck(blank));
+    }
+
+    function recheck(blank) {
+        if (blank.box.hasAttribute("data-invalid") && filled(blank)) flag(blank, false);
+    }
+
+    function filled(blank) {
+        const value = blank.input.value.trim();
+        if (!value || !blank.input.checkValidity()) return false;
+        return blank.input.type !== "email" || value.split("@").pop().includes(".");
+    }
+
+    function check(blank) {
+        const ok = filled(blank);
+        flag(blank, !ok);
+        return ok;
+    }
+
+    function flag(blank, wrong) {
+        blank.input.setAttribute("aria-invalid", wrong);
+        blank.box.toggleAttribute("data-invalid", wrong);
+        write(blank.note, wrong ? blank.error : "");
+    }
+
+    function visit(blank) {
+        blank.input.focus({ preventScroll: true });
+        blank.box.scrollIntoView({ block: "nearest" });
+    }
+
+    function fit() {
+        paper.dataset.value = message.value;
     }
 
     function mirror() {
@@ -71,22 +124,30 @@
     async function submit(e) {
         e.preventDefault();
         if (button.hasAttribute("aria-busy")) return;
+        const missing = blanks.filter((blank) => !check(blank));
+        if (missing.length) return visit(missing[0]);
         if (form.elements._gotcha.value) return fold();
         if (!form.dataset.endpoint) return say("contact.off");
         if (form.dataset.sitekey && blocked) return say("contact.blocked");
         if (form.dataset.sitekey && (widget === null || !window.turnstile.getResponse(widget))) return say("contact.wait");
         say("");
         button.setAttribute("aria-busy", "true");
+        write(busy, "contact.sending");
         try {
-            const response = await fetch(form.dataset.endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+            const response = await fetch(form.dataset.endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" }, signal: AbortSignal.timeout(TIMEOUT) });
             if (!response.ok) throw new Error(response.status);
             fold();
         } catch {
+            release();
             say("contact.error");
         } finally {
-            button.removeAttribute("aria-busy");
             rearm();
         }
+    }
+
+    function release() {
+        button.removeAttribute("aria-busy");
+        write(busy, "");
     }
 
     function rearm() {
@@ -97,8 +158,12 @@
 
     function say(key) {
         shown = key;
-        status.innerHTML = key ? `<span data-i18n="${key}"></span>` : "";
-        if (key) window.I18n.translate(status);
+        write(status, key);
+    }
+
+    function write(note, key) {
+        note.innerHTML = key ? `<span data-i18n="${key}"></span>` : "";
+        if (key) window.I18n.translate(note);
     }
 
     function fold() {
@@ -124,7 +189,10 @@
     function again() {
         gsap.set([form, envelope, flap, sent], { clearProps: "all" });
         form.reset();
+        release();
+        blanks.forEach((blank) => flag(blank, false));
         mirror();
+        fit();
         say("");
         sent.hidden = true;
         name.focus();
