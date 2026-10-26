@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://telexx12.github.io/sitemap.xml

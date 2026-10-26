@@ -162,7 +162,7 @@
 
 .log-line b {
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-ink);
 }
 
 .log-ok b {

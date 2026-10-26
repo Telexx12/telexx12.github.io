@@ -1,0 +1,47 @@
+# Dávid
+
+> Dávid is a Laravel developer from Romania, working in the industry since 2022. This file summarises the personal portfolio at https://telexx12.github.io/, a bilingual (Hungarian and English) single-page site that renders with JavaScript. The same facts are in the static HTML of the home page.
+
+I’m Dávid, a Laravel developer from Romania, working in the industry since 2022. I’ve worked on CRM, OMS and ERP systems and on webshops serving several European countries in multiple currencies. I’ve taken over and extended a legacy PHP codebase, designed REST APIs for mobile apps and internal systems, integrated payment providers, and optimised the performance of high-traffic backends.
+
+Yes, I use PHP, and yes, I can build fast systems with it. The two get along surprisingly well.
+
+## Work
+
+- Junior PHP / Laravel Developer, 2022–2024: CRMs, webshops, API integrations
+- Freelance & own business, 2023–: REST APIs, webshop optimisation, A/B tests
+- Mid-level PHP / Laravel Developer, 2024–: Business-critical systems, high-traffic webshops
+
+## Education
+
+- High school, 2015–2019, Orbán Balázs Gimnázium: Mathematics–Computer Science; Algorithmic thinking; Programming fundamentals
+- University, 2019–2022, Sapientia University: Business Informatics major; Analysing and designing IT systems; Mastering web technologies; Database design
+- Self-development, 2023–, Laracasts: Mastering modern Laravel technologies; Up-to-date Laravel knowledge; Wider horizons: the latest technologies and how to use them
+
+## Projects
+
+- Scut Motor (Webshop, 2024) – Romanian webshop for metal engine guards.
+- Customer management (CRM, 2022–) – Customers, contacts and sales in one system.
+- Order management (OMS, 2022–) – Orders from checkout to delivery.
+- Resource planning (ERP, 2022–) – Stock, purchasing and finance in one system.
+- Zynex (Mobile app, 2026) – Personal finance app: see all your accounts in one place.
+- UtilityMeter (Web app, 2025) – Tracks utility meters and monthly readings by location.
+- Szókirakó (Mobile game, 2026) – A Hungarian offline word puzzle game for Android, level by level.
+- GA4 & GTM (Web analytics, 2023–) – Web measurement and tag management with Google Analytics 4 and Tag Manager.
+
+## Profiles
+
+- [GitHub](https://github.com/Telexx12)
+- [LinkedIn](https://www.linkedin.com/in/telegdi-d%C3%A1vid-4b29a428a)
+- [Stack Overflow](https://stackoverflow.com/users/telexx)
+- [Upwork](https://www.upwork.com/freelancers/~01f893ba367c73dfa3)
+- [Laracasts](https://laracasts.com/@Telexx)
+- [Monkeytype](https://monkeytype.com/profile/Telexx12)
+
+## Contact
+
+- Contact form on the home page (needs JavaScript), or any profile listed above.
+
+## Optional
+
+- [Home page](https://telexx12.github.io/): English and Hungarian text as static HTML
