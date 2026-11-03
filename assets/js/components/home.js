@@ -9,6 +9,7 @@
     let section, tl, installs, cursorLine;
     let state = "booting";
     let held = false;
+    let skipped = false;
 
     function init() {
         section = document.querySelector(".home");
@@ -108,21 +109,26 @@
     }
 
     function skip() {
-        if (state === "booting") tl.progress(1);
+        if (state !== "booting") return;
+        skipped = true;
+        tl.progress(1);
     }
 
     function press(event) {
         held = event.type === "pointerdown" && state === "booting";
+        if (state === "booting") Track.event("terminal-skipped");
         skip();
     }
 
     function ready() {
         state = "ready";
         section.dataset.state = state;
+        if (!skipped) Track.event("terminal-watched");
     }
 
     function sendRequest() {
         if (state !== "ready" || held) return;
+        Track.event("journey");
         state = "sent";
         section.dataset.state = state;
         document.dispatchEvent(new Event("story:request"));
@@ -135,13 +141,18 @@
 
     function jumpToStory() {
         if (state !== "ready" || held) return;
+        Track.event("jump");
+        jump();
+    }
+
+    function jump() {
         document.dispatchEvent(new CustomEvent("story:open", { detail: "instant" }));
     }
 
     function enter() {
         skip();
         document.addEventListener("story:arrived", land, { once: true });
-        jumpToStory();
+        jump();
     }
 
     function land() {

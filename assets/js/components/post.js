@@ -1,9 +1,6 @@
 (() => {
     const root = document.documentElement;
-    const actions = {
-        theme: () => { root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark"; },
-        lang: () => window.I18n.set(root.lang === "en" ? "hu" : "en"),
-    };
+    const actions = { theme: switchTheme, lang: switchLang };
 
     let article, back;
 
@@ -24,6 +21,20 @@
         if (!el) return;
         actions[el.dataset.action]();
         if (e.detail) el.blur();
+    }
+
+    function switchTheme() {
+        const to = root.dataset.theme === "dark" ? "light" : "dark";
+
+        root.dataset.theme = to;
+        window.Track?.event("theme-switch", { to });
+    }
+
+    function switchLang() {
+        const to = root.lang === "en" ? "hu" : "en";
+
+        window.Track?.event("language-switch", { to });
+        return window.I18n.set(to);
     }
 
     function goBack(e) {

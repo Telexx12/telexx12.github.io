@@ -103,6 +103,7 @@
         state = "booting";
         dock.classList.add("is-shown");
         boot.restart();
+        Track.event("landing-view");
     }
 
     function skip() {

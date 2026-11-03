@@ -35,6 +35,8 @@ components/blog/<slug>/               one folder per post
 
 **Standard post** = the shared files above plus the header partial. Load order in `<head>`: `preferences.js`; `base.css`, `boot-story.css`, `post.css`, then own CSS; deferred scripts `i18n.js`, `post.js`, own JS, and `component-loader.js` last. The body has a slot `[data-component="post"]` (the header goes there) and `article.post`.
 
+**Analytics:** every post `<head>` also carries the Umami script tag, copied verbatim from `index.html` (the `cloud.umami.is/script.js` line with `data-website-id` and `data-domains`), placed after `component-loader.js`. Without it the post has no page views. `assets/js/track.js` is optional in a post, loaded deferred before `post.js`: with it, `post.js` also reports the theme and language switches; without it only page views are counted.
+
 `post.js` runs on `components:loaded`: it wires every `[data-action]` button (`theme` toggles `html[data-theme]`, `lang` calls `I18n.set`), awaits `I18n.translate(document)`, sets `data-ready` on `.post`, and handles the back link. It expects `.post` and `.post-back` to exist.
 
 The header partial (identical in every post): `.boot-bar` with the back link `.post-back` (`href="../../../"`, text key `menu.blog`) and the buttons `.bar-theme` and `.bar-lang` (`data-action="theme"` / `"lang"`, accessible names `bar.theme` / `bar.lang`). Its keys are resolved from the post's own dictionary, so the three keys must exist there.

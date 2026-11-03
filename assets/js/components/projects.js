@@ -38,10 +38,15 @@
             allowContextMenu: true,
             cursor: MOUSE.matches ? "grab" : "auto",
             activeCursor: MOUSE.matches ? "grabbing" : "auto",
-            onDragStart: () => field.classList.add("is-dragging"),
+            onDragStart: dragStart,
             onRelease: () => field.classList.remove("is-dragging"),
         })[0];
         home();
+    }
+
+    function dragStart() {
+        field.classList.add("is-dragging");
+        Track.once("projects-drag");
     }
 
     function home() {

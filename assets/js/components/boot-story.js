@@ -6,12 +6,10 @@
     const HURRY_KEYS = ["Escape", "Enter", " ", "ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End"];
     const root = document.documentElement;
     const page = document.scrollingElement;
-    const actions = {
-        theme: () => { root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark"; },
-        lang: () => window.I18n.set(root.lang === "en" ? "hu" : "en").then(() => ScrollTrigger.refresh()),
-    };
+    const actions = { theme: switchTheme, lang: switchLang };
 
     let story, sections, thread, journey, calm;
+    let hurried = false;
 
     function init() {
         story = document.querySelector(".boot-story");
@@ -21,6 +19,7 @@
         addProgress();
         watchLanding();
         watchSight();
+        watchViews();
         story.addEventListener("click", runAction);
         story.addEventListener("click", navigate);
         document.addEventListener("story:opened", start, { once: true });
@@ -35,7 +34,7 @@
     }
 
     function watchLanding() {
-        ScrollTrigger.create({ trigger: sections.at(-1), endTrigger: story, start: "top center", toggleClass: { targets: thread, className: "is-away" } });
+        ScrollTrigger.create({ trigger: sections.at(-1), endTrigger: story, start: "top center", toggleClass: { targets: thread, className: "is-away" }, onLeaveBack: trackReplay });
     }
 
     function watchSight() {
@@ -46,6 +45,25 @@
 
     function rest(entries) {
         entries.forEach((entry) => entry.target.classList.toggle("is-resting", !entry.isIntersecting));
+    }
+
+    function watchViews() {
+        story.querySelectorAll("[data-track-view]").forEach(watchView);
+    }
+
+    function watchView(section) {
+        ScrollTrigger.create({
+            trigger: section,
+            start: "top 60%",
+            end: "bottom 40%",
+            onToggle: (self) => {
+                if (self.isActive) Track.once(section.dataset.trackView);
+            },
+        });
+    }
+
+    function trackReplay() {
+        Track.once("journey-replay");
     }
 
     function start(e) {
@@ -74,6 +92,8 @@
 
     function hurry(e) {
         if (e.target.closest(".boot-bar")) return;
+        if (!hurried) Track.event("journey-skipped");
+        hurried = true;
         journey.progress(1, true);
         if (calm) calm.kill();
         calm = gsap.delayedCall(CALM, arrive, ["instant"]);
@@ -91,6 +111,7 @@
         window.removeEventListener("keydown", hurryKey);
         window.removeEventListener("click", hurry);
         root.classList.remove("is-traveling");
+        if (journey && !hurried) Track.event("journey-watched");
         document.dispatchEvent(new CustomEvent("story:arrived", { detail }));
     }
 
@@ -107,6 +128,20 @@
         if (!el) return;
         actions[el.dataset.action]();
         if (e.detail) el.blur();
+    }
+
+    function switchTheme() {
+        const to = root.dataset.theme === "dark" ? "light" : "dark";
+
+        root.dataset.theme = to;
+        Track.event("theme-switch", { to });
+    }
+
+    function switchLang() {
+        const to = root.lang === "en" ? "hu" : "en";
+
+        Track.event("language-switch", { to });
+        return window.I18n.set(to).then(() => ScrollTrigger.refresh());
     }
 
     function navigate(e) {

@@ -42,7 +42,12 @@
         blanks.forEach(watch);
         form.addEventListener("submit", submit);
         form.addEventListener("focusin", loadGuard, { once: true });
+        form.addEventListener("focusin", start, { once: true });
         sent.querySelector("[data-again]").addEventListener("click", again);
+    }
+
+    function start() {
+        Track.event("contact-start");
     }
 
     function findBlank(spec) {
@@ -131,7 +136,10 @@
         e.preventDefault();
         if (button.hasAttribute("aria-busy")) return;
         const missing = blanks.filter((blank) => !check(blank));
-        if (missing.length) return visit(missing[0]);
+        if (missing.length) {
+            Track.event("contact-error", { field: missing[0].input.name });
+            return visit(missing[0]);
+        }
         if (form.elements._gotcha.value) return fold();
         if (!form.dataset.endpoint) return say("contact.off");
         if (form.dataset.sitekey && blocked) return say("contact.blocked");
@@ -142,6 +150,7 @@
         try {
             const response = await fetch(form.dataset.endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" }, signal: AbortSignal.timeout(TIMEOUT) });
             if (!response.ok) throw new Error(response.status);
+            Track.event("contact-send");
             fold();
         } catch {
             release();
