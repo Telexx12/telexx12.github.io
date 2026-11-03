@@ -1,4 +1,5 @@
 {
+    "site.title": "Dávid Telegdi – Laravel developer",
     "home.title": "david@earth: ~ first boot",
     "home.installing": "Installing ",
     "home.trait1": "problem solving",
@@ -76,7 +77,7 @@
     "menu.contact": "Contact",
 
     "about.title": "Complex question, simple answer",
-    "about.lead": "I’m Dávid, a Laravel developer from Romania, working in the industry since 2022. I’ve worked on CRM, OMS and ERP systems and on webshops serving several European countries in multiple currencies. I’ve taken over and extended a legacy PHP codebase, designed REST APIs for mobile apps and internal systems, integrated payment providers, and optimised the performance of high-traffic backends.",
+    "about.lead": "I’m Dávid Telegdi, a Laravel developer from Romania, working in the industry since 2022. I’ve worked on CRM, OMS and ERP systems and on webshops serving several European countries in multiple currencies. I’ve taken over and extended a legacy PHP codebase, designed REST APIs for mobile apps and internal systems, integrated payment providers, and optimised the performance of high-traffic backends.",
     "about.text": "Yes, I use PHP, and yes, I can build fast systems with it. The two get along surprisingly well.",
     "about.quote": "Controlling complexity is the essence of computer programming.",
     "about.write": "Get in touch",

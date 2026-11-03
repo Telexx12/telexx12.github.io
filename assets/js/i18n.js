@@ -17,6 +17,11 @@ window.I18n = (() => {
         root.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = text(el.dataset.i18n); });
         root.querySelectorAll("[data-i18n-label]").forEach((el) => el.setAttribute("aria-label", text(el.dataset.i18nLabel)));
         root.querySelectorAll("[data-i18n-placeholder]").forEach((el) => el.setAttribute("placeholder", text(el.dataset.i18nPlaceholder)));
+        if (root === document) entitle(texts);
+    }
+
+    function entitle(texts) {
+        if ("site.title" in texts) document.title = texts["site.title"];
     }
 
     async function set(lang) {
@@ -28,6 +33,6 @@ window.I18n = (() => {
         return document.documentElement.lang;
     }
 
-    load(currentLang());
+    load(currentLang()).then(entitle);
     return { translate, set };
 })();

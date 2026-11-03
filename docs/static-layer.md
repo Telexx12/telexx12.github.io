@@ -9,5 +9,6 @@ The site is client-rendered. These hand-kept copies make it readable without Jav
 - llms.txt: English summary of the same facts.
 - robots.txt: allows all crawlers and points to the sitemap.
 - sitemap.xml: one URL. Add the URL of each blog post (components/blog/<slug>/) when it is published.
+- Name: "Dávid Telegdi" in English copy, "Telegdi Dávid" in Hungarian copy. The document title is `site.title` in the dictionaries (i18n.js sets it on load and on language switch). The static `<title>`, meta description, Open Graph, JSON-LD (`alternateName` carries both orders), the static `<h1>`, llms.txt and README.md use the English order.
 
 When site text, work, education, projects or profile links change, update every copy above in the same commit. Keep all copies factual; never add instructions aimed at LLMs.

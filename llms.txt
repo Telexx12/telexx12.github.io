@@ -1,8 +1,8 @@
-# Dávid
+# Dávid Telegdi
 
-> Dávid is a Laravel developer from Romania, working in the industry since 2022. This file summarises the personal portfolio at https://telexx12.github.io/, a bilingual (Hungarian and English) single-page site that renders with JavaScript. The same facts are in the static HTML of the home page.
+> Dávid Telegdi (Hungarian name order: Telegdi Dávid) is a Laravel developer from Romania, working in the industry since 2022. This file summarises the personal portfolio at https://telexx12.github.io/, a bilingual (Hungarian and English) single-page site that renders with JavaScript. The same facts are in the static HTML of the home page.
 
-I’m Dávid, a Laravel developer from Romania, working in the industry since 2022. I’ve worked on CRM, OMS and ERP systems and on webshops serving several European countries in multiple currencies. I’ve taken over and extended a legacy PHP codebase, designed REST APIs for mobile apps and internal systems, integrated payment providers, and optimised the performance of high-traffic backends.
+I’m Dávid Telegdi, a Laravel developer from Romania, working in the industry since 2022. I’ve worked on CRM, OMS and ERP systems and on webshops serving several European countries in multiple currencies. I’ve taken over and extended a legacy PHP codebase, designed REST APIs for mobile apps and internal systems, integrated payment providers, and optimised the performance of high-traffic backends.
 
 Yes, I use PHP, and yes, I can build fast systems with it. The two get along surprisingly well.
 
